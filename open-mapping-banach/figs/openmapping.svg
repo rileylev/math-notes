@@ -87,8 +87,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8284271"
-     inkscape:cx="10.464143"
-     inkscape:cy="60.062462"
+     inkscape:cx="204.21141"
+     inkscape:cy="145.26883"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -127,7 +127,7 @@
        r="5.5920639" />
     <path
        sodipodi:type="star"
-       style="opacity:0.27900002;fill:#b01ba8;fill-opacity:0.6692913;stroke:#000000;stroke-width:0.09075852;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:0.595;fill:#b01ba8;fill-opacity:0.50999999;stroke:#000000;stroke-width:0.04937701;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.97000003"
        id="path822"
        sodipodi:sides="12"
        sodipodi:cx="19.443859"
@@ -155,7 +155,7 @@
          y="323.75455"
          style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.15958795px">\(0\)</tspan></text>
     <circle
-       style="opacity:0.46100003;fill:#5874da;fill-opacity:0.6692913;stroke:#000000;stroke-width:0.208;stroke-miterlimit:4;stroke-dasharray:0.624, 0.624;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:0.46100003;fill:#5874da;fill-opacity:0.6692913;stroke:#000000;stroke-width:0.308;stroke-miterlimit:4;stroke-dasharray:0.924,0.924;stroke-dashoffset:0;stroke-opacity:1"
        id="path866"
        cx="59.527443"
        cy="291.24274"
@@ -247,14 +247,14 @@
     <text
        xml:space="preserve"
        style="font-size:4.23333311px;line-height:6.61458302px;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="62.834473"
+       x="62.305305"
        y="280.53918"
        id="text1608"><tspan
          sodipodi:role="line"
          id="tspan1606"
-         x="62.834473"
+         x="62.305305"
          y="280.53918"
-         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px">\(y-y_1\)</tspan></text>
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px">\(y_1-y\)</tspan></text>
     <circle
        style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.45147923;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path816-3-3-3"

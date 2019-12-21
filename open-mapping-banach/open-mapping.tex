@@ -11,13 +11,13 @@
   A meager set is countable union of \nameref{nowhere-dense}~sets
 \end{defn}
 \begin{theorem}[Baire category]\label{baire category}
-  If \(X\) is an \emph{completely metrizable} space,
+  If \(X\) is a \emph{completely metrizable} space,
   \begin{enumerate}
   \item countable intersections of \emph{open} dense subsets are dense,
   \item \(X\) is not \nameref{meager}.
   \end{enumerate}
 \end{theorem}
-\begin{proof}
+\begin{proof} \
   \begin{enumerate}
   \item
     Consider \(U_i\), a sequence of open dense sets. It suffices to show a nonempty open set~\(W\)
@@ -29,8 +29,11 @@
       \subimport{figs/}{baire.pdf_tex}
     \end{center}
     If \(r_n\) are selected such that \(r_n\to 0\), \eg, by requiring \(r_n < 2^{-n}\) at each step of the induction,
-    then \(x_n\) is Cauchy. By completeness, there is a limit; call it \(x\). But because \(x_i\) is eventuall in \(\ball_n\), \(x\in \closure{\ball\paren{x_n,r_n}}\). But \[x\in\closure{\ball\paren{x_n,r_n}}\subseteq \ball\paren{x_{n-1},r_{n-1}}\subseteq U_{n-1} \quad \text{for all \(n\).}\]
-    Therefore, \(x\in \bigcap U_n\). But \(x\in W\) as well because every \(\closure{\ball(x_n,r_n)}\in W\); hence \(\bigcap U_n\) meets \(W\).
+    then \(x_n\) is Cauchy. By completeness, there is a limit; call it \(x\). But because \(x_i\) is eventuall in \(\ball_n\), \(x\in \closure{\ball\paren{x_n,r_n}}\subseteq \ball\paren{x_{n-1},r_{n-1}}\) for all \(n\). Then
+    \[
+      x \in \dots \grayunderbrace{\ball_n}{\subseteq U_n}\subseteq \grayunderbrace{\ball_{n-1}}{\subseteq U_{n-1}} \subseteq  \grayunderbrace{\ball_2}{\subseteq U_2} \subseteq \grayunderbrace{\ball_1}{\subseteq U_1} \subseteq W.
+    \]
+    Therefore, \(x\in \bigcap U_n\cap W\).
   \item By the previous result, it suffices to show the complement of any \nameref{nowhere-dense} set contains an open, dense set.
     Suppose \(N\) is nowhere dense. Then \(N^C\) is dense; hence, \(\interior{\paren[]{N^C}}\) is open and dense.
   \end{enumerate}
@@ -46,12 +49,12 @@
   \begin{center}
     \import{figs/}{openmapping.pdf_tex}
   \end{center}
-  If \(\norm y < 2r\), then \[y=y_1+y-y_1 = Tx_1 + (y-y_1)\in \closure{T(x+\ball_1)}\subseteq \closure{T\ball_2}.\] Halving this shows \(\norm y < r \implies y\in \closure{T\ball_1}\). In general, linearity tells us
+  If \(\norm y < 2r\), then \(y_1-y\in \closure{T\ball_1}\) so \[y=y_1-\paren{y_1-y} = Tx_1 - (y_1-y)\in \closure{T(x+\ball_1)}\subseteq \closure{T\ball_2}.\] Halving this shows \(\norm y < r \implies y\in \closure{T\ball_1}\); repeatedly halving shows
   \begin{equation}
-  \norm y < r2^{-n} \implies y\in \closure{T\ball_{2^{-n}}}\label{eq:openmap-small enough to be in closed image}
-\end{equation}
+    \norm y < r2^{-n} \implies y\in \closure{T\ball_{2^{-n}}}.\label{eq:openmap-small enough to be in closed image}
+  \end{equation}
 
-Now, chase an arbitrary point \(y\) where \(\norm y < \sfrac r 2\) with a sequence of \(Tx_i\): \cref{eq:openmap-small enough to be in closed image} guarantees an \(x_1\in \ball_1\) such that \(\norm{y-Tx_1} < \sfrac r 4\), and, by induction, a sequence such that \(\norm{y-\sum_1^n Tx_i} < r2^{n-1}\) with \(x_i\in\ball_i\). The series \(\sum x_i\) is hence absolutely convergent; by completeness, it has some limit \(x\). But
+Now, chase an arbitrary \(y\) in \(\set{y:\norm y < \sfrac r 2}\) with a sequence of \(Tx_i\). \Cref{eq:openmap-small enough to be in closed image} guarantees an \(x_1\in \ball_1\) such that \(\norm{y-Tx_1} < \sfrac r 4\), and, by induction, a sequence such that \(\norm{y-\sum_1^n Tx_i} < r2^{n-1}\) with \(x_i\in\ball_i\). The series \(\sum x_i\) is hence absolutely convergent; by completeness, it has some limit \(x\). But
 \[
   \norm{x} \leq \sum_i \norm{x_i} = \sum_i 2^{-i} = 1
 \]
@@ -60,4 +63,8 @@ with \(Tx=\lim T\paren{\sum x_i}=y\) by construction. Therefore \(y\in T\ball_1\
   \grayunderbrace{\set{y: \norm y < \sfrac r 2}}{\text{open nhood of } 0} \subseteq T\ball_1
 \]
 \end{proof}
+Because the inverse of an open map is continuous,
+\begin{cor}
+  A bijective Banach-morphism is an isomorphism.
+\end{cor}
 \end{document}

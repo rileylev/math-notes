@@ -61,7 +61,7 @@
     \put(0.43939979,0.5396678){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.56250024}\smash{\begin{tabular}[t]{l}\(y_1\)\end{tabular}}}}%
     \put(0.56589435,0.0074548){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.5625}\smash{\begin{tabular}[t]{l}\(y\)\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{openmapping.pdf}}%
-    \put(0.4626715,0.5940112){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.5625}\smash{\begin{tabular}[t]{l}\(y-y_1\)\end{tabular}}}}%
+    \put(0.45621429,0.5940112){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.5625}\smash{\begin{tabular}[t]{l}\(y_1-y\)\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=4]{openmapping.pdf}}%
   \end{picture}%
 \endgroup%
