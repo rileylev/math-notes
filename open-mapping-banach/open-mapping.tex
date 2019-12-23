@@ -1,14 +1,19 @@
 \documentclass{scrartcl}
 \usepackage{riley}
 \usepackage{import}
-
+\usepackage{biblatex}
+\addbibresource{bib.bib}
+\author{Riley Levy}
+\title{\color[gray]{.3}Illustrated companion for Folland's ``The~Baire~Category Theorem and its~Consequences''}
 \newcommand{\ball}{B}
 \begin{document}
+\maketitle{}
+These notes are a companion for Section~5.3: ``The Baire Category Theorem and its~Consequences'', in Folland's \emph{Real Analysis: Modern Techniques and their Applications}.
 \begin{defn}[nowhere dense]\label{nowhere-dense}
   A nowhere dense set's closure has empty interior.
 \end{defn}
 \begin{defn}[meager]\label{meager}
-  A meager set is countable union of \nameref{nowhere-dense}~sets
+  A meager set is countable union of \nameref{nowhere-dense}~sets. \cite[pg.\ 161]{folland}
 \end{defn}
 \begin{theorem}[Baire category]\label{baire category}
   If \(X\) is a \emph{completely metrizable} space,
@@ -20,32 +25,39 @@
 \begin{proof} \
   \begin{enumerate}
   \item
-    Consider \(U_i\), a sequence of open dense sets. It suffices to show a nonempty open set~\(W\)
-    meets \(\bigcap U_i\). The proof proceeds by inductively\footnote{In a general (nonseparable) metric space, this requires the axiom of dependent choice.} nesting open balls inside successive \(W\cap U_i\). By assumption of density, \(W\cap U_1\) is nonempty. It is also open, so there is some \(\ball_1= \ball\paren{x_1,r_1}\) with \(\closure{\ball_1}\subseteq W\cap U_0\). Observe \(\ball_1\cap U_1\) is also open; therefore, find a \(\ball_2=\ball(x_2,r_2)\) where \(\closure{\ball_2}\subseteq \ball_1\cap U_1\) and proceed inductively: \(\ball_{n+1}=\ball(x_{n},r_{n})\) where \(\closure{\ball_{n+1}}\subseteq \ball_n\cap U_n\). These are nested and
+    Consider \(U_i\), a~sequence of dense open sets. It suffices to show a nonempty open~set~\(W\)
+    meets \(\bigcap U_i\). The proof proceeds by inductively\footnote{In a general (nonseparable) metric space, this requires the axiom of dependent choice.} nesting open balls inside successive~\(W\cap U_i\). By assumption of density, \(W\cap U_1\) is nonempty.
+    It is also open, so there is some~\(\ball_1= \ball\paren{x_1,r_1}\) with~\(\closure{\ball_1}\subseteq W\cap U_0\).
+    Observe \(\ball_1\cap U_1\) is also open; therefore, find a~\(\ball_2=\ball(x_2,r_2)\) where \(\closure{\ball_2}\subseteq \ball_1\cap U_1\) and proceed inductively: \(\ball_{n+1}=\ball(x_{n},r_{n})\) where \(\closure{\ball_{n+1}}\subseteq \ball_n\cap U_n\). These are nested and
     \[
-      x_n \in \grayunderbrace{\ball_n}{\subseteq U_n}\subseteq \grayunderbrace{\ball_{n-1}}{\subseteq U_{n-1}} \subseteq  \grayunderbrace{\ball_2}{\subseteq U_2} \subseteq \grayunderbrace{\ball_1}{\subseteq U_1} \subseteq W
+      x_n \in \grayunderbrace{\ball_n}{\subseteq U_n}\subseteq \grayunderbrace{\ball_{n-1}}{\subseteq U_{n-1}}\subseteq\dots \subseteq
+      \grayunderbrace{\ball_2}{\subseteq U_2} \subseteq \grayunderbrace{\ball_1}{\subseteq U_1} \subseteq W
     \]
     \begin{center}
       \subimport{figs/}{baire.pdf_tex}
     \end{center}
-    If \(r_n\) are selected such that \(r_n\to 0\), \eg, by requiring \(r_n < 2^{-n}\) at each step of the induction,
-    then \(x_n\) is Cauchy. By completeness, there is a limit; call it \(x\). But because \(x_i\) is eventuall in \(\ball_n\), \(x\in \closure{\ball\paren{x_n,r_n}}\subseteq \ball\paren{x_{n-1},r_{n-1}}\) for all \(n\). Then
+    If \(r_n\) are selected such that \(r_n\to 0\)---\eg, by requiring \(r_n < 2^{-n}\) at each step of the induction---then \(x_n\) is Cauchy. By completeness, there is a limit; call it \(x\). But because \(x_i\)~is eventually in~\(\ball_n\), \(x\in \closure{\ball\paren{x_n,r_n}}\subseteq \ball\paren{x_{n-1},r_{n-1}}\) for all \(n\). Then
     \[
-      x \in \dots \grayunderbrace{\ball_n}{\subseteq U_n}\subseteq \grayunderbrace{\ball_{n-1}}{\subseteq U_{n-1}} \subseteq  \grayunderbrace{\ball_2}{\subseteq U_2} \subseteq \grayunderbrace{\ball_1}{\subseteq U_1} \subseteq W.
+      x \in \dots \grayunderbrace{\ball_n}{\subseteq U_n}\subseteq \grayunderbrace{\ball_{n-1}}{\subseteq U_{n-1}}
+      \subseteq\dots\subseteq  \grayunderbrace{\ball_2}{\subseteq U_2} \subseteq \grayunderbrace{\ball_1}{\subseteq U_1} \subseteq W;
     \]
-    Therefore, \(x\in \bigcap U_n\cap W\).
-  \item By the previous result, it suffices to show the complement of any \nameref{nowhere-dense} set contains an open, dense set.
+    therefore, \(x\) is in the intersection~\(\bigcap U_n\cap W\), proving it's nonempty.
+  \item By the previous result, it suffices to show the complement of any \nameref{nowhere-dense}~set contains an dense open set.
     Suppose \(N\) is nowhere dense. Then \(N^C\) is dense; hence, \(\interior{\paren[]{N^C}}\) is open and dense.
   \end{enumerate}
 \end{proof}
-\begin{theorem}[Open mapping theorem]
+
+The proofs of \namecref{open mapping theorem} and \namecref{uniform bdd} both share a technique: find a bound around an arbitrary point (given by a density argument) and then translate this to a bound around the origin (via the triangle inequality and linearity).
+\begin{theorem}[open mapping]\label{open mapping theorem}
   Surjective Banach-morphisms are open.
 \end{theorem}
 \begin{proof}
-  Call the morphism \(T:X\to Y\). Let \(\ball_r=\ball\paren{0,r}\in X\). Because linear maps commute with translations and dilations, it suffices to show that \(0\) is an interior point of \(T(B_1)\). By surjectivity,
-  \(Y = \bigcup_{n=1}^\infty TB_n\). The map \(n\blank: \paren{Y,TB_1}\to \paren{Y,TB_n}\) is a homeomorphism for \(n>0\). Therefore, \(B_1\) cannot be \nameref{nowhere-dense}: if it were, \(\ball_n\) would be too, making \(Y\) \nameref{meager}, which contradicts \namecref{baire category}.
+  Call the morphism~\(T:X\to Y\). Let~\(\ball_r=\ball\paren{0,r}\in X\). Because linear~maps commute with translations and dilations, it suffices to show that \(0\) is an interior point of~\(T(B_1)\).
 
-  The closure~\(\closure{T\ball_1}\) contains an interior point \(y_0\). For some \(r\), \(\ball(y_0,4r)\subseteq \closure{T\ball_1}\). Then there is some \(y_1=Tx_1\in T\ball_1\) within \(2r\) of \(y_0\). In particular, its neighborhood \(\ball(y_1,2r)\subseteq \ball(y_0,4r)\subseteq \closure{T\ball_1}\)
+  By surjectivity,
+  \(Y = \bigcup_{n=1}^\infty TB_n\). The map \(n\blank: \paren{Y,TB_1}\to \paren{Y,TB_n}\) is a homeomorphism for \(n>0\). Therefore, \(B_1\) cannot be \nameref{nowhere-dense}: if it were, \(\ball_n\) would be too, making \(Y\) \nameref{meager}, contradicting \namecref{baire category}.
+
+  The closure~\(\closure{T\ball_1}\) contains an interior point \(y_0\). For some \(r\), \(\ball(y_0,4r)\subseteq \closure{T\ball_1}\). Then there is some \(y_1=Tx_1\in T\ball_1\) within \(2r\) of \(y_0\). In particular, its neighborhood \(\ball(y_1,2r)\subseteq \ball(y_0,4r)\subseteq \closure{T\ball_1}\).
   \begin{center}
     \import{figs/}{openmapping.pdf_tex}
   \end{center}
@@ -54,17 +66,57 @@
     \norm y < r2^{-n} \implies y\in \closure{T\ball_{2^{-n}}}.\label{eq:openmap-small enough to be in closed image}
   \end{equation}
 
-Now, chase an arbitrary \(y\) in \(\set{y:\norm y < \sfrac r 2}\) with a sequence of \(Tx_i\). \Cref{eq:openmap-small enough to be in closed image} guarantees an \(x_1\in \ball_1\) such that \(\norm{y-Tx_1} < \sfrac r 4\), and, by induction, a sequence such that \(\norm{y-\sum_1^n Tx_i} < r2^{n-1}\) with \(x_i\in\ball_i\). The series \(\sum x_i\) is hence absolutely convergent; by completeness, it has some limit \(x\). But
+Now, chase an arbitrary \(y\) in~\(\set{y:\norm y < \sfrac r 2}\) with a sequence of~\(Tx_i\). \Cref{eq:openmap-small enough to be in closed image} guarantees an \(x_1\in \ball_1\) such that \(\norm{y-Tx_1} < \sfrac r 4\), and, by induction, a sequence such that \(\norm{y-\sum_1^n Tx_i} < r2^{n-1}\) with~\(x_i\in\ball_i\). The series~\(\sum x_i\) is hence absolutely convergent; by completeness, it has some limit \(x\). But
 \[
   \norm{x} \leq \sum_i \norm{x_i} = \sum_i 2^{-i} = 1
 \]
-with \(Tx=\lim T\paren{\sum x_i}=y\) by construction. Therefore \(y\in T\ball_1\) itself, not just its closure. Hence
+with~\(Tx=\lim T\paren{\sum x_i}=y\) by construction. Therefore \(y\in T\ball_1\) itself, not just its closure. Conclude
 \[
-  \grayunderbrace{\set{y: \norm y < \sfrac r 2}}{\text{open nhood of } 0} \subseteq T\ball_1
+  \grayunderbrace{\set{y: \norm y < \sfrac r 2}}{\text{open nhood of } 0} \subseteq T\ball_1.
 \]
 \end{proof}
+
 Because the inverse of an open map is continuous,
-\begin{cor}
+\begin{cor}[bounded inverse]\label{bounded inverse}
   A bijective Banach-morphism is an isomorphism.
 \end{cor}
+\begin{theorem}[Closed graphs]
+  A linear map between Banach spaces is continuous iff its graph is closed.
+\end{theorem}
+\begin{proof}
+  \newcommand{\graph}{\Gamma}
+  Let \(T:X \to Y\). Denote its graph by~\(\graph\define\set{(x,Tx):x\in X}\).
+  Let~\(\pi_X\), \(\pi_Y\) indicate the projection maps from~\(\graph\) to~\(X\) and~\(Y\) respectively.
+
+  Suppose \(T\) is continuous. Suppose \((x_n,Tx_n)\) is a convergent sequence in \(\graph\). Then there~is some~\(x=\lim x_n\). But by continuity, \(Tx_n\to Tx\) hence \((x_n,Tx_n)\to (x,Tx)\in\graph\), so \(\graph\) is closed.
+
+  Suppose \(\graph\) is closed. Then, as \(X\times Y\) is complete, being a closed subset, \(\graph\) is complete as well.
+  Then \(\pi_X\) is a bijective Bananch-morphism so it is actually an isomorphism by \namecref{bounded inverse}. Hence
+  \(T=\pi_Y\circ {\pi_X}^{-1}: X\to Y\) is a continuous.
+\end{proof}
+\begin{theorem}[uniform boundedness principle]\label{uniform bdd} \
+  \begin{enumerate}
+  \item If\/ \(\sup_{T\in A} \norm{Tx} < \infty\) for all \(x\) in a non\nameref{meager}
+    subset of \(X\), then\/ \(\sup_{T\in A}\norm{T}<\infty\).
+  \item If \(X\) is a Banach space and\/ \(\sup_{T\in A}\norm{Tx}< \infty\) for all \(x\in X\), then\/ \(\sup_{T\in A}\norm T < \infty\).
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  By \namecref{baire category}, a Banach space is non\nameref{meager}, hence (2) follows from (1). So it suffices to prove (1).
+
+  Let
+  \[
+    E_n\define \set{x\in X : \sup_{T\in A}\norm{Tx} \leq n} = \bigcap_{T\in A} \set{x\in X: \norm{Tx} \leq n}.
+  \]
+  The \(E_n\) are closed. By hypothesis of (1), some \(E_n\) is non\nameref{meager}; therefore it contains a nontrivial closed ball \(\closure{\ball(r,x_0)}\). Now, we use this fact to construct a ball around \(0\) contained in \(E_{2n}\). If \(\norm x \leq r\) then \(x_0-x\in E_n\):
+  \begin{center}
+    \import{figs/}{uniform-boundedness.pdf_tex}
+  \end{center}
+  hence
+  \[
+    \norm{Tx} \leq \norm{T(x-x_0)}+\norm{Tx_0} = \norm{T(x_0-x)}+\norm{Tx_0} \leq 2n.
+  \]
+  Therefore, \(\norm{Tx}\leq 2n\) whenever \(T\in A\) and \(\norm x \leq r\). Therefore \(\sup_{T\in A}\norm T \leq \sfrac {2n} r\).
+\end{proof}
+\printbibliography
 \end{document}
