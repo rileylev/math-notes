@@ -1,32 +1,42 @@
 \documentclass{scrartcl}
 \usepackage{riley}
+\usepackage{riley-libertine}
 \usepackage{import}
 \usepackage{biblatex}
 \addbibresource{bib.bib}
-\author{Riley Levy}
-\title{\color[gray]{.3}Illustrated companion for Folland's ``The~Baire~Category Theorem and its~Consequences''}
+\author{Riley Quinn Levy}
+\title{Illustrated companion for Folland's ``The~Baire~Category Theorem and its~Consequences''}
 \newcommand{\ball}{B}
+  \makeatletter
 \begin{document}
-\maketitle{}
+\begin{center}
+  \begin{minipage}{.8\linewidth}
+    \centering
+    {\normalfont\bfseries\LARGE\color[gray]{.3}\@title}
+  \end{minipage} \\
+  %{\LARGE\color[gray]{.2}\sffamily\bfseries\@title} \\
+  \@author\quad{\small\color[gray]{.2}❧}\quad\@date
+  \makeatother
+\end{center}
 These notes are a companion for Section~5.3: ``The Baire Category Theorem and its~Consequences'', in Folland's \emph{Real Analysis: Modern Techniques and their Applications}.
 \begin{defn}[nowhere dense]\label{nowhere-dense}
-  A nowhere dense set's closure has empty interior.
+  A nowhere dense set's closure has empty interior.\cite{nowhere-dense}
 \end{defn}
 \begin{defn}[meager]\label{meager}
   A meager set is countable union of \nameref{nowhere-dense}~sets. \cite[pg.\ 161]{folland}
 \end{defn}
 \begin{theorem}[Baire category]\label{baire category}
-  If \(X\) is a \emph{completely metrizable} space,
+  If\eurelitcorrect\ \(X\) is a \emph{completely metrizable} space,
   \begin{enumerate}
   \item countable intersections of \emph{open} dense subsets are dense,
-  \item \(X\) is not \nameref{meager}.
+  \item \(X\) is not \nameref{meager}. \cite[pg.\ 161]{folland}
   \end{enumerate}
 \end{theorem}
 \begin{proof} \
   \begin{enumerate}
   \item
     Consider \(U_i\), a~sequence of dense open sets. It suffices to show a nonempty open~set~\(W\)
-    meets \(\bigcap U_i\). The proof proceeds by inductively\footnote{In a general (nonseparable) metric space, this requires the axiom of dependent choice.} nesting open balls inside successive~\(W\cap U_i\). By assumption of density, \(W\cap U_1\) is nonempty.
+    meets \(\bigcap U_i\). The proof proceeds by inductively\footnote{In a general (nonseparable) metric space, this requires the axiom of dependent choice. In \textsc{zf}, \namecref{baire category} and the axiom of dependent choice are equivalent.\cite{wikipediabairecat}} nesting open balls inside successive~\(W\cap U_i\). By assumption of density, \(W\cap U_1\) is nonempty.
     It is also open, so there is some~\(\ball_1= \ball\paren{x_1,r_1}\) with~\(\closure{\ball_1}\subseteq W\cap U_0\).
     Observe \(\ball_1\cap U_1\) is also open; therefore, find a~\(\ball_2=\ball(x_2,r_2)\) where \(\closure{\ball_2}\subseteq \ball_1\cap U_1\) and proceed inductively: \(\ball_{n+1}=\ball(x_{n},r_{n})\) where \(\closure{\ball_{n+1}}\subseteq \ball_n\cap U_n\). These are nested and
     \[
@@ -49,7 +59,7 @@ These notes are a companion for Section~5.3: ``The Baire Category Theorem and it
 
 The proofs of \namecref{open mapping theorem} and \namecref{uniform bdd} both share a technique: find a bound around an arbitrary point (given by a density argument) and then translate this to a bound around the origin (via the triangle inequality and linearity).
 \begin{theorem}[open mapping]\label{open mapping theorem}
-  Surjective Banach-morphisms are open.
+  Surjective Banach-morphisms are open. \cite[pg.\ 162]{folland}
 \end{theorem}
 \begin{proof}
   Call the morphism~\(T:X\to Y\). Let~\(\ball_r=\ball\paren{0,r}\in X\). Because linear~maps commute with translations and dilations, it suffices to show that \(0\) is an interior point of~\(T(B_1)\).
@@ -57,7 +67,7 @@ The proofs of \namecref{open mapping theorem} and \namecref{uniform bdd} both sh
   By surjectivity,
   \(Y = \bigcup_{n=1}^\infty TB_n\). The map \(n\blank: \paren{Y,TB_1}\to \paren{Y,TB_n}\) is a homeomorphism for \(n>0\). Therefore, \(B_1\) cannot be \nameref{nowhere-dense}: if it were, \(\ball_n\) would be too, making \(Y\) \nameref{meager}, contradicting \namecref{baire category}.
 
-  The closure~\(\closure{T\ball_1}\) contains an interior point \(y_0\). For some \(r\), \(\ball(y_0,4r)\subseteq \closure{T\ball_1}\). Then there is some \(y_1=Tx_1\in T\ball_1\) within \(2r\) of \(y_0\). In particular, its neighborhood \(\ball(y_1,2r)\subseteq \ball(y_0,4r)\subseteq \closure{T\ball_1}\).
+  The closure~\(\closure{T\ball_1}\) contains an interior point \(y_0\). For some \(r\), \(\ball(y_0,4r)\subseteq \closure{T\ball_1}\). Then there is some \(y_1=Tx_1\in T\ball_1\) within \(2r\) of \(y_0\). In particular, its neighborhood \(\ball(y_1,2r)\subseteq \ball(y_0,4r)\subseteq \closure{T\ball_1}\). We translate this to an inclusion of points around the origin as follows.
   \begin{center}
     \import{figs/}{openmapping.pdf_tex}
   \end{center}
@@ -78,10 +88,10 @@ with~\(Tx=\lim T\paren{\sum x_i}=y\) by construction. Therefore \(y\in T\ball_1\
 
 Because the inverse of an open map is continuous,
 \begin{cor}[bounded inverse]\label{bounded inverse}
-  A bijective Banach-morphism is an isomorphism.
+  A bijective Banach-morphism is an isomorphism. \cite[pg.\ 162]{folland}
 \end{cor}
-\begin{theorem}[Closed graphs]
-  A linear map between Banach spaces is continuous iff its graph is closed.
+\begin{theorem}[closed graph]
+  A linear map between Banach spaces is continuous iff its graph is closed. \cite[pg.\ 163]{folland}
 \end{theorem}
 \begin{proof}
   \newcommand{\graph}{\Gamma}
@@ -96,9 +106,9 @@ Because the inverse of an open map is continuous,
 \end{proof}
 \begin{theorem}[uniform boundedness principle]\label{uniform bdd} \
   \begin{enumerate}
-  \item If\/ \(\sup_{T\in A} \norm{Tx} < \infty\) for all \(x\) in a non\nameref{meager}
-    subset of \(X\), then\/ \(\sup_{T\in A}\norm{T}<\infty\).
-  \item If \(X\) is a Banach space and\/ \(\sup_{T\in A}\norm{Tx}< \infty\) for all \(x\in X\), then\/ \(\sup_{T\in A}\norm T < \infty\).
+  \item If\/ \(\sup_{T\in A} \norm{Tx} < \infty\) for all\euleritcorrect\ \(x\) in a non\nameref{meager}
+    subset of\euleritcorrect\ \(X\), then\/ \(\sup_{T\in A}\norm{T}<\infty\).
+  \item If\euleritcorrect\ \(X\) is a Banach space and\/ \(\sup_{T\in A}\norm{Tx}< \infty\) for all\euleritcorrect\ \(x\in X\), then\/ \(\sup_{T\in A}\norm T < \infty\). \cite[pg.\ 163]{folland}
   \end{enumerate}
 \end{theorem}
 \begin{proof}
