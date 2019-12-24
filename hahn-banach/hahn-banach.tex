@@ -1,0 +1,70 @@
+\documentclass{scrartcl}
+\usepackage{riley}
+\usepackage{import}
+\begin{document}
+\newcommand{\thespace}{\ensuremath X}
+\newcommand{\sublin}{\ensuremath \rho}
+\begin{defn}[Sublinear functional]
+  \(\sublin:\thespace\to \R\) is a sublinear functional if
+  \begin{align*}
+    \sublin(x+y)&\leq \sublin(x)+\sublin(y) && x,y\in \thespace\\
+    \sublin(\lambda x) &= \lambda \sublin(x) && \lambda > 0
+  \end{align*}
+\end{defn}
+I'm splitting the proof into two parts because the infinite-dimensional part of the extension is independent from \textsc{zf}.
+\newcommand{\subspace}{\ensuremath E}
+\begin{lemma}[one-dimensional extension] \label{one more dimension}
+  Suppose \subspace~is a subspace of~\thespace. Let \(\subspace'=\subspace\oplus \Span\set{e}\) be a one-dimension-larger subspace of~\thespace. If \(\sublin:\thespace \to \R\)~is a sublinear functional and \(f:\subspace\to\R\)~is a linear functional bounded by~\sublin, then there is an extension~\(f'\)  of~\(f\) to~\(\subspace'\) such that \(f'\)~is also bounded by~\sublin.
+\end{lemma}
+\begin{proof}
+  Proceed by finding a bound on potential extensions to \(\subspace'\) where \(f'\leq \sublin\) still. Suppose we already have a suitable \(f'\). Let \(f'(e)=\alpha\). To extract a bound on \(\alpha\), consider the following inequalities:
+  \begin{align}
+    f'(x-e) = f(x)-\alpha &\leq \sublin(x-e) \label{bound on f'(x-e)} \\
+    f'(y+e) = f(y) + \alpha &\leq \sublin(y+e) \label{bound on f'(y+e)}
+  \end{align}
+    Combining these gives
+    \[
+      f(x)-\sublin(x-e) \leq \alpha \leq \sublin(y+e)-f(y)
+    \]
+    Because \(x\) and \(y\) are arbitrary, this requires
+    \begin{equation}
+      \sup\set{f(x)-\sublin(x-e)} \leq \alpha \leq \inf\set{\sublin(y+e)-f(y)}.\label{eq:hahn-banach alpha bound}
+    \end{equation}
+
+    It is necessary to show the left hand side of~\cref{eq:hahn-banach alpha bound} is, in fact, less than or equal to the right hand side. But
+    \[
+      f(x)+f(y) = f(x+y) \leq \sublin(x+y)  \leq \sublin(x-e)+\sublin(y+e).
+    \]
+    Rearranging gives \(f(x)-\sublin(x-e)\leq \sublin(e+y)-f(y)\).  Recalling, again, that \(x\) and \(y\) are arbitrary gives
+    \[
+      \sup\set{f(x)-\sublin(x-e)}\leq \inf\set{\sublin(e+y)-f(y)}.
+    \]
+    Therefore there is at least one such \(\alpha\).
+
+    Now, we need to check that satisfying \cref{eq:hahn-banach alpha bound} is sufficient to give a bounded extension of~\(f\). Suppose \(\alpha\)~satisfies \cref{eq:hahn-banach alpha bound} and, if \(x\in \subspace\), define the extension \(f'(x+\lambda e) = f(x)+t\alpha\). If \(\lambda > 0\),
+    \begin{align*}
+      f'(x+\lambda e) = \lambda\paren[\big]{f\paren{\sfrac x\lambda}+\alpha}&
+      \grayunderbrace{\leq\lambda{\sublin\paren{\sfrac x \lambda+e}}}{\text{by \cref{bound on f'(y+e)}}} = \sublin(x+\lambda e) \\
+      \shortintertext{If \(\lambda = -\mu < 0\),}
+      f'(x-\mu e) = \mu\paren[\big]{f\paren{\sfrac x\mu}-\alpha}&
+      \grayoverbrace{\leq\mu{\sublin\paren{\sfrac x \mu-e}}}{\text{by \cref{bound on f'(x-e)}}} = \sublin(x+\lambda e)
+    \end{align*}
+    proving sufficiency.
+\end{proof}
+By induction, this proves we can extend to a finite number of dimensions. The typical approach uses Zorn's lemma to extend to the infinite dimensional case:
+\begin{theorem}[Hahn-Banach theorem]
+  If \(f:\subspace\to \R\) is bounded by a sublinear functional \(\sublin: \thespace \to \R\), then \(f\) extends to a functional \(f':\thespace\to\R\) which is bounded by \sublin\ on the whole space.
+\end{theorem}
+\begin{proof}
+  The set of linear extensions of \(f\) from subspaces of \(\thespace\) to \(\R\) is a poset ordered by inclusion. But if \(f_\alpha\) are chain of extensions of \(f\), they must agree on every subset of \thespace\ on which they are defined. Hence \(\sup f_\alpha\define \bigcup f_\alpha\) is well-defined and gives an upper bound on the chain. By Zorn's lemma, there is a maximal \(f^*\).
+
+  Suppose \(f^*\) is not defined on \(\subspace\), not the entirety of \thespace. Then pick some \(e\) on which \(f^*\) is not defined. By \namecref{one more dimension}, there is some \(f^{*\prime}\) extending \(f^*\) to \(\subspace\oplus \Span\{e\}\). This contradicts maximality; hence, \(f^*:\thespace \to \R\).
+\end{proof}
+
+Here is a sketch of an alternate proof using the compactness of first order logic, which is strictly weaker than the axiom of choice.
+\begin{proof}
+  We need to axiomatize the statement of the theorem. Consider the domain of discourse of points of the form \(\thespace \times \R\). Let each needed \(X\times\R\) be a constant in this language. Write the axioms of a vector space and a linear map in terms of the domain of discourse. Take the predicate \(\blank\in \subspace\) for every subspace~\subspace. Then consider the axiom schema \(\forall (x,y) x\in\subspace \implies y \leq \sublin(x)\) encoding ``bounded by \sublin''. Inductively applying \namecref{one more dimension} proves that each finite subtheory has a model. By compactness, there must be a model of the whole theory, which is a function defined on all of \thespace, and this model is the desired extension.
+\end{proof}
+
+Although Hahn-Banach is weaker than logical compactness, it is still strong enough to construct the Banach-Tarski paradox.
+\end{document}
