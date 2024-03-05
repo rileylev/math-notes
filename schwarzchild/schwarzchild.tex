@@ -1,0 +1,142 @@
+\documentclass{scrartcl}
+\usepackage{amsmath}
+\usepackage{riley}
+\usepackage{riley-libertine}
+\usepackage{bigints}
+%TODO: why won't my dots work with libertine/euler?
+\begin{document}
+\section{Newton's lagrangian}
+\[
+  U(x) = -\frac{M}{r}
+\]
+\[
+  L_N = \frac{1}{2}\abs{\dot x}^2 + \frac{M}{r}
+\]
+In polar coordinates, the metric is
+\[
+  ds^2 = dr^2 +r^2d\theta^2
+\]
+and hence
+\[
+  L_N = \frac{\dot r^2}{2} + \frac{r^2\dot \theta^2}2 + \frac{M}{r}.
+\]
+
+The equations of motion are \\
+\begin{minipage}{.5\linewidth}
+  \begin{align*}
+    \frac{d}{dt}\frac{\partial L_N}{\partial \dot\theta} &= \frac{\partial L_n}{\partial \theta} \\
+    \frac{d}{dt}\paren{r^2\dot\theta} &= 0 \\
+    \dot\theta &= \frac{K}{r^2}
+  \end{align*}
+\end{minipage}
+\begin{minipage}{.5\linewidth}
+\begin{align*}
+  \frac{d}{dt}\frac{\partial L_N}{\partial \dot r} &= \frac{\partial L_N}{\partial r} \\
+  \ddot r &=r\dot\theta^2 - \frac{M}{r^2}  \\
+  \ddot r &=\frac{K^2}{r^3} - \frac{M}{r^2}
+\end{align*}
+\end{minipage}
+
+\section{Schwarzchild's geodesics lagrangian}
+\[
+  ds^2 = - \paren{1-\frac{2M}{r}} dt^2 + \paren{1-\frac{2M}{r}}^{-1} dr^2 + r^2 d\theta^2.
+\]
+Geodesics minimize energy:
+\begin{align*}
+  S[\gamma] = \int_\gamma \frac{ds^2}2 &= \int_\gamma{ -\paren{1-\frac{2M}r}\frac{dt^2}2 + \paren{1-\frac{2M}r}^{-1}\frac{dr^2}2 + r^2\frac{d\theta^2}2}\\
+                               &= \int_\gamma\grayunderbrace{ -\paren{\Ccancel{1}-\frac{2M}r}\frac{\Ccancel{\dot t}^2}2 + \paren{1-\frac{2M}r}^{-1}\frac{{\dot r}^2}2 + r^2\frac{{\dot \theta}^2}2}{\hat L}dt
+\end{align*}
+Remove the constant:
+\[
+  L = \frac{M}{r} + \paren{1-\frac{2M}{r}}^{-1}\frac{\dot r^2}{2} + \frac{r^2\dot\theta^2}{2}
+\]
+Perturbatively expand:
+\[
+  L = L_N + \frac{\dot r^2}{2} \sum_{k=1}^\infty \paren{2M}^k r^{-k}
+\]
+
+\section{No tangential motion}
+\[
+  L = \frac{M}{r} + \paren{1-\frac{2M}r}^{-1}\frac{\dot r^2}{2}
+\]
+\begin{align*}
+  \frac{\partial L}{\partial\dot r} &= \paren{1-\frac{2M}r}^{-1}\dot r \\
+  \frac{d}{dt} \frac{\partial L}{\partial\dot r} &= \paren{1-\frac{2M}r}^{-1} \ddot r - \paren{1-\frac{2M}{r}}^{-2}\frac{2M}{r^2}\dot r^2 \\
+  \frac{\partial L}{\partial r}&= -\frac{M}{r^2} - \paren{1-\frac{2M}{r}}^{-2}\frac{M}{r^2}\dot r^2
+\end{align*}
+\begin{align*}
+  \paren{1-\frac{2M}r}^{-1} \ddot r - \paren{1-\frac{2M}{r}}^{-2}\frac{2M}{r^2}\dot r^2 &= -\frac{M}{r^2} - \paren{1-\frac{2M}{r}}^{-2}\frac{M}{r^2}\dot r^2 \\
+  \paren{1-\frac{2M}r}^{-1} \ddot r &= -\frac{M}{r^2} + \paren{1-\frac{2M}{r}}^{-2}\frac{M}{r^2}\dot r^2 \\
+  \ddot r &= -\paren{1-\frac{2M}{r}}\frac{M}{r^2} + \paren{1-\frac{2M}{r}}^{-1}\frac{M}{r^2}\dot r^2 \\
+\end{align*}
+
+\section{Slow}
+\[
+  \ddot r = -\frac{M}{r^2} + \frac{2M^2}{r^3}
+\]
+\[
+  V(r) = -\frac{M}{r} + \frac{M^2}{r^2}
+\]
+\[
+  E = \frac{\dot r^2}2 -\frac{M}{r} + \frac{M^2}{r^2}
+\]
+\[
+  \dot r = \sqrt{2}\sqrt{E + \frac{M}r - \frac{M^2}{r^2}}
+\]
+\[
+  \frac{1}{\sqrt 2}\bigintss \dfrac{dr}{\sqrt{E + \dfrac{M}r - \dfrac{M^2}{r^2}}} = \Delta t
+\]
+\[
+  \frac{1}{\sqrt {2E}}\bigintss \dfrac{r\, dr}{\sqrt{r^2 + {\dfrac M E}r - {\dfrac {M^2}E}}} = \Delta t
+\]
+\[
+  \frac{1}{\sqrt {2E}}\bigint \dfrac{r\, dr}{\sqrt{\paren{r+\dfrac{M}{2E}}^2  -\paren{\dfrac{M^2}{4E^2} + \dfrac{M^2}{E}}}} = \Delta t
+\]
+\[
+  \frac{1}{\sqrt {2E}}\int \frac{r\, dr}{\sqrt{R^2-K^2}} = \Delta t
+\]
+\(R=K\sec u\), \(du = \sec u \tan u\)
+\section{Christoffel symbols}
+\[
+  E = \int \frac{ds^2}2 = \bigintsss\grayunderbrace{{-\paren{1-\frac{2M}{r}}\frac{\dot t^2}2 + \paren{1-\frac{2M}r}^{-1}\frac{\dot r^2}2 + r^2 \frac{\dot \theta^2}2 + r^2\sin^2\theta \frac{\dot\phi^2}2}}{L}\, d\lambda
+\]
+Euler lagrange:
+\begin{align*}
+  \frac{\partial L}{\partial \dot t} &= -\paren{1-\frac{2M}r}\dot t \\
+  \frac{d}{d\lambda}\frac{\partial L}{\partial \dot t} &= -\paren{1-\frac{2M}r}\ddot t -\frac{2M}{r^2}\dot r\dot t \\
+  0 &=\ddot t +2{\paren[\color{gray}\Bigg]{-\paren{1-\frac{2M}r}^{-1}\frac{M}{r^2}}}\dot r\dot t \\
+  0 &=\ddot t +2\grayunderbrace{\paren[\color{gray}\Bigg]{-\paren{\frac{r^2}{M}-2r}^{-1}}}{{\Gamma^t}_{rt}}\dot r\dot t
+\end{align*}
+\begin{align*}
+  \frac{\partial L}{\partial r} &= -\frac{M}{r^2}\dot t^2 - \paren{1-\frac{2M}r}^{-2}{\frac{M}{r^2}}\dot r^2 + r\dot \theta^2 + r\sin^2\theta \dot \phi^2 \\
+  \frac{\partial L}{\partial \dot r} &= \paren{1-\frac{2M}{r}}^{-1}\dot r \\
+  \frac{d}{d\lambda}\frac{\partial L}{\partial \dot r} &= -\paren{1-\frac{2M}r}^{-2}{\frac{2M}{r^2}}\dot r^2 + \paren{1-\frac{2M}r}^{-1} \ddot r \\
+  0 &= \paren{1-\frac{2M}r}^{-1}\ddot r +\frac{M}{r^2}\dot t^2 - \paren{1-\frac{2M}r}^{-2}{\frac{M}{r^2}} \dot r^2 - r\dot\theta^2 - r\sin^2\theta\dot\phi^2 \\
+  0 &= \ddot r +{\paren{1-\frac{2M}r}\frac{M}{r^2}}\dot t^2  -\paren{1-\frac{2M}r}{\frac{M}{r^2}}\dot r^2 - \paren{1-\frac{2M}r}r\dot\theta^2 - \paren{1-\frac{2M}r}r\sin^2\theta\dot\phi^2 \\
+  0 &= \ddot r +\grayunderbrace{\paren{\frac{M}{r^2}-\frac{2M^2}{r^3}}}{{\Gamma^r}_{tt}}\dot t^2  \grayunderbrace{-\paren{\frac{M}{r^2}-\frac{2M^2}{r^3}}}{{\Gamma^r}_{rr}}\dot r^2 \grayunderbrace{- \paren{r-2M}}{{\Gamma^r}_{\theta\theta}}\dot\theta^2 \grayunderbrace{- \paren{r-{2M}}\sin^2\theta}{{\Gamma^r}_{\phi\phi}}\dot\phi^2
+\end{align*}
+\begin{align*}
+  \frac{\partial L}{\partial \theta} &= 2r^2\sin\theta\cos\theta \dot\phi^2 \\
+  \frac{\partial L}{\partial\dot\theta}&= r^2\dot\theta \\
+  \frac{d}{d\lambda}\frac{\partial L}{\partial\dot\theta}&= r^2\ddot\theta + 2r\dot r\dot\theta \\
+  0 &= r^2\ddot \theta +2r\dot r\dot \theta -2r^2\sin\theta\cos\theta \dot\phi^2 \\
+  0 &= \ddot \theta +2\grayunderbrace{r^{-1}}{{\Gamma^\theta}_{r\theta}}\dot r\dot \theta \grayunderbrace{-\sin(2\theta)}{{\Gamma^\theta}_{\phi\phi}} \dot\phi^2
+\end{align*}
+\begin{align*}
+  \frac{\partial L}{\partial \dot \phi} &= r^2\sin^2\theta\dot \phi \\
+  \frac{d}{d\lambda}\frac{\partial L}{\partial \dot \phi} &= r^2\sin^2\theta\ddot\phi + 2r\sin^2\theta\dot r \dot \phi +2 r^2\sin\theta\cos\theta \dot\theta\dot\phi \\
+  0&= \ddot \phi +2\grayunderbrace{ r^{-1}}{{\Gamma^\phi}_{r\phi}} \dot r\dot \phi + 2\grayunderbrace{\cot\theta}{{\Gamma^\phi}_{\theta\phi}} \dot\theta\dot\phi
+\end{align*}
+\begin{align*}
+  {\Gamma^t}_{rt,r} &= \paren{\frac{r^2}M - 2r}^{-2}\paren{\frac{2r}{M}-2} =  \frac{2M}{r^2}\frac{r-M}{\paren{r-2M}^2} \\
+  {\Gamma^r}_{tt,r} &= -\frac{2M}{r^3} +  \frac{6M^2}{r^4} \\
+  {\Gamma^r}_{rr,r} &= +\frac{2M}{r^3} -  \frac{6M^2}{r^4} \\
+  {\Gamma^r}_{\theta\theta,r} &= -1 \\
+  {\Gamma^r}_{\phi\phi,r} &= -\sin^2\theta \\
+  {\Gamma^r}_{\phi\phi,\theta} &= -(r-2M)\sin2\theta\\
+  {\Gamma^\theta}_{r\theta,r} &= -\frac{1}{r^2} \\
+  {\Gamma^\theta}_{\phi\phi,\theta}&= -2\cos2\theta \\
+  {\Gamma^\phi}_{r\phi,r}&=-\frac{1}{r^2} \\
+  {\Gamma^\phi}_{\theta\phi,\theta}&= 2\csc^2\theta
+\end{align*}
+\end{document}
