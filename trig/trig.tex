@@ -1,0 +1,130 @@
+\documentclass{scrartcl}
+\usepackage{riley}
+\usepackage{riley-libertine}
+
+\newcommand{\black}[1]{{\color{black}{#1}}}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\begin{document}
+%\color{darkgray}
+\begin{align*}
+  \text{Complex} & & \text{Hyperbolic} \\
+  i^2 &\define {-1} &  j^2 &\define {+1} \\
+  i(x+iy) &= -y + ix & j(x+jy) &=y +jx
+  \intertext{Conjugation and norm}
+  (x+iy)^* &= x-iy & (x+jy)^* &= x-jy \\
+  \abs{z}^2&\define zz^*=(x+iy)(x-iy)  & \abs{z}^2 &\define zz^*=(x+jy)(x-jy) \\
+      &= x^2 +y^2 & &=x^2-y^2
+  \intertext{Exponentiation}
+  i^n&=
+       \begin{cases}
+         1 \\
+         i\\
+         -1\\
+         -i
+       \end{cases}
+       & j^n&=
+              \begin{cases}
+                1 \\
+                j \\
+                1 \\
+                j
+              \end{cases} \\
+  e^{it} &= 1(\dots) + i(\dots) & e^{jt} &= 1(\dots) + j(\dots)  \\
+        & -1(\dots)-i(\dots) && +1(\dots) +j(\dots) \\
+  e^{it}&= \cos t + i \sin t & e^{jt} &=\cosh t + j \sinh t
+  \intertext{Pythagorean identity}
+  e^{-it}&= \cos (-t) + i \sin (-t) & e^{-jt} &=\cosh (-t) + j \sinh (-t) \\
+      &= \cos t - i \sin t  &      &=\cosh t - j \sinh t \\
+  e^{-it} &= \paren{e^{it}}^* & e^{-jt} &= \paren{e^{jt}}^* \\
+  \abs{e^{it}}^2 &= e^{it-it} & \abs{e^{jt}}^2 &= e^{jt-jt} \\
+      &=1  & &=1 \\
+  1&=\cos^2 t + \sin^2 t & 1&= \cosh^2t -\sinh^2t
+  \intertext{Pythagorean corollaries}
+  \cos^2 t &= 1-\sin^2t & \cosh^2 t &= 1+\sinh^2 t \\
+  \sin^2 t &= 1-\cos^2t & \sinh^2 t &= \cosh^2t -1 \\
+  \sec^2 t &= 1 + \tan^2 t & \sech^2 t&= 1 -\tanh^2 t \\
+  \csc^2 t &= \cot^2 t+1 & \csch^2 t&= \cot^2 t -1
+  \intertext{Angle sum formulae}
+  e^{i(A+B)} &= e^{iA}e^{iB} & e^{j(A+B)} &= e^{jA}e^{jB} \\
+   &= \paren{c_A + i s_A}\paren{c_B + is_B}
+              &&= \paren{c_A + j s_A}\paren{c_B + js_B}\\
+  &
+    \begin{array}{c|cc}
+          &c_B & is_B    \\
+      \hline
+      c_A &c_Ac_B&ic_As_B \\
+      is_A&ic_Bs_A& -s_As_B
+    \end{array}
+    &&
+    \begin{array}{c|cc}
+          &c_B & js_B    \\
+      \hline
+      c_A &c_Ac_B&jc_As_B \\
+      js_A&jc_Bs_A& +s_As_B
+    \end{array} \\
+  \begin{matrix}
+    \phantom{+}\cos(A+B) \\
+    +i\sin(A+B)
+  \end{matrix}
+  &=
+    \begin{matrix}
+      \phantom{+} c_Ac_B -s_As_B \\
+      +i\paren{c_Bs_A +c_As_B}
+    \end{matrix}
+  & \begin{matrix}
+    \phantom{+}\cosh(A+B) \\
+    +j\sinh(A+B)
+  \end{matrix}
+  &=
+    \begin{matrix}
+      \phantom{+}c_Ac_B +s_As_B \\
+      +j\paren{c_Bs_A +c_As_B}
+    \end{matrix}
+  \intertext{Double angle}
+    e^{2it}&= \paren{e^{it}}^2 & e^{2jt}&=\paren{e^{jt}}^2  \\
+  \cos 2t &= \cos^2 t- \sin^2 t & \cosh 2t &= \cosh^2t +\sinh^2 t  \\
+  i\sin 2t &= i\,2\cos t\sin t& j\sinh 2t &= j\,2 \cosh t \sinh t
+  \intertext{Double angle + Pythagorean}
+  \cos 2t &= \cos^2t - (1-\sin^2t)&\cosh 2t &= \cosh 2t +(\cosh 2t - 1) \\
+          &= 2\cos^2 t -1         &         &= 2\cosh^2t -1 \\
+          &= (1-\sin^2t ) - \sin^2t &       &= (1+\sinh^2 t ) + \sinh^2 t \\
+         &1 -2\sin^2t &                     &= 1 + 2\sinh^2 t
+  \intertext{Derivatives}
+    f(t)&\define e^{it} & f(t)&\define e^{jt} \\
+  f'(t) &= ie^{it} & f'(t)&= je^{jt} \\
+  &=i\paren{\cos t+ i\sin t} &&=j\paren{\cosh t + j\sinh t} \\
+  \cos' t +i\sin' t &= -\sin t +i\cos  t & \cosh' t + j\sinh' t&= \sinh t + j\cosh t
+                                \intertext{Dot and cross product}
+  u^*v &= \paren{\alpha - i\beta}\paren{\gamma + i\delta} & u^*v &= \paren{\alpha - j\beta}\paren{\gamma + j\delta} \\
+  &
+    \begin{array}{c|cc}
+            &\gamma &i\delta \\
+      \hline
+      \alpha& \alpha\gamma  & i\alpha\delta \\
+      -i\beta& -i\beta\gamma& + \beta\delta
+    \end{array}
+    &&
+    \begin{array}{c|cc}
+            &\gamma &i\delta \\
+      \hline
+      \alpha& \alpha\gamma  & +j\alpha\delta \\
+      -j\beta& -j\beta\gamma& - \beta\delta
+    \end{array} \\
+      &= (\alpha\gamma + \beta\delta) + i (\alpha\delta - \beta\gamma)
+      &&= (\alpha\gamma - \beta\delta) + j (\alpha\delta - \beta\gamma) \\
+     u^*v &= (u\cdot v) + i(u\times v) & u^*v &=(u\cdot v) +j (u\times v) \\
+  (iz)\cdot z &= \Re (iz^*z)= \Re(i\abs{z}^2)=0  & (jz)\cdot z &= \Re (j z^*z)=\Re(j\abs{z}^2)=0
+  \intertext{Arc length}
+   f(t) &\define e^{it} & f(t)&\define e^{jt} \\
+  S &= \int \sqrt{\abs{f'(t)}^2} dt& S& = \int \sqrt{-\abs{f'(t)}^2}dt \\
+                 &= \int \sqrt{\abs{ie^{it}}^2} dt = \int\sqrt{1}dt & & = \int \sqrt{\abs{je^{jt}}^2} dt=\int\sqrt{-(-1)}dt\\
+                 &= \Delta t & &=\Delta t
+                                 \intertext{Sector area}
+                                 A &= \frac{1}{2} \int { f(t)\times f'(t)}dt& A&=\frac12 \int[\Big]{f(t)\times f'(t)} dt \\
+  &=\frac12 \int \Im\paren[\Big]{f^*(t)f'(t)}dt &=&=\frac12 \int \Im\paren{f^*(t)f'(t)} dt \\
+                 &=\frac12 \int \Im\paren{e^{-it}ie^{it}}dt &=&=\frac12 \int \Im\paren{e^{-jt}je^{jt}} dt \\
+                 &=\frac12\int 1\,dt &&=\frac12\int 1\,dt \\
+  &= \frac{\Delta t}2 & &=\frac{\Delta t}2
+\end{align*}
+\end{document}
