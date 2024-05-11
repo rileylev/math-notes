@@ -13,8 +13,35 @@
   \text{Complex} & & \text{Hyperbolic} \\
   i^2 &\define {-1} &  j^2 &\define {+1} \\
   i(x+iy) &= -y + ix & j(x+jy) &=y +jx
+  \intertext{
+  \begin{tikzpicture}
+    \draw[gray](-2,0) -- (2,0) (0,-2) -- (0,2);
+    \draw[->](0,0) -- (1,2)  coordinate [label=right:{\(z\)}];
+    \draw[->](0,0) -- (-2,1) coordinate [label=above:{\(iz\)}];
+  \end{tikzpicture}
+  \hfil
+  \begin{tikzpicture}
+    \draw[gray,dashed](-2,-2) -- (2,2);
+    \draw[gray](-2,0) -- (2,0) (0,-2) -- (0,2);
+    \draw[->](0,0) -- (1,2) coordinate [label=right:{\(z\)}];
+    \draw[->](0,0) -- (2,1) coordinate [label=right:{\(jz\)}];
+  \end{tikzpicture}
+  }
   \intertext{Conjugation and norm}
-  (x+iy)^* &= x-iy & (x+jy)^* &= x-jy \\
+  (x+iy)^* &= x-iy & (x+jy)^* &= x-jy
+  \intertext{
+  \begin{tikzpicture}
+    \draw[gray](-2,0) -- (2,0) (0,-2) -- (0,2);
+    \draw[->](0,0) -- (1,2)  coordinate [label=right:{\(z\)}];
+    \draw[->](0,0) -- (1,-2) coordinate [label=right:{\(z^*\)}];
+  \end{tikzpicture}
+  \hfil
+  \begin{tikzpicture}
+    \draw[gray](-2,0) -- (2,0) (0,-2) -- (0,2);
+    \draw[->](0,0) -- (1,2) coordinate [label=right:{\(z\)}];
+    \draw[->](0,0) -- (1,-2) coordinate [label=right:{\(z^*\)}];
+  \end{tikzpicture}
+  }
   \abs{z}^2&\define zz^*=(x+iy)(x-iy)  & \abs{z}^2 &\define zz^*=(x+jy)(x-jy) \\
       &= x^2 +y^2 & &=x^2-y^2
 \intertext{
@@ -26,6 +53,7 @@
   \begin{tikzpicture}
     \clip (-2,-2) rectangle (2,2);
     \draw[gray](-2,0) -- (2,0) (0,-2) -- (0,2);
+    \draw[gray,dashed](-2,-2) -- (2,2) (-2,2) -- (2,-2);
     \draw[samples=5, domain=-2:2,smooth,variable=\t]
     plot ({cosh \t}, {sinh \t})
     plot (-{cosh \t}, {sinh \t})
@@ -50,6 +78,31 @@
   e^{it} &= 1(\dots) + i(\dots) & e^{jt} &= 1(\dots) + j(\dots)  \\
         & -1(\dots)-i(\dots) && +1(\dots) +j(\dots) \\
   e^{it}&= \cos t + i \sin t & e^{jt} &=\cosh t + j \sinh t
+\intertext{
+  \begin{tikzpicture}[scale=2]
+    \draw[gray] (-2,0) -- (2,0) (0,-2) -- (0,2);
+    \draw (0,0) circle (1);
+    \def\t{1}
+    \def\x{{cos(\t r)}}
+    \def\y{{sin(\t r)}}
+    \draw[->] (0,0) -- (\x,\y) coordinate[label=above right:{\((\cos, \sin)\)}];
+    \draw (\x,0)--(\x,\y);
+  \end{tikzpicture}
+  \hfil
+  \begin{tikzpicture}[scale=2]
+    \clip (0,-2) rectangle (4,2);
+    \draw[gray] (-2,0) -- (4,0) (0,-2) -- (0,2);
+    \draw[gray,dashed](0,0) -- (2,2) (0,0) -- (2,-2);
+    \draw[samples=5, domain=-2:2,smooth,variable=\t]
+    plot ({cosh \t}, {sinh \t})
+    ;
+    \def\t{.7}
+    \def\x{{cosh \t}}
+    \def\y{{sinh \t}}
+    \draw[->] (0,0) -- (\x,\y) coordinate[label=below right:{\((\cosh,\sinh)\)}];
+    \draw(\x,0) -- (\x,\y);
+  \end{tikzpicture}
+                      }
   \intertext{Pythagorean identity}
   e^{-it}&= \cos (-t) + i \sin (-t) & e^{-jt} &=\cosh (-t) + j \sinh (-t) \\
       &= \cos t - i \sin t  &      &=\cosh t - j \sinh t \\
@@ -124,13 +177,37 @@
   \begin{tikzpicture}
     \clip (-2,-2) rectangle (2,2);
     \draw[gray] (-2,0) -- (2,0) (0,-2) -- (0,2);
+    \draw[gray,dashed](0,0) -- (2,2) (0,0) -- (2,-2);
     \draw[samples=5, domain=-2:2,smooth,variable=\t]
     plot ({cosh \t}, {sinh \t})
-    plot ({cosh \t}, {-sinh \t})
     ;
-    \def\t{.2}
+    \def\t{.4}
     \draw[->] (0,0) -- ({cosh( \t)}, {sinh( \t)});
     \draw[->] ({cosh(\t}, {sinh(\t)}) -- ({cosh(\t) + sinh(\t)}, {sinh(\t) + cosh(\t)}) ;
+  \end{tikzpicture}
+  }
+\intertext{
+  \begin{tikzpicture}
+    \draw[gray] (-2,0) -- (2,0) (0,-2) -- (0,2);
+    \draw (0,0) circle (1);
+    \def\t{1}
+    \draw[->] (0,0) -- ({cos( \t r)}, {sin( \t r)});
+    \draw[->,lightgray] ({cos( \t r)}, {sin( \t r)}) -- ({cos( \t r) - sin(\t r)}, {sin( \t r) + cos(\t r)}) ;
+    \draw[->] (0,0) -- ({- sin(\t r)}, { cos(\t r)}) ;
+  \end{tikzpicture}
+  \hfil
+  \begin{tikzpicture}
+    \clip (-2,-2) rectangle (2,2);
+    \draw[gray] (-2,0) -- (2,0) (0,-2) -- (0,2);
+    \draw[gray,dashed](0,0) -- (2,2) (0,0) -- (2,-2);
+    \draw[samples=5, domain=-2:2,smooth,variable=\t]
+    plot ({cosh \t}, {sinh \t})
+    plot ({sinh \t}, {cosh \t})
+    ;
+    \def\t{.4}
+    \draw[->] (0,0) -- ({cosh( \t)}, {sinh( \t)});
+    \draw[lightgray,->] ({cosh(\t}, {sinh(\t)}) -- ({cosh(\t) + sinh(\t)}, {sinh(\t) + cosh(\t)}) ;
+    \draw[->] (0,0) -- ({sinh(\t)}, {cosh(\t)}) ;
   \end{tikzpicture}
                       }
   \intertext{Dot and cross product}
