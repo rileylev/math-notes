@@ -1,0 +1,667 @@
+\documentclass[draft]{scrartcl}
+
+\newcommand{\problem}[1]{\newpage\section*{Problem #1}}
+\usepackage{riley}
+\usepackage{riley-libertine}
+
+\usepackage{multicol}
+\usepackage{ifdraft}
+
+\newcommand{\drafthide}[1]{\ifdraft{}{#1}}
+
+\usepackage[top=.9in,left=.9in,right=.9in]{geometry}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+
+
+\newcommand{\g}{\mathfrak g}
+\newcommand{\h}{\mathfrak h}
+\newcommand{\n}{\mathfrak n}
+
+\newcommand{\cross}{\times}
+\newcommand{\ham}{\mathbb H}
+
+\renewcommand{\aa}{\mathfrak a}
+\newcommand{\bb}{\mathfrak b}
+
+\newcommand{\gl}{\mathfrak {gl}}
+\newcommand{\GL}{GL}
+\newcommand{\SO}{SO}
+\newcommand{\so}{\mathfrak{so}}
+\renewcommand{\O}{O}
+\newcommand{\RP}{RP}
+
+\newcommand{\gray}[1]{{\color{gray}{#1}}}
+
+\newcommand{\quaternion}{\mathbb{H}}
+
+\newcommand{\black}[1]{{\color{black}{#1}}}
+
+\renewcommand{\blank}{\_\_}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\coker}{coker}
+
+\DeclareMathOperator{\trace}{tr}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\sgn}{sgn}
+
+
+\let\oldepsilon\epsilon
+\def\epsilon{\varepsilon}
+
+
+\newcommand{\upleft}[2]{\prescript{#1}{}{#2}}
+
+\newcommand{\qrot}{\mathcal R}
+\begin{document}
+\begin{multicols*}{2}
+\[
+  \begin{tikzcd}[column sep = 1em]
+    & i \ar[bend left]{dr}\\
+    k\ar[bend left]{ur} & &j \ar[bend left]{ll}
+  \end{tikzcd}
+\]
+  \section{Quaternions, conjugation, rotation}
+%Apr 3rd:  Reviewed some basics about the quaternions.  Proved that (group) conjugation commutes with (Hamiltonian) conjugation, whereby group conjugation I mean, qpq^{-1} and Hamiltonian conjugation I mean send a vector p = scal(p) + vec(p) to pbar = scal(p) - vec(p).  As a consequence, expressions in terms of p and its (Hamiltonian) conjugate are preserved under (group) conjugation.  In particular, the scalar part, the vector part, and the norm of a typical quaternion p are all respected under the operation of (group) conjugation.  Consequently, we have an induced action of S^{3} on R^{3} that preserves norm.  Stated a theorem that S^3 maps surjectively onto SO(3,R) with a Z2-kernel, which is the spin double cover of SO(3,R).  Will make progress on the proof next time (special thanks to Robert for recording the lecture) (Oleg Viro notes on quaternions)
+%
+  \begin{lemma}
+    Group conjugation commutes with hamiltonian conjugation
+  \end{lemma}
+  \begin{proof}
+    Suppose \(\abs q=1\). Then \(q^{-1}=q^*\) and
+    \begin{align*}
+      \paren{qpq^{-1}}^* &= \paren{qpq^{*}}^* \\
+                         &= \paren{q^*}^*\paren{p^*}\paren{q}^* \\
+                         &= q\paren{p^*}q^* \\
+                         &= q p^* q^{-1}.
+    \end{align*}
+    In general, \(q = t \hat q\) for \(t\in\R\). Then
+    \begin{align*}
+      qpq^{-1}&=\paren{t\hat q}p\paren{t\hat q}^{-1}  \\
+              &= \paren{t\hat q} p \paren{t^{-1}\hat q^{-1}} \\
+              &= \hat q p \hat q^{-1} \\
+      \shortintertext{Conclude}
+      \paren{qpq^{-1}}^* &= \paren{\hat q p \hat q^{-1}}^* \\
+              &= \hat q p^* \hat q^{-1} \\
+              &= qp^* q^{-1}
+    \end{align*}
+
+  \end{proof}
+  \begin{cor}
+    \[
+      \qrot: q\mapsto q\blank q^{-1}: S^3\to \O(\R^3)
+    \]
+  \end{cor}
+  Because \(S^3\) is connected, so is \(\qrot(S^3)\). Because its image contains \(\qrot(1) = 1\blank 1 = \id\), it lies in the identity component:
+  \begin{cor}
+    \[
+      q\mapsto q\blank q^{-1}: S^3\to \SO(\R^3).
+    \]
+  \end{cor}
+
+  The properties of \(\qrot(q)\) are determined by commutativity.  Since we're acting on \(\R^3\), decompose:
+  \[
+    q = r + \vec v.
+  \]
+  In the case \(r=0\),
+  \[
+    \vec v \vec u \vec v^{*} = -\vec v \vec x \vec v
+  \]
+  Split \(x=x_\parallel + x_\perp\)
+  \[
+    \vec u x_\parallel \vec u^* = \vec u \vec u^{*} x_\parallel = x_\parallel
+  \]
+  \[
+    \vec u x_\perp \vec u^* = -\vec u \vec u^{*} x_\perp = -x_\perp
+  \]
+  a reflection negating everything but \(\Span u\) (line symmetry).
+
+  Commuting?
+  \[
+    \bracket{q,\vec x} = \bracket{q+\vec v, \vec x} = \bracket{\vec v, \vec x}
+  \]
+  Split \(x=x_\parallel+x_\perp\). Parallels commute and orthogonals anticommute:
+  \begin{align*}
+    v x_\parallel = x_\parallel v  \\
+    v x_\perp = x_\perp v
+  \end{align*}
+  Therefore,
+  \begin{align*}
+    q x_\parallel q^{-1} &= qq^{-1}x_\parallel = x_\parallel \\
+    \shortintertext{while}
+    q x_\perp q^* &= \paren{r+ v}x_\perp \paren{r- v} \\
+                  &=  \paren{r+ v}\paren{r+v}x_\perp \\
+    &= q^2 x_\perp \\
+      \shortintertext{so}
+    \qrot\paren q x = qxq^{-1} &= x_\parallel + q^2 x_\perp
+  \end{align*}
+  \begin{align*}
+    q &= c_\theta + s_\theta \hat v\\
+    q^2 &= c_\theta^2 - s_\theta^2  + 2c_\theta s_\theta \hat v \\
+      &= c_{2\theta} + s_{2\theta} \hat v \\
+    q^2 x_\perp &= c_{2\theta} x_\perp + s_{2\theta}\hat v x_\perp
+  \end{align*}
+  % TODO characterize rotations
+  %
+
+
+  In general, I want to show rotations fix subspaces of size 2.
+
+  % Apr 5th:  Talked more about how conjugation acts.  In particular, focused on the case where q in S^{3} is pure, and acting by conjugation.  Showed that in this case that I_{q} acts by line symmetry, preserving the axis defined by q, and acting by -1 on the orthogonal complement of said axis.  Proved a lemma that states that every unit quaternion can be expressed as the product of two pure unit quaternions.  Related this to Cartan-Dieudonné Theorem which states every isometry of R^{n} is the product of at most (n+1) reflections in hyperplanes.  Stated the Euler-Rodrigues Theorem that states for each q in S^{3}, I_{q} acts on the pure quaternions by rotation with a fixed axes generated by Vec(q) and by an angle of cos(theta/2) where theta is determined by q = cos(theta/2) + sin(theta/2)u with u unit.  Gave an idea of how to prove it, will proceed next time.  (Oleg Viro)
+  \begin{theorem}
+    Every unit quaternion can be expressed as the product of two pure units
+  \end{theorem}
+  \begin{proof}
+    \begin{align*}
+      \vec u \vec v &= -\vec u \cdot \vec v + \vec u \times \vec v \\
+                    &= -\cos\theta + \sin\theta \,\vec u\times\vec v \\
+      i \paren{-i \cos \theta  - iw\sin\theta} &= \cos\theta + w\sin\theta
+    \end{align*}
+  \end{proof}
+
+  \begin{theorem}[Cartan-Dieudonné]
+  \end{theorem}
+  \begin{proof}
+    I forgot where I read this.
+
+    Decompose the space. Consider the map \(U:(x,\vec u) \mapsto (y,\vec v)\). There's a reflection \(F\) sending the first coordinate to the correct location:
+    \[
+      F(x,\vec u) = (y, F' \vec u)
+    \]
+    so
+    \[
+      U = \paren{UF} F
+    \]
+    and \(UF(x,w) = (x,w')\) which is orthogonal on a codimension 1 space, so go by induction. On a dimension 0 space, nothing is necessary to do (base case is vacuously true).
+  \end{proof}
+  %
+  % Apr 8th:  Proved the theorem about rotations mentioned last time.  Started by looking at the composition of line symmetries in the x, y, and z axes.  Went on to investigate the composition of two line symmetries in R^{3} in general.  Reduced to the problem to a 2-dimensional problem by finding the fixed axes to the composition.  Somewhat hastily went through the proof of the Euler-Rodrigues theorem.  (Oleg Viro)
+
+  % Apr 10th:  Went over the Euler-Rodrigues theorem in more detail.  Did some consequences of this theorem, in particular, showed the existence of the S^{3} double cover of SO(3,R) and talked about how S^{3}/Z_{2} is isomorphic to SO(3,R).  In particular this means that RP^{3} the space of all lines in R^{4} through the origin is homeomorphic to SO(3,R), so one can multiply lines in R^{4} together.  Started to analyze the SU(2,C) representation of H^{x}, namely embedding the non-zero quaternions into a SU(2,C) via considering H as both a left and right complex vector space.  (Keith Conrad notes on quaternions)
+
+  \section{Representations of \(\ham^\times\)}
+  % Apr 12th:  Considered H^{x} as a right C-vector space.  Looked at left multiplication by q to which is a C-endomorphism for each choice of q.  Wrote out the matrix representation, and obtained the SU(2,C) representation of S^{3}.  After, considered H as a real vector space and noticed some basic properties about how each matrix has orthogonal columns, and in particular, for each choice of (p,q) in S^{3}xS^{3}, the map L_{q}R_{p^{-1}} is an element of SO(4,R).  Next time will prove this map is surjective.  (Gallier notes on quaternions)
+  \begin{align*}
+    q &= \alpha + \beta i + \gamma j + \delta k \\
+      &= \paren{\alpha +\beta i} + \paren{\gamma +\delta i}j  \\
+      &= u  + vj  \\
+      &=\paren{\alpha+\beta i} + j\paren{\gamma - \delta i} \\
+      &= u + v^*j
+  \end{align*}
+  \[
+    \begin{array}{ccc}
+      & w& xj \\
+      u&uw & uxj    \\
+      vj& vw^*j & vx^*j^2
+    \end{array},
+  \]
+  so we get the action
+  \begin{align*}
+    \begin{bmatrix}
+      u \\ v
+    \end{bmatrix}
+    \paren{w+xj} &=
+    \begin{bmatrix}
+      uw - vx^* \\ vw^* +ux
+    \end{bmatrix} \\
+    &=
+    \begin{bmatrix}
+      w & -x^* \\
+      x & w^*
+    \end{bmatrix}
+    \begin{bmatrix}
+      u\\ v
+    \end{bmatrix}
+    \\
+    \blank(w+xj) &\mapsto
+                   \begin{bmatrix}
+                     w & -x^* \\ x & w^*
+                   \end{bmatrix}
+  \end{align*}
+% TODO what about the other side?
+
+  Or to \(\SO\R^4\)
+  \begin{align*}
+    i\blank&\mapsto
+       \begin{bmatrix}
+          & -1\\
+         1 \\
+          & & & -1\\
+          & & 1
+       \end{bmatrix} \\
+    j\blank & \mapsto
+              \begin{bmatrix}
+                && -1\\
+                &&    &1\\
+                1         \\
+                & -1
+              \end{bmatrix} \\
+    k \blank & \mapsto
+               \begin{bmatrix}
+                 &  &  &-1\\
+                 &  &-1\\
+                 & 1\\
+                 1
+               \end{bmatrix} \\
+  \end{align*}
+
+  \begin{align*}
+    \blank i&\mapsto
+       \begin{bmatrix}
+          & -1\\
+         1 \\
+          & & & 1\\
+          & & -1
+       \end{bmatrix} \\
+    \blank j & \mapsto
+              \begin{bmatrix}
+                && -1\\
+                &&    &-1\\
+                1         \\
+                & 1
+              \end{bmatrix} \\
+     \blank k& \mapsto
+               \begin{bmatrix}
+                 &  &  &-1\\
+                 &  &1\\
+                 & -1\\
+                 1
+               \end{bmatrix}
+  \end{align*}
+
+  \newcommand{\lightgray}[1]{{\color{lightgray}#1}}
+  \begin{align*}
+    q \blank  &\mapsto
+                \color{gray}
+    \begin{bmatrix}
+      \lightgray\alpha & - \beta & -\gamma & -\delta  \\
+      \beta & \lightgray\alpha   & \black{-\delta} & \black{\gamma} \\
+      \gamma & \black{\delta} & \lightgray\alpha & \black{-\beta}  \\
+      \delta & \black{-\gamma} & \black\beta & \lightgray\alpha
+    \end{bmatrix} \\
+     \blank q  &\mapsto
+                \color{gray}
+    \begin{bmatrix}
+      \lightgray\alpha & - \beta & -\gamma & -\delta  \\
+      \beta & \lightgray\alpha   & \black{\delta} & \black{-\gamma} \\
+      \gamma & \black{-\delta} & \lightgray\alpha & \black{\beta}  \\
+      \delta & \black{\gamma} & \black{-\beta} & \lightgray\alpha
+    \end{bmatrix}
+  \end{align*}
+  For pure vectors,
+  \begin{align*}
+    v q &= v\pi_{1}(q) -v\cdot \pi_{ijk} q + v\times \pi_{ijk} q \\
+    v\blank &= v\blank_{\R} - v\cdot\blank + v\times\blank
+  \end{align*}
+  \[
+    v\blank =
+    \begin{bmatrix}
+      0 & -v^T \\
+      v & v\times\blank
+    \end{bmatrix}
+    \quad
+    \blank v =
+    \begin{bmatrix}
+      0 & -v^T \\
+      v & \blank\times v
+    \end{bmatrix}
+  \]
+  \begin{align*}
+    v\blank v &=
+    \begin{bmatrix}
+      -v\cdot v & -v\cdot \paren{\blank\times v} \\
+      v\times v & -vv^T+ v\times \paren{\blank\times v}
+    \end{bmatrix} \\
+    v\times\paren{x\times v} &= -\paren{v\cdot x} v + x\paren{v\cdot v} \\
+    &= \paren{-vv^T+ vv^T}x \\
+    v\blank v &=
+    \begin{bmatrix}
+      -v\cdot v &  \\
+       & -2vv^T+ v^Tv
+    \end{bmatrix} \\
+  \end{align*}
+  % Apr 15th:  Finished proof that the map as defined previously from S^{3}xS^{3} is surjective.  Did this by a simple reduction of what happens if it fixes the point 1 in H.  This proves the spin double cover of SO(4,R) is isomorphic to S^{3}xS^{3}.  Introduced fiber bundles.  Gave lots of examples of fiber bundles including interval bundles over S^{1} and S^{1} bundles over S^{1}.  Drew some cutting and pasting diagrams for the torus and Klein bottle.  Stated the theorem regarding the Hopf-fibration, namely S^{3} is an S^{1} bundle over S^{2}.  Talked about stereographic projection a bit.  (Gallier notes on quaternions and my notes)
+  %
+
+  % Apr 17th:  Talked about principal G-bundles.  Loosely defined them as fiber bundles where there's a right action of G on the total space E such that the G-action preserves the fibers, and each fiber is isomorphic to G.  Gave examples including an R-action on [0,1]xR ---> [0,1] via projection onto first factor, and S^{1} action on T^{2} ---> S^{1} via projection onto first factor.  Gave non-commutative example of the frame bundle over the sphere taking a frame of the tangent bundle onto the associated point on the sphere.  Drew some pictures, and argued why there's a natural right GL(2,R) action on this bundle.  After, defined the actual Hopf-fibration as the map taking q in S^{3} to qkq^{-1} in S^{2}.  Showed this induces an action of S^{3} on S^{2} where the action is transitive, and, its fiber is S^{1}.  Did this by arguing the copy of C in H generated by {1,k} stabilizes k, and so its `unitization' must as well.  The complement generated by {i,j} obviously does not stabilize k.  This more or less shows that S^{3}/S^{1} is S^{2}, and next time will investigate the S^{1} action on S^{3}.
+  %
+  % Apr 22nd:  Talked more about the Hopf-fibration.  Did some calculations to figure out how the Hopf-fibration map behaves under pre-composition with both left and right multiplication.  Demonstrated that the Hopf-fibration is a principal S^{1}-bundle over S^{2} where S^{1} is the Stab(k) where S^{3} acts by conjugation on itself, i.e. H^{-1}(v) = qS^{1} where q is any point in S^{3} with H(q) = v in S^{2}.  Showed that left-multiplication takes H(qp) = I_{q}H(p) where I_{q} is conjugation.  Using these observations wrote out the typical fiber over v in S^{2} as H^{-1}(v) = (1/Sqrt(2+2c))(1+c-b*i+a*j).  [Note, I botched this part a little; Tommy was right, the orientation was incorrect].  Did some visual demonstrations about the fibers of the map and how they're linked.
+  %
+  % Apr 24th:  Gave a proof that the Hopf-links are in fact linked using some topology.  Talked about the winding number of a curve in the plane through two different ways; very loosely described the degree of the map from S^{1} ---> S^{1} that takes t --> gamma(t)/||gamma(t)||.  Second, and more concretely, talked about the the winding number of a curve as the pairing between a curve gamma not through the origin and the differential form -ydx + xdy/(x^2 + y^2) which was motivated by taking the derivative of the `function' f(x,y) = arctan(y/x).  Talked about how the function makes sense locally, but not globally.  Did a calculation between the unit circle and the form above normalized with 1/(2pi).  Finally, drew some pictures describing how the fundamental group of two linked circles is not free, in particular the commutator of the two elements generated by the loops is isotopic to the identity.
+  %
+
+  Hopf map things
+  \[
+    H(q)\define qkq^{-1} = \upleft{q}{k}
+  \]
+  \begin{align*}
+    H(pq) &= \upleft{pq}{k} \\
+          &= \upleft{p}{\paren{\upleft{ q}k }} \\
+          &=\upleft{p}{H(q)} \\
+    H(qr) &= H(rq^r) \\
+          &= \upleft{r}{H(q^r)}
+  \end{align*}
+
+  \section{Winding and linking number}
+  \renewcommand{\H}{\mathcal H}
+  \url{https://en.wikipedia.org/wiki/Linking_number}
+
+  There's too many \(H\)s in this field.
+  Winding number:
+  \[
+    \begin{tikzcd}
+      S^1 \rar{\gamma} & S^1 \\
+      \Z \rar{\H_1(\gamma)} & \Z
+    \end{tikzcd}
+  \]
+  If you homotope one curve to a standard circle, the linking number is the winding number of the other curve.
+
+  Linking number of \(s^1\to \blank\) is only nontrivial in dimension 3 because you can homotope through the fourth dimension to separate. %TODO draw a picture :D
+
+  Gauss's linking number (via wikipedia). The Gauss map
+  \[
+    \Gamma(\alpha,\beta)(s,t) = \sgn\paren[\big]{\alpha(s) -\beta(t)}
+  \]
+  \begin{quote}
+    \footnotesize
+    ``Pick a point in the unit sphere, \(v\), \emph{so that orthogonal projection} of the \emph{link} to the plane perpendicular to \(v\) \emph{gives a link diagram}. Observe that a point \((s, t)\) that \emph{goes to v} under the Gauss map \emph{corresponds to a crossing} in the link diagram \emph{where [\(\alpha\)] is over [\(\beta\)]}.  Also, a neighborhood of \((s, t)\) is mapped under the Gauss map to a neighborhood of \(v\) preserving or reversing \emph{orientation} depending on the \emph{sign} of the crossing. Thus in order to compute the linking number of the diagram corresponding to \(v\) it suffices to \emph{count the signed number of times the Gauss map covers\eulit{}~\(v\)}. Since \(v\) is a \emph{regular value}, this is precisely the \emph{degree of the Gauss map} (i.e. the signed number of times that the image of [\(Γ(\alpha,\beta)\)] covers the sphere). Isotopy invariance of the linking number is automatically obtained as the \emph{degree is invariant} under homotopic maps. Any other regular value would give the same number, so the linking number doesn't depend on any particular link diagram.''
+  \end{quote}
+
+  \begin{align*}
+    \deg \Gamma_{(\alpha,\beta)} \int_{S^2} 1
+    &= \int_{T^2} \Gamma(\alpha,\beta) \\
+    \deg \Gamma_{(\alpha,\beta)}
+    &=\paren{2\tau}^{-1}\int_{T^2} \Gamma_{(\alpha,\beta)} \paren{ds\wedge dt} \\
+    \shortintertext{Because slotting a unit vector into a volume form gives area}
+    &= \int \paren{\wedge^2 d\Gamma }\wedge \Gamma \\
+    \shortintertext{With the added benefit of discarding the normal components of \(\wedge^2 d\Gamma\):}
+    &= \int \frac{d\alpha}{\abs{\alpha-\beta}} \wedge \frac{-d\beta}{\abs{\alpha-\beta}} \wedge \frac{\alpha-\beta}{\abs{\alpha-\beta}}
+  \end{align*}
+  But I think I lost a minus sign.
+  % TODO verify this
+  \section{stereographic projection of hopf links}
+  Foliate \(S^3\) with tori:
+  \begin{align*}
+    F(\alpha)(s,t)&\define \cos\alpha\, e^{sk} + \sin\alpha\, i e^{-tk}  \\
+    &:\  [0,\tau/4] \to T^2 \to S^3 \\
+    \shortintertext{Spin}
+    Fe^{uk} &= \cos\alpha\, e^{(s+u)k} + \sin\alpha\, i e^{(u-t)k} \\
+    \shortintertext{It spins within leaves not across. Project}
+    P(Fe^{uk}) &= \frac{\cos\alpha\cos (s+u) + {\sin \alpha} \, ie^{(u-t)k}}{1-\cos\alpha\sin (s+u)}
+  \end{align*}
+  Project
+  \drafthide{
+\[
+  \begin{tikzpicture}
+    \draw[dashed, lightgray] (-4,-4) rectangle (4,4);
+    \clip (-4,-4) rectangle (4,4);
+    %
+    \def\T{0}
+    \def\eps{.001}
+    \foreach \A in {0,.1,...,1.0}
+    \foreach \S in {0,.2,...,6.3}
+    \draw[samples={40},lightgray!80,domain=-3.2:3.2,smooth,variable=\u] plot
+    ({cos(\A r)* cos((\S + \u) r) / (\eps+ 1 - (cos(\A r) * sin((\S + \u) r)))},
+    {sin(\A r)*cos((\u - \T) r)  / (\eps+1 - (cos(\A r) * sin((\S + \u) r)))});
+
+    \foreach \A in {.2,.3,...,1}
+    \foreach \S in {1,2,...,6.3}
+    \draw[samples={45},gray!30,domain=-3.2:3.2,smooth,variable=\u] plot
+    ({cos(\A r)* cos((\S + \u) r) / (\eps+ 1 - (cos(\A r) * sin((\S + \u) r)))},
+    {sin(\A r)*cos((\u - \T) r)  / (\eps+1 - (cos(\A r) * sin((\S + \u) r)))});
+
+
+    \foreach \A in {.1,.3,...,1}
+    \foreach \S in {1,2,...,6.3}
+    \draw[samples={45},gray,domain=-3.2:3.2,smooth,variable=\u] plot
+    ({cos(\A r)* cos((\S + \u) r) / (\eps+ 1 - (cos(\A r) * sin((\S + \u) r)))},
+    {sin(\A r)*cos((\u - \T) r)  / (\eps+1 - (cos(\A r) * sin((\S + \u) r)))});
+
+    \foreach \A in {.2,.6,...,1}
+    \foreach \S in {1,3,...,6.3}
+    \draw[samples={45},domain=-3.2:3.2,smooth,variable=\u] plot
+    ({cos(\A r)* cos((\S + \u) r) / (\eps+ 1 - (cos(\A r) * sin((\S + \u) r)))},
+    {sin(\A r)*cos((\u - \T) r)  / (\eps+1 - (cos(\A r) * sin((\S + \u) r)))});
+  \end{tikzpicture}
+\]}
+
+\section{\(S^3\times S^3\) and \(SO(4)\)}
+\begin{minipage}{.5\linewidth}
+  \begin{align*}
+    z(u+vj) &= (zu) + (zv)j \\
+    j(u+vj) &= ju +jvj \\
+            &= -v^* + u^*j \\
+    z
+    \begin{bmatrix}
+      u \\ v
+    \end{bmatrix}
+    &=
+      \begin{bmatrix}
+        zu \\ zv
+      \end{bmatrix} \\
+    j
+    \begin{bmatrix}
+      u \\ v
+    \end{bmatrix}
+    &=
+      \begin{bmatrix}
+        -v^* \\ u^*
+      \end{bmatrix}
+  \end{align*}
+\end{minipage}
+\quad
+\begin{minipage}{.5\linewidth}
+  \begin{align*}
+    (u+vj)z &= uz + vjz \\
+            &= uz + vz^* j  \\
+    (u+vj)j &= uj - v \\
+    \begin{bmatrix}
+      u \\ v
+    \end{bmatrix} z &=
+                      \begin{bmatrix}
+                        zu \\  z^*v
+                      \end{bmatrix} \\
+    \begin{bmatrix}
+      u \\ v
+    \end{bmatrix} j &=
+                      \begin{bmatrix}
+                        -v \\ u
+                      \end{bmatrix}
+  \end{align*}
+\end{minipage}
+We can rotate \(\ham\) fixing \(1\) to make an arbitrary unit vector into \(i\). In that case, the effect of exponential-rotation is
+\[
+  e^{is}
+  \begin{bmatrix}
+    u \\ v
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    e^{is} u \\ e^{is} v
+  \end{bmatrix}
+  \quad
+  \begin{bmatrix}
+    u \\v
+  \end{bmatrix}
+  e^{it} =
+  \begin{bmatrix}
+    e^{it} u \\ e^{-it} v
+  \end{bmatrix}
+\]
+\[
+  e^{is}
+  \begin{bmatrix}
+    u \\ v
+  \end{bmatrix}
+  e^{it}
+  =
+  \begin{bmatrix}
+    e^{i(s+t)} u \\ e^{i(s-t)} v
+  \end{bmatrix}
+\]
+So we can rotate the two complex numbers independently.
+\[
+  \exp\paren{i\frac{A+ B}2}
+  \begin{bmatrix}
+    u \\ v
+  \end{bmatrix}
+  \exp \paren{i\frac{A-B}2}
+  =
+  \begin{bmatrix}
+    e^{iA} u \\ e^{iB}v
+  \end{bmatrix}
+\]
+Especially
+\[
+  e^{iA/2}
+  \begin{bmatrix}
+    u \\v
+  \end{bmatrix}
+  e^{iA/2}
+  =
+  \begin{bmatrix}
+    e^{iA} u \\ v
+  \end{bmatrix}
+\]
+So now we can (1) rotate the vector parts, (2) rotate between a vector and scalar.
+
+\(e^{tx/2}\blank e^{-tx/2}\) rotates vectors around the axle \(x\), fixing \(1\) and \(x\).
+
+\(e^{tx/2}\blank e^{tx/2}\) rotates the \(1,x\)-plane, fixing vectors orthogonal to \(x\).
+
+The simplest ``generic'' rotation would be in the \(e^{it},j\)  plane:
+\[
+  (c1+is) \wedge j = c1\wedge j + s i \wedge j
+\]
+\section{\(\ham\) and geometric algebra}
+\[
+  \ham = \R^3/\paren{v^2=-1}
+\]
+whereas your standard geometric algebra is
+\[
+  \R^3/\paren{v^2=1}.
+\]
+
+But they Hodge\(*\) into each other. Let \(x,y,z\) be the geometric algebra's basis. Then
+\begin{align*}
+  I &= xyz  \\
+  I^2 &= (xyz)(xyz) = -1 \\
+  xI &= x^2yz = xyzx = Ix
+\end{align*}
+Define
+\[
+  \phi:
+  \left\{
+  \begin{matrix}
+    i &\mapsto& xI &=&xxyz&= yz    \\
+    j &\mapsto& -yI&=&-yxyz&= xz  \\
+    k &\mapsto& zI &=&zxyz&= xy
+  \end{matrix}
+  \right.
+\]
+This has the right squares:
+\[
+  \phi(\vec x)^2 = \paren{xI}\paren{xI} = x^2I^2 = -1.
+\]
+And products?
+\begin{align*}
+  \paren{yz}\paren{xz} &= -yx &= xy \\
+  \paren{xz}\paren{xy} &= -zy &=yz \\
+  \paren{xy}\paren{yz} &= &=xz
+\end{align*}
+\[
+  \begin{tikzcd}[row sep=1em,column sep = .5em]
+    & i \ar[bend left]{dr}\\
+    k\ar[bend left]{ur} & &j \ar[bend left]{ll}
+  \end{tikzcd}
+  \overset{\phi}{\implies}
+  \begin{tikzcd}[row sep=1em,column sep = .4ex]
+    & yz \ar[bend left]{dr}\\
+    xy\ar[bend left]{ur} & &xz \ar[bend left]{ll}
+  \end{tikzcd}
+  =
+  \begin{tikzcd}[row sep=1em,column sep = .4ex]
+    & xI \ar[bend left]{dr}\\
+    zI\ar[bend left]{ur} & &-yI \ar[bend left]{ll}
+  \end{tikzcd}
+\]
+Punning between vectors and spinors depends on planes and lines being dual in \(\R^3\):
+\[
+  \begin{tikzcd}
+    \ham = \R \oplus \R^3 \rar{1\oplus \phi}& \R\oplus \wedge^2\R^3
+  \end{tikzcd}
+\]
+\section{rotation tricks}
+Log of a rotor/product of unit vectors
+\begin{align*}
+  uv &= \grayunderbrace{u\cdot v}{\cos\theta} + u\wedge v  \\
+     &= \cos\theta + \sin\theta \frac{u\wedge v}{\abs{u\wedge v}} \\
+     &= \exp\paren{\cos^{-1}(u\cdot v) \frac{u\wedge v}{\abs{u\wedge v}}}
+\end{align*}
+
+Product of 2-rotors. If they commute:
+\[
+  e^{\alpha xy} e^{\beta zt} = e^{\alpha xy + \beta zt} \quad \text{as } \bracket{xy,zt} = 0
+\]
+If they don't commute,
+\begin{align*}
+  e^{\alpha xy} e^{\beta yz}
+  &= \grayoverbrace{\paren{e^{\alpha xy} y}}{\deg=1}\grayoverbrace{\paren{ye^{\beta yz}}}{\deg=1} \\
+  &=\grayunderbrace{\paren{e^{\alpha xy} y} \cdot \paren{ye^{\beta yz}}}{\cos \theta=c_\alpha c_\beta} + \paren{e^{\alpha xy} y} \wedge \paren{ye^{\beta yz}} \\
+  &=\exp\paren{\cos^{-1}(c_\alpha c_\beta) \frac{\paren{e^{\alpha xy}y}\wedge\paren{ye^{\beta yz}}}{\sqrt{1-{c_\alpha}^2{c_\beta}^2}}}
+\end{align*}
+Note \(xy+zt\) is not a blade means it is a double rotation
+
+\section{Rotor representation?}
+I'm writing these so rotors conjugate on the left
+\begin{align*}
+  i\blank &=
+            \begin{cases}
+              1 &\mapsto i \\
+              i &\mapsto -1 \\
+              j &\mapsto k \\
+              k &\mapsto -j
+            \end{cases}
+\shortintertext{Double rotation:}
+            i\blank &\mapsto \paren{\frac{1+x_1x_0}{\sqrt 2}}\paren{\frac{1+x_3x_2}{\sqrt 2}} \\
+  \blank i &=
+            \begin{cases}
+              1 &\mapsto i \\
+              i &\mapsto -1 \\
+              j &\mapsto -k \\
+              k &\mapsto j
+            \end{cases} \\
+            \blank i &\mapsto \paren{\frac{1+x_1x_0}{\sqrt 2}}\paren{\frac{1+x_2x_3}{\sqrt 2}} \\
+  j\blank&=
+           \begin{cases}
+             1 &\mapsto   j \\
+             j &\mapsto  -1 \\
+             i &\mapsto k \\
+             k &\mapsto -i
+           \end{cases} \\
+  \blank j&=
+           \begin{cases}
+             1 &\mapsto   j \\
+             j &\mapsto  -1 \\
+             i &\mapsto -k \\
+             k &\mapsto  i
+           \end{cases} \\
+  k\blank&=
+           \begin{cases}
+             1 \mapsto k \\
+             k \mapsto -1 \\
+             i \mapsto j \\
+             j\mapsto -i
+           \end{cases} \\
+  \blank k&=
+           \begin{cases}
+             1 \mapsto k \\
+             k \mapsto -1 \\
+             i \mapsto -j \\
+             j\mapsto i
+           \end{cases}
+\end{align*}
+\end{multicols*}
+\end{document}
