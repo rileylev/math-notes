@@ -2,6 +2,8 @@
 \usepackage{riley}
 \usepackage{riley-libertine}
 
+\usepackage{tikz}
+
 \newcommand{\black}[1]{{\color{black}{#1}}}
 \DeclareMathOperator{\sech}{sech}
 \DeclareMathOperator{\csch}{csch}
@@ -15,6 +17,21 @@
   (x+iy)^* &= x-iy & (x+jy)^* &= x-jy \\
   \abs{z}^2&\define zz^*=(x+iy)(x-iy)  & \abs{z}^2 &\define zz^*=(x+jy)(x-jy) \\
       &= x^2 +y^2 & &=x^2-y^2
+\intertext{
+  \begin{tikzpicture}
+    \draw[gray] (-2,0) -- (2,0) (0,-2) -- (0,2);
+    \draw (0,0) circle (1);
+  \end{tikzpicture}
+                      \hfil
+  \begin{tikzpicture}
+    \clip (-2,-2) rectangle (2,2);
+    \draw[gray](-2,0) -- (2,0) (0,-2) -- (0,2);
+    \draw[samples=5, domain=-2:2,smooth,variable=\t]
+    plot ({cosh \t}, {sinh \t})
+    plot (-{cosh \t}, {sinh \t})
+    ;
+  \end{tikzpicture}
+                      }
   \intertext{Exponentiation}
   i^n&=
        \begin{cases}
@@ -95,7 +112,28 @@
   f'(t) &= ie^{it} & f'(t)&= je^{jt} \\
   &=i\paren{\cos t+ i\sin t} &&=j\paren{\cosh t + j\sinh t} \\
   \cos' t +i\sin' t &= -\sin t +i\cos  t & \cosh' t + j\sinh' t&= \sinh t + j\cosh t
-                                \intertext{Dot and cross product}
+\intertext{
+  \begin{tikzpicture}
+    \draw[gray] (-2,0) -- (2,0) (0,-2) -- (0,2);
+    \draw (0,0) circle (1);
+    \def\t{1}
+    \draw[->] (0,0) -- ({cos( \t r)}, {sin( \t r)});
+    \draw[->] ({cos( \t r)}, {sin( \t r)}) -- ({cos( \t r) - sin(\t r)}, {sin( \t r) + cos(\t r)}) ;
+  \end{tikzpicture}
+  \hfil
+  \begin{tikzpicture}
+    \clip (-2,-2) rectangle (2,2);
+    \draw[gray] (-2,0) -- (2,0) (0,-2) -- (0,2);
+    \draw[samples=5, domain=-2:2,smooth,variable=\t]
+    plot ({cosh \t}, {sinh \t})
+    plot ({cosh \t}, {-sinh \t})
+    ;
+    \def\t{.2}
+    \draw[->] (0,0) -- ({cosh( \t)}, {sinh( \t)});
+    \draw[->] ({cosh(\t}, {sinh(\t)}) -- ({cosh(\t) + sinh(\t)}, {sinh(\t) + cosh(\t)}) ;
+  \end{tikzpicture}
+                      }
+  \intertext{Dot and cross product}
   u^*v &= \paren{\alpha - i\beta}\paren{\gamma + i\delta} & u^*v &= \paren{\alpha - j\beta}\paren{\gamma + j\delta} \\
   &
     \begin{array}{c|cc}
