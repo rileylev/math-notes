@@ -7,6 +7,7 @@
 \newcommand{\black}[1]{{\color{black}{#1}}}
 \DeclareMathOperator{\sech}{sech}
 \DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\SO}{SO}
 \begin{document}
 %\color{darkgray}
 \begin{align*}
@@ -241,5 +242,12 @@
                  &=\frac12 \int \Im\paren{e^{-it}ie^{it}}dt &=&=\frac12 \int \Im\paren{e^{-jt}je^{jt}} dt \\
                  &=\frac12\int 1\,dt &&=\frac12\int 1\,dt \\
   &= \frac{\Delta t}2 & &=\frac{\Delta t}2
+ \intertext{\(\SO^+(2)\): Multiplying by imaginary exponents preserves inner product and area!}
+  \paren{e^{it}u}^*\paren{e^{it}v} &= \paren{e^{it}u}\cdot \paren{e^{it}v} + i\paren{e^{it}v}\times \paren{e^{it }u} &
+                                                                                                               \paren{e^{jt}u}^*\paren{e^{jt}v} &= \paren{e^{jt}u}\cdot \paren{e^{jt}v} + j\paren{e^{jt}v}\times \paren{e^{jt }u} \\
+                 &= e^{-it}u^*e^{it}v & &=e^{-jt}u^*e^{jt}v \\
+                 &=u^*v & & = u^* v \\
+  &=u\cdot v + i\, u\times v & &=u\cdot v + j\, u\times v
+  % TODO: draw the effect of SO(2)
 \end{align*}
 \end{document}
