@@ -3,6 +3,7 @@
 \usepackage{riley-libertine}
 
 \usepackage{tikz}
+\usetikzlibrary{calc}
 
 \newcommand{\black}[1]{{\color{black}{#1}}}
 \DeclareMathOperator{\sech}{sech}
@@ -242,12 +243,74 @@
                  &=\frac12 \int \Im\paren{e^{-it}ie^{it}}dt &=&=\frac12 \int \Im\paren{e^{-jt}je^{jt}} dt \\
                  &=\frac12\int 1\,dt &&=\frac12\int 1\,dt \\
   &= \frac{\Delta t}2 & &=\frac{\Delta t}2
- \intertext{\(\SO^+(2)\): Multiplying by imaginary exponents preserves inner product and area!}
-  \paren{e^{it}u}^*\paren{e^{it}v} &= \paren{e^{it}u}\cdot \paren{e^{it}v} + i\paren{e^{it}v}\times \paren{e^{it }u} &
-                                                                                                               \paren{e^{jt}u}^*\paren{e^{jt}v} &= \paren{e^{jt}u}\cdot \paren{e^{jt}v} + j\paren{e^{jt}v}\times \paren{e^{jt }u} \\
+ \intertext{\(\SO(2),\SO^+(+,-)\): Multiplying by imaginary exponents preserves inner product and area!}
+ \paren{e^{it}u}\cdot\paren{e^{it}v } && \paren{e^{jt}u}\cdot\paren{e^{jt}v} \\
+ +\paren{e^{it}u}\times\paren{e^{it}v } &= \paren{e^{it}u}^*\paren{e^{it}v} & \paren{e^{jt}u}\times\paren{e^{jt}v}&=\paren{e^{jt}u}^*\paren{e^{jt}v} \\
                  &= e^{-it}u^*e^{it}v & &=e^{-jt}u^*e^{jt}v \\
                  &=u^*v & & = u^* v \\
-  &=u\cdot v + i\, u\times v & &=u\cdot v + j\, u\times v
-  % TODO: draw the effect of SO(2)
+  &=u\cdot v + i\, u\times v & &=u\cdot v + j\, u\times v \\
+  \begin{tikzpicture}
+    \draw[lightgray] (0,0) circle (1)
+                     (0,0) circle (1.4) ;
+    \draw (0,0) -- (1,0) --(1,1) --(0,1) --cycle;
+  \end{tikzpicture}
+  &\implies
+  \begin{tikzpicture}
+    \draw[lightgray] (0,0) circle (1)
+                     (0,0) circle (1.4) ;
+    \draw (0,0) -- (.7,.7) --(0,1.4) --(-.7,.7) --cycle;
+  \end{tikzpicture}
+    &
+  \begin{tikzpicture}
+    \clip (0,0) rectangle (2,2);
+    \draw[lightgray,samples=5, domain=-2:2,smooth,variable=\t]
+      plot ({cosh \t}, {sinh \t})
+      plot ({sinh \t}, {cosh \t})
+      (0,0) -- (2,2)
+      ;
+    \draw (0,0) -- (1,0) --(1,1) --(0,1) --cycle;
+  \end{tikzpicture}
+      &
+      \implies
+  \begin{tikzpicture}
+    \clip (0,-0.2) rectangle (4,4);
+    \draw[lightgray,samples=5, domain=-2:2,smooth,variable=\t]
+      plot ({cosh \t}, {sinh \t})
+      plot ({sinh \t}, {cosh \t})
+      (0,0) -- (2,2)
+      ;
+    \draw let \p1 = (1,0),
+              \p2 = (0,1),
+              \n0  = 1
+      in
+      (0,0) --
+      ({cosh(\n0) * \x1 + sinh(\n0) * \y1}, {sinh(\n0) * \x1 + cosh(\n0) * \y1})
+      -- +({cosh(\n0) * \x2 + sinh(\n0) * \y2}, {sinh(\n0) * \x2 + cosh(\n0) * \y2}) --
+({cosh(\n0) * \x2 + sinh(\n0) * \y2}, {sinh(\n0) * \x2 + cosh(\n0) * \y2}) --cycle ;
+      % ({cosh(\n1) * \x1 + \sinh(\n1) * \y1 },{sinh(\n1) * \x1 + cosh(\n1) * \y1 });
+  \end{tikzpicture}
 \end{align*}
+
+% tikz coordinates are stored in pt so eg \x1 will be way too big
+\begin{tikzpicture}
+  \clip (-4,-4) rectangle (4,4);
+    \draw[lightgray,samples=5, domain=-2:2,smooth,variable=\t]
+      plot ({cosh \t}, {sinh \t})
+      plot ({sinh \t}, {cosh \t})
+      plot ({-cosh \t}, {sinh \t})
+      plot ({sinh \t}, {-cosh \t})
+      (-4,-4) -- (4,4)
+      (-4,4) -- (4,-4);
+    \def\X#1{\x{#1}/1cm}
+    \def\Y#1{\y{#1}/1cm}
+    \draw let \p A = (1,0),
+              \p B = (0,1),
+              \n0  = {0.4},
+              \p{tA}  = ($\X A *({cosh(\n0)},{sinh(\n0)})
+                        +\Y A *({sinh (\n0)},{cosh(\n0)}) $),
+              \p{tB}  = ($\X B *({cosh(\n0)},{sinh(\n0)})
+                        +\Y B *({sinh (\n0)},{cosh(\n0)}) $)
+     in
+     (0,0) -- (\p{tA}) -- ($ (\p{tA}) + (\p{tB}) $) -- (\p{tB}) -- cycle;
+\end{tikzpicture}
 \end{document}
