@@ -1,0 +1,41 @@
+\documentclass{scrartcl}
+\usepackage{amsmath}
+\usepackage{riley}
+\usepackage{riley-libertine}
+\DeclareMathOperator{\trace}{tr}
+\DeclareMathOperator{\adj}{adj}
+\newcommand{\SL}{SL}
+\newcommand{\sl}{\mathfrak{sl}}
+\begin{document}
+\[
+  \SL = {\det}^{-1}\paren{1} \implies
+  \sl = \trace^{-1}\paren{0}
+\]
+A basis for \(\sl\paren{\R^N}\):
+\[
+  \begin{cases}
+    u^\alpha\otimes u_\beta & \alpha\neq\beta \\
+    u^\alpha\otimes u_\alpha-u^N\otimes u_N & \alpha \in [0,N)
+  \end{cases}
+\]
+\renewcommand{\otimes}{\vert}
+\begin{align*}
+  \bracket{u^\alpha\otimes u_\beta, u^\gamma\otimes u_\zeta} &= u^\alpha\otimes u_\beta u^\gamma\otimes u_\zeta - u^\gamma\otimes u_\zeta u^\alpha\otimes u_\beta \\
+  &= u^\alpha\otimes u_\zeta \delta^\gamma_\beta - u^\gamma\otimes u_\beta \delta^\alpha_\zeta\\
+    \shortintertext{In particular}
+\bracket{u^\alpha\otimes u_\beta, u^\beta\otimes u_\gamma} &= u^\alpha\otimes u_\gamma \\
+\bracket{u^\alpha\otimes u_\beta, u^\beta\otimes u_\alpha} &= u^\alpha\otimes u_\alpha - u^\beta\otimes u_\beta
+\end{align*}
+\begin{align*}
+  \bracket{u^\alpha\otimes u_\beta, u^\gamma\otimes u_\gamma - u^N\otimes u_N}
+  &= \bracket{u^\alpha\otimes u_\beta, u^\gamma \otimes u_\gamma} -\bracket{u^\alpha\otimes u_\beta, u^N\otimes u_N} \\
+  &= \paren{u^\alpha\otimes u_\gamma \delta^\gamma_\beta-u^\gamma\otimes u_\beta\delta^\alpha_\gamma} - \paren[\Big]{u^\alpha\otimes u_N \delta^N_\beta - u^N\otimes u_\beta \delta^\alpha_N} \\
+  &= u^\alpha\otimes u_\beta \paren{\delta^\gamma_\beta - \delta^N_\beta - \delta^\alpha_\gamma + \delta^\alpha_N }
+\end{align*}
+\begin{align*}
+  \bracket{u^\alpha \otimes u_\alpha - u^N\otimes u_N , u^\gamma \otimes u_\gamma - u^N \otimes u_N}
+  &= \bracket{u^\alpha \otimes u_\alpha, u^\gamma\otimes u_\gamma - u^N\otimes u_N } - \Ccancel{\bracket{u^N\otimes u_N,u^\gamma \otimes u_\gamma}} \\
+  &= u^\alpha\otimes u_\alpha \Ccancel{\paren{\delta^\gamma_\alpha - \delta^N_\alpha - \delta^\alpha_\gamma + \delta^\alpha_N}} \\
+    &=0
+\end{align*}
+\end{document}

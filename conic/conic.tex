@@ -1,0 +1,99 @@
+\documentclass{scrartcl}
+\usepackage{amsmath}
+\usepackage{riley}
+\usepackage{riley-libertine}
+\DeclareMathOperator{\trace}{tr}
+\DeclareMathOperator{\adj}{adj}
+\begin{document}
+\section{Rotate and slice}
+\[
+  C = \begin{bmatrix} 1 \\ & 1 \\ & & -1 \end{bmatrix}.
+\]
+\[
+  Z(C)\define \paren{x\mapsto x^T C x}^{-1}(0)
+\]
+\[
+  MZ(C) = \paren{x\mapsto (M^{-1}x)^T C (M^{-1}x)}^{-1}(0) = Z\paren{\paren{M^{-1}}^T C M^{-1}}
+\]
+\[
+  \begin{bmatrix}
+    1 & \\
+      & R
+  \end{bmatrix}
+  \begin{bmatrix}
+   1 & \\
+     & 1 \\
+     &  & -1
+  \end{bmatrix}
+  \begin{bmatrix}
+    1 & \\
+      & R^T
+  \end{bmatrix}
+\]
+\[
+  \begin{bmatrix}
+    c & -s \\ s & c
+  \end{bmatrix}
+  \begin{bmatrix}
+    1 \\ & -1
+  \end{bmatrix}
+  \begin{bmatrix}
+    c & s \\ -s & c
+  \end{bmatrix}
+  = 
+  \begin{bmatrix} 
+    c & s \\ s & -c
+  \end{bmatrix}
+  \begin{bmatrix}
+    c & s \\ -s & c
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+    c^2-s^2 & 2cs \\
+    2cs     & s^2 - c^2
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+     \cos(2u) & \sin(2u) \\ \sin(2u) & -\cos(2u) 
+  \end{bmatrix}
+\]
+\[
+  R_*C = \begin{bmatrix} 1 \\ & \gamma & \sigma \\ & \sigma & -\gamma \end{bmatrix}
+\]
+\[
+x^2 + \gamma y^2 + 2\sigma yz = \gamma z^2 
+\]
+If \(\gamma=0\) this gives the parabola:
+\[
+  x^2 + 2\sigma y z = 0,\quad \quad y = -\frac{x^2}{2\sigma z}
+\]
+Else,
+\[
+\frac{x^2}{\gamma} + {y^2 + 2\tau z y} = z^2
+\]
+\[
+\frac{x^2}{\gamma} + \paren{y + \tau z}^2 = z^2\paren{1+\tau^2} = z^2/\gamma^2
+\]
+\[
+\frac{x^2}{z^2/\gamma} + \frac{\paren{y+\tau z}^2}{z^2/\gamma^2} = 1
+\]
+
+The sign of \(\gamma\) by the \(x\) can switch between hyperbola and ellipse. The simple hyperbola:
+\[
+  -x^2+ y^2 = 1 \implies y^2 = 1+x^2 \implies \abs y \geq 1
+\]
+\section{Directrix}
+Use the \(x\)-axis as the directrix so that \(y\) is the distance. Put the focus on \((0,f)\).
+
+The directrix/eccentricity property:
+\[
+  ey = \abs[\big]{\paren{x,y} - \paren{0,f}} = \abs[\big]{\paren{x,y-f}}.
+\]
+Square:
+\[
+  e^2y^2 = {x^2 + \paren{y-f}^2} = {x^2 + y^2 -2yf + f^2}
+\]
+\[
+  x^2 + (1-e^2)y^2 - 2yf + f^2 = 0
+\]
+\end{document}

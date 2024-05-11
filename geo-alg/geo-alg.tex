@@ -1,0 +1,164 @@
+\documentclass{scrartcl}
+\usepackage{amsmath}
+\usepackage{riley}
+\usepackage{riley-libertine}
+\usepackage{xfrac}
+\usepackage{multicol}
+\usepackage[top=.9in,left=.9in,right=.9in]{geometry}
+\begin{document}
+\renewcommand{\b}{u}
+\renewcommand{\R}{R}
+\begin{multicols*}{2}
+  \section{Rotation matrix facts}
+  Start small
+  \[
+    R_\theta \define
+    \begin{bmatrix}
+      \cos \theta & -\sin\theta \\
+      \sin\theta & \cos\theta
+    \end{bmatrix}
+  \]
+  Eigenvalues
+  \begin{align*}
+    0&=\det\paren{R_\theta- t}\\
+     &=
+                              \begin{bmatrix}
+                                \cos\theta - t & -\sin\theta \\
+                                \sin\theta & \cos\theta - t
+                              \end{bmatrix} \\
+    0&=\paren{\cos\theta - t}^2 + \sin^2\theta \\
+    \paren {\cos \theta - t}^2 &= -\sin^2\theta  \\
+    \cos\theta - t &= \pm i\sin\theta \\
+    t &= \cos\theta \pm i \sin\theta \\
+    &= e^{i\theta}
+  \end{align*}
+  Eigenvectors
+  \begin{align*}
+    \begin{bmatrix}
+      c & -s \\
+      s & c
+    \end{bmatrix}
+    \begin{bmatrix}
+      i \\ 1
+    \end{bmatrix}
+    &=
+      \begin{bmatrix}
+        ic & -s \\
+        is & c
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+        i (c+is) \\
+        1 (c+ is)
+      \end{bmatrix} \\
+    &= e^{i\theta}
+      \begin{bmatrix}
+        i \\ 1
+      \end{bmatrix} \\
+    \begin{bmatrix}
+      c & -s \\
+      s & c
+    \end{bmatrix}
+    \begin{bmatrix}
+      1 \\ i
+    \end{bmatrix}
+    &=
+      \begin{bmatrix}
+        c -si \\
+        s + ci
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+        1(c -si) \\
+        i(c-si)
+      \end{bmatrix} \\
+    & =e^{-i\theta}
+      \begin{bmatrix}
+        1 \\ i
+      \end{bmatrix}
+  \end{align*}
+  Diagonalized
+  \begin{align*}
+    \begin{bmatrix}
+      c & -s \\ s & c
+    \end{bmatrix}
+    &=
+    \begin{bmatrix}
+      1 & i \\
+      i & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      e^{-i\theta} \\ & e^{i\theta}
+    \end{bmatrix}
+    \begin{bmatrix}
+      1 & i \\
+      i & 1
+    \end{bmatrix}^* \\
+    &=
+    \begin{bmatrix}
+      1 & i \\
+      i & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      e^{-i\theta} \\ & e^{i\theta}
+    \end{bmatrix}
+    \begin{bmatrix}
+      1 & -i \\
+      -i & 1
+    \end{bmatrix}
+  \end{align*}
+
+  In general, by Jordan normal form,
+  \begin{align*}
+    R &\sim
+    \begin{bmatrix}
+      e^{\pm i \theta_0} \\ &e^{\pm i \theta_1} \\ &&\ddots
+    \end{bmatrix} \\
+    &\sim
+    \begin{bmatrix}
+      \begin{bmatrix}
+        1 & i \\ i & 1
+      \end{bmatrix}
+      \begin{bmatrix}
+        e^{-i\theta_0} \\ & e^{i\theta_0}
+      \end{bmatrix}
+      \begin{bmatrix}
+        1 & -i \\ -i & 1
+      \end{bmatrix}
+      \\ & \ddots
+    \end{bmatrix}
+  \end{align*}
+  I think I'm missing an idea to close this off
+  \section{Rotor}
+  \begin{align*}
+    \R&=\b_0\b_1 \\
+    \intertext{What does it do on \(\Span \b_0,\b_1\)?  The map \(\blank \R\) rotates counterclockwise (\(+\)):}
+    \b_0\R &= \b_0\b_0\b_1 = \b_1  \\
+    \b_1\R &= \b_1\b_0\b_1 = -\b_0 \\
+    \intertext{And \(R\blank\) rotates clockwise (\(-\)) as \(\R\) anticommutes with \(\b_0,\b_1\):}
+    \R\b_0 &= \b_0\b_1\b_0 = -\b_1 \\
+    \R\b_1 &= \b_0\b_1\b_1 = \b_0
+  \end{align*}
+  Because \(\R\) commutes with the other \(\b_n\), this rotates the \(\b_0,\b_1\) plane and fixes the rest:
+  \[
+    e^{-t\R} \blank e^{t\R}:
+    \begin{cases}
+      \b_0 &\mapsto \b_0 e^{2t\R} \\
+      \b_1 &\mapsto \b_1 e^{2t\R} \\
+      \b_n &\mapsto \b_n
+    \end{cases}
+  \]
+
+  Doran, Lasenby Geometric algebra for physicists 2.7 Rotations
+
+  \begin{lemma}
+    Unitary equivalence restricts to orthogonal equivalence
+  \end{lemma}
+  \begin{proof}
+    ?
+    % https://mathoverflow.net/questions/140878/can-two-unitary-similar-real-matrix-be-orthogonal-similar
+    % https://math.stackexchange.com/questions/178145/a-unitary-matrix-taking-a-real-matrix-to-another-real-matrix-is-it-an-orthogona
+  \end{proof}
+
+\end{multicols*}
+\end{document}

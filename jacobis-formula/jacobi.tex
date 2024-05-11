@@ -1,0 +1,92 @@
+\documentclass{scrartcl}
+\usepackage{amsmath}
+\usepackage{riley}
+\usepackage{riley-libertine}
+\DeclareMathOperator{\trace}{tr}
+\DeclareMathOperator{\adj}{adj}
+\begin{document}
+\section{Lagrange's formula}
+\[
+  X =
+  \begin{bmatrix}
+    X^0_0 & X^0_1 & X^0_2 \\
+    X^1_0 & X^1_1 & X^1_2 \\
+    X^2_0 & X^2_1 & X^2_2 \\
+  \end{bmatrix}
+\]
+\[
+  \wedge^3 X =
+  \begin{bmatrix}
+    X^0_0 \\ X^1_0 \\ X^2_0
+  \end{bmatrix}
+  \wedge
+  \begin{bmatrix}
+    X^0_1 \\ X^1_1 \\ X^2_1
+  \end{bmatrix}
+  \wedge
+  \begin{bmatrix}
+    X^0_2 \\ X^1_2 \\ X^2_2
+  \end{bmatrix}
+\]
+\[
+  \begin{bmatrix}
+    X^0_0 \\ 0 \\ 0
+  \end{bmatrix}
+  \wedge
+  \begin{bmatrix}
+    \Ccancel{X^0_1} \\ X^1_1 \\ X^2_1
+  \end{bmatrix}
+  \wedge
+  \begin{bmatrix}
+    \Ccancel{X^0_2} \\ X^1_2 \\ X^2_2
+  \end{bmatrix}
+  = X^0_0u_0 \wedge \abs{
+    \begin{matrix}
+      X^1_1 & X^1_2 \\
+      X^2_1 & X^2_2 \\
+    \end{matrix}
+  }
+    u_1\wedge u_2
+  = + X^0_0 M^0_0 u_{012} = X^0_0 C^0_0 u_{012}
+\]
+\[
+  \begin{bmatrix}
+    0 \\ X^1_0 \\ 0
+  \end{bmatrix}
+  \wedge
+  \begin{bmatrix}
+    {X^0_1} \\ \Ccancel{X^1_1} \\ X^2_1
+  \end{bmatrix}
+  \wedge
+  \begin{bmatrix}
+    {X^0_2} \\ \Ccancel{X^1_2} \\ X^2_2
+  \end{bmatrix}
+  = X^0_1u_1 \wedge \abs{
+    \begin{matrix}
+      X^1_1 & X^1_2 \\
+      X^2_1 & X^2_2 \\
+    \end{matrix}
+  }
+    u_0\wedge u_2
+  = -X^0_1 M^0_1 u_{012} = X^0_1C^0_1u_{012}
+\]
+\[
+  \wedge^3 X = \sum_\alpha X^0_\alpha C^0_\alpha u_{012}
+\]
+\section{Jacobi's formula}
+\[
+  \paren{A^TB}^\alpha_\beta = \paren{A^T}^\alpha_\gamma B^\gamma_\beta = A^\gamma_\alpha B^\gamma_\beta
+\]
+\[
+  \trace\paren{A^TB} = \paren{A^TB}^\alpha_\alpha = A^\gamma_\alpha B^\gamma_\alpha
+\]
+\begin{align*}
+  \det{A} &= \sum_{k} A_{ik} C_{ik} \\
+  \det\paren{A+tu_i\otimes u_j} &=  \sum_{k}A_{ik}C_{ik} + tC_{ij} \\
+  &=\det A + tC_{ij} \\
+  \nabla_{u_i\otimes u_j} \det &= C_{ij} \\
+  d{\det}_{A}(h) &= \sum_{ij} C_{ij} h_{ij} \\
+          & = \trace\paren{C^Th} \\
+          &=\trace\paren[\big]{\adj(A)h}
+\end{align*}
+\end{document}

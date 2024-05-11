@@ -1,0 +1,73 @@
+\documentclass{scrartcl}
+\usepackage{amsmath}
+\usepackage{riley}
+\usepackage{riley-libertine}
+\usepackage{bigints}
+\let\oldepsilon\epsilon
+\def\epsilon{\varepsilon}
+\DeclareMathOperator{\trace}{tr}
+\begin{document}
+\begin{align*}
+  K(b,a) &\define \frac{1}{A} \int\limits_{\gamma: a \leadsto b} D\gamma\, e^{i S(\gamma)} \\
+ &= \frac{1}{A} \int\limits_{\gamma:a\rightsquigarrow b} D\gamma \exp\paren[\color{gray}\Bigg]{i \int_{t_a}^{t_b} L\paren{\gamma(t),\dot\gamma(t),t}\, dt}
+\intertext{An infinitesimal Wick rotation probably encourages convergence:}
+   &\approx \frac{1}{A}\int\limits_{\gamma: a \leadsto b} D\gamma\, e^{(i-\alpha) S(\gamma)} \\
+\end{align*}
+\[
+  {\textstyle\int}:\paren[\Big]{\paren{I\to \R^3}\to \complex} \to \complex?
+\]
+What is the structure of the space of curves? It's almost affine, but the action of the vector space isn't free. It fixes endpoints. Given two endpoints, any curves differ by loops through zero, so given endpoints we get a vector space.
+
+\section{Feynman's limit}
+\begin{align*}
+  K(b,a) &=\lim  \frac{1}{A_n}\idotsint {dx_1}\dots {dx_{N-1}}\, e^{i S(\vec x)}
+           \shortintertext{with \(x_0=a\) and \(x_N = b\)} \\
+         &=\lim  \frac{1}{A_n}\idotsint {dx_1}\dots {dx_{N-1}}\exp\paren[\color{gray}\Big]{i \epsilon\sum L\paren{x_k, v_k, t} }
+\end{align*}
+\section{Schrödinger's equation}
+\[
+  K(x,t+\epsilon; y,t) = \int\limits_{(y,t)\leadsto(x,t+\epsilon)} D\gamma \exp(i S(\gamma))
+\]
+Mean value theorem:
+\[
+  S(\gamma) = \int_t^{t+\epsilon} L\paren{\gamma(t),\dot\gamma(t)}\,dt = \bar L(\gamma) \epsilon \simeq L(\bar\gamma) \epsilon \pmod{o(\epsilon)}?
+\]
+by continuity of \(L\).
+
+\newcommand{\cl}{\text{cl}}
+Similarly,
+\[
+  S(\gamma_\cl+\delta\gamma) = S(\gamma_\cl) + \Ccancel{DS(\gamma_\cl)(\delta\gamma)} + o(\delta\gamma) \approx \bar L(\gamma_\cl) + ??
+\]
+\begin{align*}
+  \psi\paren{x,t+\epsilon}
+  &= \frac1A \int \exp\paren[\color{gray}\bigg]{i\epsilon L\paren{\frac{x+y}{2},\frac{x-y}\epsilon}}\psi(y,t)\, dy \\
+  &= \frac1A \int \exp\paren[\color{gray}\Big]{i\epsilon L\paren{x+\frac{\eta}2,\frac{\eta}\epsilon}}\psi(x+\eta,t)\, d\eta \\
+  &= \frac1A \int \exp\paren[\color{gray}\bigg]{i{m}\frac{\eta^2}{2\epsilon } - i\epsilon V\paren{x+\frac{\eta}2}}\psi(x+\eta,t)\, d\eta \\
+  &= \frac1A \int \exp\paren[\bigg]{\frac{-\eta^2}{2\grayunderbrace{\paren{i\epsilon/m}}{\sigma^2}}}e^{-i\epsilon V\paren{x+\eta/2}} \psi\paren{x+\eta,t}\,d\eta \\
+  \psi(x,t)+\frac{\partial \psi}{\partial t}\epsilon&\simeq  \int \frac{e^{-\eta^2/2\sigma^2}}{A}\paren{1 -i\epsilon V(x)}\paren{\psi + \frac{\partial \psi}{\partial x}\eta + \frac{\partial^2\psi}{\partial x^2}\eta^{\otimes2}} \pmod{o\paren{\epsilon=\eta^2}} \\
+  \shortintertext{\(A\) is the normalizing factor for the gaussian.}
+  \psi(x,t)+\frac{\partial \psi}{\partial t}\epsilon&=  \expect \paren{\paren{1 -i\epsilon V}\paren{\psi + \frac{\partial \psi}{\partial x}\eta + \frac{\partial^2\psi}{\partial x^2}\frac{\eta^{\otimes2}}2}} \\
+  \Ccancel{\psi}+\frac{\partial \psi}{\partial t}\epsilon&= \Ccancel{\psi} -i\epsilon V\psi + \frac{1}{2}\grayunderbrace{\frac{i\epsilon}{m}}{\sigma^2}\nabla^2 \psi \\
+  \frac{\partial\psi}{\partial t} &= -i\paren{\frac{-\nabla^2}{2m}+V}\psi
+\end{align*}
+What about magnetism?
+\begin{align*}
+  \psi(x,t) + \frac{\partial\psi}{\partial t}\epsilon
+  &= \frac1A \int \exp\paren[\color{gray}\bigg]{i{m}\frac{\eta^2}{2\epsilon } - i\epsilon V\paren{x+\frac{\eta}2, \frac{\eta}{\epsilon}}}\psi(x+\eta,t)\, d\eta \\
+  &= \expect\paren{e^{-i\epsilon V\paren{x+\sfrac\eta2,\sfrac\eta\epsilon}}\psi(x+\eta,t)} \\
+  V(x,\dot x)&= -\dot x \cdot A(x) + \phi(x) \\
+  V\paren{x+\frac{\eta}2, \frac{\eta}\epsilon}&= -\frac{\eta}{\epsilon} \cdot A\paren{x+\frac{\eta}2} + \phi\paren{x+\frac{\eta}2} \\
+  \epsilon V\paren{x+\frac{\eta}2, \frac{\eta}\epsilon}&= -{\eta} \cdot A\paren{x+\frac{\eta}2} + \epsilon\phi\paren{x+\Ccancel{\frac{\eta}2}} \\
+  &= -\eta \cdot \paren{A + \frac{A'\eta}2 } + \epsilon\phi \\
+  \psi(x,t) + \frac{\partial\psi}{\partial t}\epsilon
+  &= \expect\paren{\paren{1+i\eta\cdot A + i \frac{\eta\cdot A'\eta}2 - i\epsilon \phi}\paren{\psi + \frac{\partial \psi}{\partial x}\eta + \frac{\partial^2\psi}{\partial x^2}\frac{\eta^{\otimes 2}}2}}
+    \shortintertext{odd terms in \(\eta\) cancel by symmetry}
+  &=\psi + \expect\paren{i\eta\cdot A \frac{\partial\psi}{\partial x}\eta} + \expect\paren{i\frac{\eta\cdot A'\eta}2\psi} -i\epsilon\phi\psi + \expect\paren{\frac{\partial^2\psi}{\partial x^2}\frac{\eta^{\otimes 2}}2}\\
+  \shortintertext{Expectationss of quadratics is trace!}
+  \epsilon\frac{\partial \psi}{\partial t}
+  &= i \expect\trace\paren{\eta  \cdot A \frac{\partial \psi}{\partial x}\eta} + \frac{i\psi}2 \expect\trace\paren{\eta\cdot A'\eta} -i \epsilon\phi\psi + \frac12 \expect\trace\paren{\frac{\partial^2\psi}{\partial x^2}\frac{\eta^{\otimes 2}}2} \\
+  &= i\paren{\frac{i\epsilon}m}\grayunderbrace{\trace\paren{A\otimes\frac{\partial \psi}{\partial x}}}{A\cdot\nabla\psi}+ \frac{i\psi}2\paren{\frac{i\epsilon}m} \grayunderbrace{\trace\paren{A'}}{\nabla\cdot A} -i \epsilon\phi\psi + \frac12\paren{\frac{i\epsilon}{m}} \nabla^2\psi?
+\end{align*}
+I'm missing the \(A^2\) term.
+\end{document}

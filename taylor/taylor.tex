@@ -1,0 +1,60 @@
+\documentclass{scrartcl}
+\usepackage{riley}
+\usepackage{riley-libertine}
+\begin{document}
+\begin{align*}
+  f(x) &= f(0) + \int_0^x df(t) dt = f(0) + \int_0^x df(t) (x-t)^0 dt  \\
+       &=f(0) - \int_x^0 \grayunderbrace{df(t)}{u} \grayunderbrace{(x-t)^0 dt}{dv} \\
+       &=f(0) - \paren[\Big]{df(t)(-1)(x-t)}_x^0 - (-1)\int_x^0 d^2f(t)(-1){(x-t)} dt \\
+       &=f(0) + df(0)x - \int_x^0 d^2f(t){(x-t)} dt \\
+       &=f(0) + df(0)x - \paren{d^2f(t)\frac{(-1)\paren{x-t}^2}2}_x^0 - (-1)\int_x^0 d^3f(t) \frac{(-1)(x-t)^2}{2} dt\\
+       &=f(0) + df(0)x +d^2f(0)\frac{x^2}2 - \int_x^0 d^3f(t) \frac{(x-t)^2}{2} dt\\
+       &=f(0) + df(0)x + \dots d^nf(0)\frac{x^n}{n!} + \grayunderbrace{\int_0^x d^{n+1}f(t) \frac{(x-t)^n}{n!}dt}{E}
+\end{align*}
+\section{Holomorphic}
+\begin{theorem}[Cauchy-Riemann]
+  \[
+    df =
+    \begin{bmatrix}
+      \frac{\partial f}{\partial x} & \frac{\partial f}{\partial y}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      z &iz
+    \end{bmatrix}
+  \]
+\end{theorem}
+
+\begin{cor}
+  \[
+    \oint_{\gamma} f dz =0
+  \]
+\end{cor}
+\begin{proof}
+  \[
+    \int_{\partial A} f dz = \int_A df \wedge dz = \int_A \paren{zdx+izdy}\wedge\paren{dx+idy} = \int_A \paren{iz-iz}dx\wedge dy =0.
+  \]
+\end{proof}
+
+\begin{theorem}
+  \[
+    f(a) = \frac{1}{i\tau } \oint \frac{f(z)}{a-z} dz
+  \]
+\end{theorem}
+\begin{proof}
+  Set \(z=re^{it}+a\).
+  \[
+    \oint \frac{f(z)}{z-a} dz = \oint \frac{f(re^{it}+a)}{\Ccancel{re^{it}}} \paren{i\Ccancel{re^{it}}dt}  \to  if(a) \oint dt = i\tau  f(a)
+  \]
+\end{proof}
+
+\begin{cor}
+  \(f\) is complex-analytic.
+\end{cor}
+\begin{proof}
+  \[
+    f(u)  = \frac{1}{i\tau} \oint \frac{f(z)}{z(1-u/z)} dz= \frac{1}{i\tau}\oint \frac{f(z)}{z}\paren{1 + \frac{u}z +\paren{\frac{u}{z}}^2 + \dots}dz
+  \]
+\end{proof}
+
+\end{document}

@@ -1,0 +1,26 @@
+\documentclass{scrartcl}
+\usepackage{amsmath}
+\usepackage{riley}
+\usepackage{riley-libertine}
+\newcommand{\vary}{{\color[gray]{.4}\textsf{\textbf{δ}}}}
+%\newcommand{\vary}{\delta}
+\begin{document}
+Landau \& Lifshitz thinks of \(dx\) as a small change in \(x\). I try to think of it as a differential form. I believe they are equivalent in the presence of a metric, but without one, I'm not so sure. I suppose you can always use an arbitrary metric.
+\[
+  f(x+dx) = df(x)(dx)?
+\]
+\begin{align*}
+  S&=\int -m\, d\tau\\
+   S(x+\vary x) &= \int -m \sqrt{d(x+\vary x)_\alpha d(x+\vary x)^\alpha} \\
+  S(x)+\vary S(x)(\vary x) + o(\vary x)&= \int -m \sqrt{d(x+\vary x)_\alpha d(x+\vary x)^\alpha} \\
+   \vary S(x)(\vary x)&= \int -m \frac{dx_ad\vary x^\alpha}{d\tau} \\
+   &= \int -m u_\alpha \,d\vary x^\alpha \\
+   &=\int m\, du_\alpha \vary x^\alpha + \cancel{\paren{-mu_\alpha \vary x^\alpha}}_a^b \\
+  \frac{\vary S}{\vary x} &= m\, du
+\end{align*}
+\begin{align*}
+  S &= -\int A_\alpha(x)dx^\alpha \\
+  S(x+\vary x) &= -\int A_\alpha(x+\vary x) d\paren{x+\vary x}^\alpha \\
+  &= -\int A_\alpha(x)dx^\alpha -\int A_\alpha(x) d \vary x^\alpha + dA_\alpha(x)(\vary x)  dx^\alpha + o(\vary x)
+\end{align*}
+\end{document}
