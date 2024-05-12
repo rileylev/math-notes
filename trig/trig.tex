@@ -79,6 +79,22 @@ Complex\hfil Hyperbolic
               \end{cases} \\
   e^{it} &= 1(\dots) + i(\dots) & e^{jt} &= 1(\dots) + j(\dots)  \\
         & -1(\dots)-i(\dots) && +1(\dots) +j(\dots) \\
+  \intertext{
+    \begin{tikzpicture}[scale=3]
+      \clip (-1,-1.4) rectangle (1.6,1.4);
+      \draw[gray] (0,0) circle (1);
+      \draw let \n0 = {1}
+      in (0,0) -- ++ (1,0) -- ++(0,{\n0}) -- ++ ({-\n0^2/2},0) -- ++(0,{-\n0^3/6}) -- ++ ({\n0^4/24,0}) -- ++ (0,{\n0^5/120});
+    \end{tikzpicture}
+    \hfill
+    \begin{tikzpicture}[scale=3]
+      \clip (0,-1.4) rectangle (1.6,1.4);
+      \draw[gray,samples=5, domain=-2:2,smooth,variable=\t]
+      plot ({cosh \t}, {sinh \t});
+      \draw let \n0 = {1}
+      in (0,0) -- ++ (1,0) -- ++(0,{\n0}) -- ++ ({\n0^2/2},0) -- ++(0,{\n0^3/6}) -- ++ ({\n0^4/24,0}) -- ++ (0,{\n0^5/120});
+    \end{tikzpicture}
+  }
   e^{it}&= \cos t + i \sin t & e^{jt} &=\cosh t + j \sinh t
 \intertext{
   \begin{tikzpicture}[scale=3]
