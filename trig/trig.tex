@@ -21,7 +21,7 @@ Complex\hfil Hyperbolic
     \draw[->](0,0) -- (1,2)  coordinate [label=right:{\(z\)}];
     \draw[->](0,0) -- (-2,1) coordinate [label=above:{\(iz\)}];
   \end{tikzpicture}
-  \hfil
+  \hfill
   \begin{tikzpicture}
     \draw[gray,dashed](-2,-2) -- (2,2);
     \draw[gray](-2,0) -- (2,0) (0,-2) -- (0,2);
@@ -37,7 +37,7 @@ Complex\hfil Hyperbolic
     \draw[->](0,0) -- (1,2)  coordinate [label=right:{\(z\)}];
     \draw[->](0,0) -- (1,-2) coordinate [label=right:{\(z^*\)}];
   \end{tikzpicture}
-  \hfil
+  \hfill
   \begin{tikzpicture}
     \draw[gray](-2,0) -- (2,0) (0,-2) -- (0,2);
     \draw[->](0,0) -- (1,2) coordinate [label=right:{\(z\)}];
@@ -51,7 +51,7 @@ Complex\hfil Hyperbolic
     \draw[gray] (-2,0) -- (2,0) (0,-2) -- (0,2);
     \draw (0,0) circle (1);
   \end{tikzpicture}
-                      \hfil
+                      \hfill
   \begin{tikzpicture}
     \clip (-2,-2) rectangle (2,2);
     \draw[gray](-2,0) -- (2,0) (0,-2) -- (0,2);
@@ -83,19 +83,19 @@ Complex\hfil Hyperbolic
 \intertext{
   \begin{tikzpicture}[scale=3]
     \draw[gray] (-1,0) -- (1,0) (0,-1) -- (0,1);
-    \draw (0,0) circle (1);
+    \draw[gray] (0,0) circle (1);
     \def\t{1}
     \def\x{{cos(\t r)}}
     \def\y{{sin(\t r)}}
     \draw[->] (0,0) --  (\x,\y) coordinate[label=above right:{\(e^{it}\)}];
     \draw (0,0)--node[below]{\(\cos t\)} (\x,0)-- node[right]{\(i\sin t\)}(\x,\y);
   \end{tikzpicture}
-  \hfil
+  \hfill
   \begin{tikzpicture}[scale=3]
     \clip (0,-1) rectangle (1.8,1);
     \draw[gray] (-2,0) -- (4,0) (0,-2) -- (0,2);
     \draw[gray,dashed](0,0) -- (2,2) (0,0) -- (2,-2);
-    \draw[samples=5, domain=-2:2,smooth,variable=\t]
+    \draw[gray,samples=5, domain=-2:2,smooth,variable=\t]
     plot ({cosh \t}, {sinh \t})
     ;
     \def\t{.7}
@@ -175,7 +175,7 @@ Complex\hfil Hyperbolic
     \draw[->] (0,0) -- ({cos( \t r)}, {sin( \t r)});
     \draw[->] ({cos( \t r)}, {sin( \t r)}) -- ({cos( \t r) - sin(\t r)}, {sin( \t r) + cos(\t r)}) ;
   \end{tikzpicture}
-  \hfil
+  \hfill
   \begin{tikzpicture}
     \clip (-2,-2) rectangle (2,2);
     \draw[gray] (-2,0) -- (2,0) (0,-2) -- (0,2);
@@ -197,7 +197,7 @@ Complex\hfil Hyperbolic
     \draw[->,lightgray] ({cos( \t r)}, {sin( \t r)}) -- ({cos( \t r) - sin(\t r)}, {sin( \t r) + cos(\t r)}) ;
     \draw[->] (0,0) -- ({- sin(\t r)}, { cos(\t r)}) ;
   \end{tikzpicture}
-  \hfil
+  \hfill
   \begin{tikzpicture}
     \clip (-2,-2) rectangle (2,2);
     \draw[gray] (-2,0) -- (2,0) (0,-2) -- (0,2);
