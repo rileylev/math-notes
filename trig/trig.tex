@@ -264,7 +264,7 @@ Complex\hfil Hyperbolic
   \intertext{Arc length}
    f(t) &\define e^{it} & f(t)&\define e^{jt} \\
   S &= \int \sqrt{\abs{f'(t)}^2} dt& S& = \int \sqrt{-\abs{f'(t)}^2}dt \\
-                 &= \int \sqrt{\abs{ie^{it}}^2} dt = \int\sqrt{1}dt & & = \int \sqrt{\abs{je^{jt}}^2} dt=\int\sqrt{-(-1)}dt\\
+                 &= \int \sqrt{\abs{ie^{it}}^2} dt = \int\sqrt{1}dt & & = \int \sqrt{-\abs{je^{jt}}^2} dt=\int\sqrt{-(-1)}dt\\
                  &= \Delta t & &=\Delta t
                                  \intertext{Sector area}
                                  A &= \frac{1}{2} \int { f(t)\times f'(t)}dt& A&=\frac12 \int{f(t)\times f'(t)} dt \\
@@ -278,19 +278,19 @@ Complex\hfil Hyperbolic
                  &= e^{-it}u^*e^{it}v & &=e^{-jt}u^*e^{jt}v \\
                  &=u^*v & & = u^* v \\
   &=u\cdot v + i\, u\times v & &=u\cdot v + j\, u\times v \\
-  \begin{tikzpicture}
+  \begin{tikzpicture}[scale=.6]
     \draw[lightgray] (0,0) circle (1)
                      (0,0) circle (1.4) ;
     \draw (0,0) -- (1,0) --(1,1) --(0,1) --cycle;
   \end{tikzpicture}
   &\implies
-  \begin{tikzpicture}
+  \begin{tikzpicture}[scale=.6]
     \draw[lightgray] (0,0) circle (1)
                      (0,0) circle (1.4) ;
     \draw (0,0) -- (.7,.7) --(0,1.4) --(-.7,.7) --cycle;
   \end{tikzpicture}
     &
-  \begin{tikzpicture}
+  \begin{tikzpicture}[scale=.6]
     \clip (0,0) rectangle (2,2);
     \draw[lightgray,samples=5, domain=-2:2,smooth,variable=\t]
       plot ({cosh \t}, {sinh \t})
@@ -301,7 +301,7 @@ Complex\hfil Hyperbolic
   \end{tikzpicture}
       &
       \implies
-  \begin{tikzpicture}
+  \begin{tikzpicture}[scale=.6]
     \clip (0,-0.2) rectangle (4,4);
     \draw[lightgray,samples=5, domain=-2:2,smooth,variable=\t]
       plot ({cosh \t}, {sinh \t})
@@ -319,7 +319,7 @@ Complex\hfil Hyperbolic
       % ({cosh(\n1) * \x1 + \sinh(\n1) * \y1 },{sinh(\n1) * \x1 + cosh(\n1) * \y1 });
   \end{tikzpicture}
 \end{align*}
-
+\hfill
 % tikz coordinates are stored in pt so eg \x1 will be way too big
 \def\squishsquare#1#2#3{%
 let \p A = (#1),
