@@ -11,6 +11,9 @@
 \DeclareMathOperator{\SO}{SO}
 \begin{document}
 %\color{darkgray}
+The identity \(e^{it}=\cos t+i\sin t\) is a powerful organizing principle for trigonometry. Using \emph{hyperbolic} or \emph{split-complex} numbers, (\url{https://en.wikipedia.org/wiki/Split-complex_number}) where \(j^2=+1\) provides an analogous tool for hyperbolic trigonometry.
+\\
+
 Complex\hfil Hyperbolic
 \begin{align*}
   i^2 &\define {-1} &  j^2 &\define {+1} \\
@@ -201,18 +204,20 @@ Complex\hfil Hyperbolic
    &= \paren{c_A + i s_A}\paren{c_B + is_B}
               &&= \paren{c_A + j s_A}\paren{c_B + js_B}\\
   &
+    \color{darkgray}
     \begin{array}{c|cc}
           &c_B & is_B    \\
       \hline
       c_A &c_Ac_B&ic_As_B \\
-      is_A&ic_Bs_A& -s_As_B
+      is_A&ic_Bs_A& \black{-s_As_B}
     \end{array}
     &&
+       \color{darkgray}
     \begin{array}{c|cc}
           &c_B & js_B    \\
       \hline
       c_A &c_Ac_B&jc_As_B \\
-      js_A&jc_Bs_A& +s_As_B
+      js_A&jc_Bs_A& \black{+s_As_B}
     \end{array} \\
   \begin{matrix}
     \phantom{+}\cos(A+B) \\
@@ -294,18 +299,20 @@ Complex\hfil Hyperbolic
   \intertext{Dot and cross product}
   u^*v &= \paren{\alpha - i\beta}\paren{\gamma + i\delta} & u^*v &= \paren{\alpha - j\beta}\paren{\gamma + j\delta} \\
   &
+    \color{darkgray}
     \begin{array}{c|cc}
             &\gamma &i\delta \\
       \hline
       \alpha& \alpha\gamma  & i\alpha\delta \\
-      -i\beta& -i\beta\gamma& + \beta\delta
+      -i\beta& -i\beta\gamma& \black{+ \beta\delta}
     \end{array}
     &&
+       \color{darkgray}
     \begin{array}{c|cc}
             &\gamma &i\delta \\
       \hline
-      \alpha& \alpha\gamma  & +j\alpha\delta \\
-      -j\beta& -j\beta\gamma& - \beta\delta
+      \alpha& \alpha\gamma  & j\alpha\delta \\
+      -j\beta& -j\beta\gamma& \black{- \beta\delta}
     \end{array} \\
       &= (\alpha\gamma + \beta\delta) + i (\alpha\delta - \beta\gamma)
       &&= (\alpha\gamma - \beta\delta) + j (\alpha\delta - \beta\gamma) \\
