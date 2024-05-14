@@ -3,6 +3,10 @@
 \usepackage{riley}
 \usepackage{riley-libertine}
 \usepackage{xfrac}
+
+\usepackage{multicol}
+\usepackage{tikz}
+
 \begin{document}
 \section{Polar coordinate}
 \[
@@ -66,4 +70,107 @@ Energy conservation:
 \[
   d\theta = \frac{B}{\sin^2\rho} dt = \frac{B\, d\rho}{\sin\rho \sqrt{A^2\sin^2\rho-B^2}}
 \]
+\section{light cone coordinates}
+\begin{multicols*}{2}
+  \begin{align*}
+    C &= \frac1{\sqrt 2}
+        \begin{bmatrix}
+          1 & 1 \\ 1 & -1
+        \end{bmatrix} \\
+    C^2&= \frac12
+         \begin{bmatrix}
+           2 \\ & 2
+         \end{bmatrix} = I
+  \end{align*}
+  so it's idempotent.
+
+  Metric
+  \begin{align*}
+    \eta(x,y) &= \eta_{s} \paren{C^{-1}x,C^{-1}y} \\
+              &= \eta_{s} \paren{Cx,Cy} \\
+              &= x^TC^T\eta_s C y \\
+    C\eta_s C &= \frac1{ 2 }
+                  \begin{bmatrix}
+                    1 & 1 \\
+                    1 &-1
+                  \end{bmatrix}
+                  \grayunderbrace{
+                  \begin{bmatrix}
+                    1 \\ & -1
+                  \end{bmatrix}
+                  \begin{bmatrix}
+                    1 & 1 \\
+                    1 &-1
+                  \end{bmatrix}}{
+                  \begin{bmatrix}
+                    1 & 1 \\ -1 & 1
+                  \end{bmatrix}
+                  }
+                  \\
+    \eta&=
+      \begin{bmatrix}
+        & 1 \\ 1
+      \end{bmatrix}
+  \end{align*}
+  Boosts
+  \begin{align*}
+    CBC^{-1} &=
+          \frac12
+          \begin{bmatrix}
+            1 & 1 \\ 1 & -1
+          \end{bmatrix}
+          \grayunderbrace{
+          \begin{bmatrix}
+            c & s \\
+            s & c
+          \end{bmatrix}
+          \begin{bmatrix}
+            1 & 1 \\
+            1 & -1
+          \end{bmatrix}
+          }{
+          \begin{bmatrix}
+            c+s & c- s \\
+            c+s & s-c
+          \end{bmatrix}
+          } \\
+    &=
+      \begin{bmatrix}
+        c+s & 0 \\
+        0 & c-s
+      \end{bmatrix} \\
+    &=
+      \begin{bmatrix}
+        e^t \\ & e^{-t}
+      \end{bmatrix}
+  \end{align*}
+  \[
+    \begin{tikzpicture}[rotate=45]
+      \def\L{5}
+      \clip (-\L,0)   -- (0,\L) -- (\L,0) -- (0,-\L) --cycle;
+      \foreach \t in {0,0.2,...,1.6}
+      \draw[lightgray]
+      (0,0) rectangle ({exp \t},{exp -\t})
+      (0,0) rectangle ({exp -\t},{exp \t})
+      (0,0) rectangle ({exp \t},{-exp -\t})
+      (0,0) rectangle ({exp -\t},{-exp \t})
+      (0,0) rectangle ({-exp \t},{exp -\t})
+      (0,0) rectangle ({-exp -\t},{exp \t})
+      (0,0) rectangle ({-exp \t},{-exp -\t})
+      (0,0) rectangle ({-exp -\t},{-exp \t})
+      ;
+      \draw[samples=5, domain=-2:2,smooth, variable=\t]
+      plot ({exp \t}, {exp -\t})
+      plot ({exp \t}, {-exp -\t})
+      plot ({-exp \t}, {exp -\t})
+      plot ({-exp \t}, {-exp -\t})
+      ;
+      \draw
+      (0,0) rectangle (1,1)
+      (0,0) rectangle (1,-1) ;
+      (0,0) rectangle (-1,1)
+      (0,0) rectangle (-1,-1) ;
+    \end{tikzpicture}
+  \]
+\end{multicols*}
 \end{document}
