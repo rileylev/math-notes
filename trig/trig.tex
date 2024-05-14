@@ -303,8 +303,8 @@ Complex\hfil Hyperbolic
       \draw[lightgray] (0,0) --(1,0)--(.94,.2) -- (-.06,.2) -- cycle;
       \clip (0,-.2)  rectangle (1.4,.4);
       \draw[gray] (.02,-.2) circle (1);
-      \draw (0,0) -- (1,0) node[below left]{\(f(t)\)}
-      (1,0) -- (.94,.2) node[right]{\(f'(t)\)}
+      \draw (0,0) --  node[below]{\(f(t)\)} (1,0)
+      (1,0) --  node[right]{\(f'(t)\)} (.94,.2)
       ;
     \end{tikzpicture}
   }
