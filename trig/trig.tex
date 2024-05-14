@@ -135,7 +135,57 @@ Complex\hfil Hyperbolic
                       }
   \intertext{Pythagorean identity}
   e^{-it}&= \cos (-t) + i \sin (-t) & e^{-jt} &=\cosh (-t) + j \sinh (-t) \\
-      &= \cos t - i \sin t  &      &=\cosh t - j \sinh t \\
+      &= \cos t - i \sin t  &      &=\cosh t - j \sinh t
+  \intertext{
+    \begin{tikzpicture}[scale=3, every node/.style={color=darkgray}]
+      \clip (-1,-1.4) rectangle (1.6,1.4);
+      \draw[lightgray] let \n0 = {1}
+      in (0,0) --
+      ++ (1,0) --
+      ++(0,{\n0}) --
+      ++ ({-\n0^2/2},0) --
+      ++(0,{-\n0^3/6}) --
+      ++ ({\n0^4/24,0}) --
+      ++ (0,{\n0^5/120})
+      (0,0) -- ({cos(1 r)},{sin(1 r)})
+      ;
+      \draw[gray] (0,0) circle (1) ;
+      \draw let \n0 = {-1}
+      in (0,0) -- node[above] {\(1\)}
+      ++ (1,0) -- node[right]{\(-it\)}
+      ++(0,{\n0}) -- node[below]{\(-t^2/2\)}
+      ++ ({-(\n0)^2/2},0) -- node[above left]{\(it^3/6\)}
+      ++(0,{-\n0^3/6}) --
+      ++ ({-\n0^4/24,0}) --
+      ++ (0,{\n0^5/120})
+      (0,0) -- ({cos(1 r)},{-sin(1 r)})
+      ;
+    \end{tikzpicture}
+    \hfill
+    \begin{tikzpicture}[scale=3, every node/.style={color=darkgray}]
+      \clip (0,-1.4) rectangle (2,1.4);
+      \draw[lightgray] let \n0 = {(1)}
+      in (0,0) --
+      ++ (1,0) --
+      ++(0,{\n0}) --
+      ++ ({\n0^2/2},0) --
+      ++(0,{\n0^3/6}) --
+      ++ ({\n0^4/24,0}) --
+      ++ (0,{\n0^5/120})
+      (0,0) -- ({cosh(1 )},{sinh(1 )});
+      \draw[gray,samples=5, domain=-2:2,smooth,variable=\t]
+      plot ({cosh \t}, {sinh \t});
+      \draw let \n0 = {(-1)}
+      in (0,0) -- node[above]{\(1\)}
+      ++ (1,0) -- node[left]{\(-jt\)}
+      ++(0,{\n0}) -- node[below]{\(t^2/2\)}
+      ++ ({-\n0^2/2},0) -- node[right]{\(-jt^3/6\)}
+      ++(0,{\n0^3/6}) --
+      ++ ({-\n0^4/24,0}) --
+      ++ (0,{\n0^5/120})
+      (0,0) -- ({cosh(1 )},{-sinh(1 )});
+    \end{tikzpicture}
+  }
   e^{-it} &= \paren{e^{it}}^* & e^{-jt} &= \paren{e^{jt}}^* \\
   \abs{e^{it}}^2 &= \paren{e^{it}}\paren{e^{it}}^* & \abs{e^{jt}}^2 &= \paren{e^{jt}}\paren{e^{jt}}^* \\
      &= e^{it}e^{-it} &  & =e^{jt}e^{-jt} \\
@@ -295,9 +345,8 @@ Complex\hfil Hyperbolic
       ;
     \end{tikzpicture}
   }
-  \intertext{Sector area}
-  \intertext{
-                                 \hfil
+  \intertext{Sector area \newline
+                                 \hbox{}\hfil
     \begin{tikzpicture}[scale=4]
       \draw[lightgray,fill=lightgray!20] (0,0) -- (1,0) -- (.94,.2) -- cycle;
       \draw[lightgray] (0,0) --(1,0)--(.94,.2) -- (-.06,.2) -- cycle;
