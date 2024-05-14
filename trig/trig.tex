@@ -449,7 +449,6 @@ Complex\hfil Hyperbolic
       % ({cosh(\n1) * \x1 + \sinh(\n1) * \y1 },{sinh(\n1) * \x1 + cosh(\n1) * \y1 });
   \end{tikzpicture}
 \end{align*}
-\hfill
 % tikz coordinates are stored in pt so eg \x1 will be way too big
 \def\squishsquare#1#2#3{%
 let \p A = (#1),
@@ -462,7 +461,8 @@ let \p A = (#1),
  in
  (0,0) -- (\p{tA}) -- ($ (\p{tA}) + (\p{tB}) $) -- (\p{tB}) -- cycle
  }
-\begin{tikzpicture}
+ \[
+\begin{tikzpicture}[scale=1.5]
   \clip (-2,-2) rectangle (2,2);
     \draw[lightgray,samples=5, domain=-2:2,smooth,variable=\t]
       plot ({cosh \t}, {sinh \t})
@@ -486,9 +486,10 @@ let \p A = (#1),
     \draw
     \squishsquare{\U}{\V}{0};
 \end{tikzpicture}
-%
-\begin{tikzpicture}
-  \clip (-1,-2) rectangle (2,2);
+\]
+\[
+\begin{tikzpicture}[scale=1.5]
+  \clip (-2,-2) rectangle (2,2);
     \draw[lightgray,samples=5, domain=-2:2,smooth,variable=\t]
       plot ({cosh \t}, {sinh \t})
       plot ({sinh \t}, {cosh \t})
@@ -513,9 +514,10 @@ let \p A = (#1),
     \draw
     \squishsquare{\U}{\V}{0};
 \end{tikzpicture}
-%
-\begin{tikzpicture}
-  \clip (0,-2) rectangle (4,2);
+\]
+\[
+\begin{tikzpicture}[scale=1.5]
+  \clip (-4,-2) rectangle (4,2);
     \draw[lightgray,samples=5, domain=-2:2,smooth,variable=\t]
       plot ({cosh \t}, {sinh \t})
       plot ({sinh \t}, {cosh \t})
@@ -540,4 +542,5 @@ let \p A = (#1),
     \draw
     \squishsquare{\U}{\V}{0};
 \end{tikzpicture}
+\]
 \end{document}
