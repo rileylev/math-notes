@@ -326,13 +326,13 @@ Complex\hfil Hyperbolic
     \hfill
     \begin{tikzpicture}[scale=2,baseline={(0,0)}]
       \clip (0,-1.3) rectangle (2,1.3);
-      \draw[gray,samples=5, domain=-1.2:1.2,smooth,variable=\t]
+      \draw[gray,samples=8, domain=-1.2:1.2,smooth,variable=\t]
       plot ({cosh \t}, {sinh \t});
 %
       \begin{scope}
         % I could not get this clipping right. This seems to work but I don't know why
         \clip
-        [samples=5, domain=-1:0,smooth,variable=\t]
+        [samples=8, domain=-1:0,smooth,variable=\t]
  plot ({cosh (-\t)}, {sinh (-\t)})
          (-2,-2) rectangle (2,2)
          ;
@@ -349,7 +349,7 @@ Complex\hfil Hyperbolic
       (0,0) -- ({cosh(\n0 )},{sinh(\n0)})
       ({cosh(\n1)}, {sinh(\n1)})
       -- (0,0)
-      [samples =5, domain=\n0:\n1,smooth,variable=\t] plot ({cosh \t}, {sinh \t})
+      [samples =8, domain=\n0:\n1,smooth,variable=\t] plot ({cosh \t}, {sinh \t})
       ;
     \end{tikzpicture}
   }
