@@ -3,7 +3,7 @@
 \usepackage{riley-libertine}
 
 \usepackage{tikz}
-\usetikzlibrary{calc}
+\usetikzlibrary{calc,arrows.meta}
 
 \newcommand{\black}[1]{{\color{black}{#1}}}
 \DeclareMathOperator{\sech}{sech}
@@ -458,15 +458,15 @@ Complex\hfil Hyperbolic
 \end{align*}
 % tikz coordinates are stored in pt so eg \x1 will be way too big
 \def\squishsquare#1#2#3{%
-let \p A = (#1),
-          \p B = (#2),
-          \n0  = {#3},
-          \p{tA}  = ($\X A *({cosh(\n0)},{sinh(\n0)})
-                    +\Y A *({sinh (\n0)},{cosh(\n0)}) $),
-          \p{tB}  = ($\X B *({cosh(\n0)},{sinh(\n0)})
-                    +\Y B *({sinh (\n0)},{cosh(\n0)}) $)
- in
- (0,0) -- (\p{tA}) -- ($ (\p{tA}) + (\p{tB}) $) -- (\p{tB}) -- cycle
+  let \p A = (#1),
+      \p B = (#2),
+      \n0  = {#3},
+      \p{tA}  = ($\X A *({cosh(\n0)},{sinh(\n0)})
+                +\Y A *({sinh (\n0)},{cosh(\n0)}) $),
+      \p{tB}  = ($\X B *({cosh(\n0)},{sinh(\n0)})
+                +\Y B *({sinh (\n0)},{cosh(\n0)}) $)
+  in
+  (0,0) -- (\p{tA}) -- ($ (\p{tA}) + (\p{tB}) $) -- (\p{tB}) -- cycle
  }
  \[
 \begin{tikzpicture}[scale=1.5]
