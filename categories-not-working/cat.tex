@@ -75,7 +75,7 @@ Theoretical mathematics is, to first order of approximation, the study of object
   \item Metric spaces \& isometries
   \item Groups \& homomorphsims
   \item Ordered sets \& order-preserving (non-decreasing) functions
-  \item Topological spaces \& continuous functions \topcat)
+  \item Topological spaces \& continuous functions (\topcat)
   \item Smooth Manifolds \& smooth functions (\smooth)
   \item Types \& computable functions
 \end{itemize}
@@ -329,9 +329,9 @@ If \(F\in\obj(\cat)\) is final, then \(F^{\text{op}}\in\obj(\cat^{\text{op}})\) 
 \begin{itemize}
   \item In an ordered set, the final object is the maximum.
   \item The trivial group is final in the category of groups.
-  \item The \emph{singleton} set is final in the category of sets.
+  \item ``The'' \emph{singleton} set is final in the category of sets.
 \end{itemize}
-Of course, there's no such thing as ``the''\marginnote{Algebraic completions are unique up to \emph{non}unique isomorphism \cite[235]{lang-alg}. An algebraic completion's failure to be \textsc{uu2ui} is measured by its Galois group \cite[262]{lang-alg}.} singleton set. Any singleton set will do, and all singleton sets are \emph{unique up to unique isomorphism}: any two singleton sets are isomorphic, and there is only one isomorphism between them. Any two singleton sets have the same structure unambiguously. The structure is the same because they're isomorphic, and since the isomorphism is unique there's no ambiguity in how to identify their structures.
+Of course, there's no such thing as \emph{the}\marginnote{Algebraic completions are unique up to \emph{non}unique isomorphism \cite[235]{lang-alg}. An algebraic completion's failure to be \textsc{uu2ui} is measured by its Galois group \cite[262]{lang-alg}.} singleton set. Any singleton set will do, and they're all basically the same. All singleton sets are \emph{unique up to unique isomorphism}: any two singleton sets are isomorphic, and there is only one isomorphism between them. They have the same structure unambiguously. The structure is the same because they're isomorphic, and since the isomorphism is unique there's no ambiguity in how to identify their structures.
 
 \begin{theorem}[Uniqueness of initial objects]
   If\eit/ \(I,I'\in\obj(\cat)\) are both initial objects, then there is a unique isomorphism \(f: I \to I'\).
@@ -770,7 +770,7 @@ Now we can define groups for every category that construction makes sense.
 \begin{theorem}
   Every object in \(\veccat\) has a unique group-object structure, the usual vector-space structure.
 \end{theorem}
-\begin{proof}\marginnote{The same argument works in \(\grp\)}
+\begin{proof}\marginnote{But if you use tensors instead, you get different monoid-object structurs}
   In \(\veccat\), the null space \(0\) is both initial and final. Hence, there is only one \(e: 0\to V\), the zero map, \(e=0\). The identity law must take the form
   \begin{equation}
     \label{eq:vec-group-m-trivial}
