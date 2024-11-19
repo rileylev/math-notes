@@ -1099,7 +1099,7 @@ so \cref{contranat} does commute! Hence, every arrow in the category must be an 
 
 If you're wondering why the naturality square looks familiar,
 \begin{defn}[Equivariant map]
-  Let \(G\) be a group. Suppose \(A: G \to \aut(X)\) and \(B: G \to \aut(Y)\) are group actions (functors). Then an equivariant map is a natural transformation \(f: A \Rightarrow B\):
+  Let \(G\) be a group. Suppose \(A: G \to \Aut(X)\) and \(B: G \to \Aut(Y)\) are group actions (functors). Then an equivariant map is a natural transformation \(f: A \Rightarrow B\):
   \[
     \begin{tikzcd}
       X \dar[swap]{A(g)}\rar{f} & Y\dar{B(g)} \\
@@ -1356,10 +1356,12 @@ In other words, there's a natural equivalence
   \bracket{A\otimes B, C} \cong \bracket{A, \bracket{B,C}}
 \]
 \ie, they're adjoints:
-\begin{theorem}[Tensor-hom adjunction]
+\begin{defn}[Tensor-hom adjunction]
+  The tensor-hom adjunction is
   \[
     \blank \otimes  B\dashv \bracket{B,\blank}
   \]
-\end{theorem}
+  It holds in \(\veccat\) for example.
+\end{defn}
 \printbibliography
 \end{document}
