@@ -58,6 +58,7 @@
 \DeclareMathOperator*{\forget}{\texttt{forget}}
 \DeclareMathOperator*{\under}{\texttt{under}}
 
+\DeclareMathOperator{\rat}{\texttt{Rational}}
 \DeclareMathOperator*{\Hom}{hom}
 \def\hom{\Hom}
 
@@ -565,14 +566,14 @@ Pushouts are important for calculating fundamental groupoids. If you can express
       0\rar[shift left = .5ex]{\eta}& 1 \lar[shift left = .5ex,gray]{}
     \end{tikzcd}.
   \]
-  Taking \(I\) and gluing \(0\) and \(1\) gives a category that looks like
+  Taking \(I\) and gluing \(0\) and \(1\) gives a groupoid that looks like a circle:
   \[
     \begin{tikzcd}
       0  \ar[swap,loop,"\eta", in=145,out=35, looseness=22]{}
        \ar[<- ,gray,swap,loop,looseness=14]{}
     \end{tikzcd}
   \]
-  But now \(\eta\) loops back on itself. The pushout is a group! Since the pushout must be universal, the group is free/has no relations: each \(\eta^k\) for \(k\in\Z\) is distinct.
+  But now \(\eta\) loops back on itself. The pushout is a group! Since the pushout must be universal, the group is free, has no relations. Each \(\eta^k\) for \(k\in\Z\) is distinct.
 \end{proof}
 
 The dual of the under category is the over category.
@@ -780,7 +781,7 @@ Now we can define groups for every category that construction makes sense.
 \begin{theorem}
   Every object in \(\veccat\) has a unique group-object structure, the usual vector-space structure.
 \end{theorem}
-\begin{proof}\marginnote{But if you use tensors instead, you get different monoid-object structurs}
+\begin{proof}\marginnote{If you use tensors instead of products, you do get new structures}
   In \(\veccat\), the null space \(0\) is both initial and final. Hence, there is only one \(e: 0\to V\), the zero map, \(e=0\). The identity law must take the form
   \begin{equation}
     \label{eq:vec-group-m-trivial}
@@ -1356,12 +1357,106 @@ In other words, there's a natural equivalence
   \bracket{A\otimes B, C} \cong \bracket{A, \bracket{B,C}}
 \]
 \ie, they're adjoints:
-\begin{defn}[Tensor-hom adjunction]
+\begin{defn}[Tensor-hom adjunction]\label{tensor-hom-adj}
   The tensor-hom adjunction is
   \[
     \blank \otimes  B\dashv \bracket{B,\blank}
   \]
   It holds in \(\veccat\) for example.
 \end{defn}
+In categories with both a tensor product and internal homs, \namecref{tensor-hom-adj} is usually satisfied. In categories with internal homs only, it suggests an approach to define a tensor product.
+
+\section{Sheaves}
+\marginnote{This doesn't really belong here, but it's here anyway.}
+Before defining sheaves, I'll explain why geometers working in \(\smooth\) don't need them. In \(\smooth\), we have smooth bump functions, smooth cutoff functions, and smooth partitions of unity. Therefore, we can extend local constructions globally.
+
+Suppose \(f:U \to \R\) for \(U\subseteq M\). If \(\phi\) is a bump function on \(U\) and \(\phi(V)=1\) for some \(V\subset U\).  Then
+\[
+  \paren{\phi f}(x) =
+  \begin{cases}
+    f(x) &\text{if } x\in V \\
+    0 &\text{if } x\notin U.
+  \end{cases}
+\]
+It contains essentially the same data as \(f\), but it's defined on all of \(M\). In \(\smooth\), we can be sloppy with domains.
+
+This is not true anymore for analytic functions. Analytic functions are rigid. Take \(f(x)=e^x\) for example. Just from its values on the infinitesimal neighborhood \([-\epsilon,\epsilon]\), we can already get its Taylor series:
+\[
+  f^{(n+1)} = \lim_{h\to 0} \frac{f^{(n)}(h)-f^{(n)}(0)}{h} = 1
+\]
+fits entirely within \([-\epsilon,\epsilon]\). But now
+\[
+  f(x) = \sum \frac{f^{(n)}(0) x^n}{n!}  =e^x
+\]
+converges on all of \(\complex\). Its values on an \emph{infinitesimal} neighborhood fix the values \emph{everywhere} in \(\complex\).
+
+The case \(e^x\) is an ideal one, \(e^x\) is entire, but the point stands in general:
+\begin{theorem}[Liouville]
+  Every holomorphic function \(\complex\to\complex\) is either constant or unbounded \cite{wiki-liouville}.
+\end{theorem}
+This eliminates the hope of analytic bump functions.
+Similarly, there's
+\begin{theorem}[Maximum modulus principle]
+  A holomorphic function\eit/ \(U \to \complex\) is either unbounded or locally constant \cite{wiki-max-mod}.
+\end{theorem}
+and the especially frustrating
+\begin{cor}
+  ``Any holomorphic function on a compact Riemann surface is necessarily constant'' \cite{wiki-liouville}.
+\end{cor}
+
+The situation is even worse when we look at polynomials and rational functions. A polynomial can't have more zeroes than its degree, so any polynomial that's zero infinitely often is zero constantly. Additionally, rational functions are interesting, but they have poles ({\footnotesize\texttt{s/rational/meromorphic}}). Sometimes the poles are the interesting part. If we want study rational functions as \emph{functions} instead of formal symbolic expressions, we are forced to be cautious with their domains.
+
+For example, the only rational functions defined on all of \(\complex\) are plain-old polynomials ({\footnotesize \texttt{s/rational/meromorphic,} \texttt{s/polynomial/holomorphic}}). The only rational functions defined on \(\complex-\set{0}\) are
+\[
+  \set{\frac{p(x)}{x^n} : n \in \N, p \text{is a polynomial}}.
+\]
+On \(\complex-\set{a,b}\), the only rational functions are
+\[
+  \set{\frac{p(x)}{(x-a)^m} + \frac{q(x)}{(x-b)^n}}
+\]
+Shrinking the domain grows the set of functions, which is backwards from \(\setcat\), \(\topcat\), \(\smooth\).
+
+To organize the situation, organize the relationships between the functions defined on various open sets. Additionally, we want to ensure the copy of \(f(x)\) defined on the set \(U\) and the copy defined on \(V\) really are the same thing. Enter sheaves.
+
+Well, first, presheaves
+\begin{defn}[Category of opens]\marginnote{\ie, draw one arrow \(A\to B\) iff \(A\subseteq B\).}
+  Let \(\tau\) be the category of open sets on your space ordered by \(\subseteq\).
+\end{defn}
+\begin{defn}[Presheaves]
+  A presheaf is a functor \(F: \tau^\op\to \setcat\).
+\end{defn}
+The arrows in \(\tau^\op\) are reverse-inclusions, also called \emph{restrictions}. When you restrict from a bigger set to a smaller one, the presheaf follows suit.
+\begin{itemize}
+  \item The identity functor is a presheaf, trivially.
+  \item \(C^\infty:\tau^\op \to \setcat\) is a presheaf on a smooth manifold. Each open set \(U\) gets its set of functions \(c^\infty(U)\). Restrictions are the usual restrictions of a function's domain.
+
+  \item \(\rat: \tau^\op \to \setcat\) is a presheaf on \(\complex\). Each open set gets its set of rational functions. Restrictions are still usual restriction of domain, but something interesting happens: restrictions \emph{are not} surjective. \(\rat(\complex)\) are just polynomials, but \(\rat(\complex - \Z)\) are every rational function with singularites on \(\Z\). Additionally, because polynomials, hence rational functions, are fully determined by their values on finitely many points, restrictions \emph{are} injective.
+\end{itemize}
+
+We're not quite there, though. We want to make sure, in some sense, functions are the same entity after restriction. Wikipedia calls elements in the sheaf sections \cite{wiki-sheaf}, which I don't love. But I'm not gonna call it wheat fields, so section it is.
+\begin{defn}[Sheaf]
+  \def\S{\mathcal S}
+  A sheaf is a presheaf \(\S:\tau^{\op}\to \setcat\) satisfying locality and gluing. Let \(U\) be an open set, covered by \(U_i\),
+  \[
+    U= \bigcup U_i.
+  \]
+  \begin{itemize}
+    \item Locality. Sections on \(U\), aka elements in \(\S(U)\), are completely determined by their values locally. Two sections are the same if they're the same locally everywhere, \ie, on each \(U_i\). Suppose \(s,t\in \S(U)\). Then locality says
+          \[
+          \gparen{\forall i \quad s|_{U_i} = t|_{U_i} } \implies s = t
+          \]
+
+    \item Gluing. If a collection of sections agree on overlaps, you can glue them together. Suppose there is a family \(s_i\in \S(U_i)\) that agrees on overlaps,
+          \[
+          \forall i,j \quad { s_i|_{U_i \cap U_j} = s_j|_{U_i\cap U_j} }
+          \]
+          then there is an \(s\in \S(U)\) formed by gluing them together:
+          \[
+          s_i = S|_{U_i}
+          \]
+  \end{itemize}
+  \cite{wiki-sheaf}
+\end{defn}
+Most things on manifolds are sheaves. \(C^\infty\) is a sheaf, but so are vector fields, tensor fields, and differential forms. You can restrict them, they're fully defined by their local behavior, and you can glue them when they agree. In \(\smooth\), this machinery can be overkill, but when you lose partitions of unity, it's crucial.
 \printbibliography
 \end{document}
