@@ -1295,11 +1295,71 @@ into a vector space. It's even finite-dimensional when both \(X\) and \(Y\) are.
 \]
 and \(X^Y\) has the product topology. Then \(\hom_\topcat(X,Y)\) inherits the subset topology, the topology of pointwise convergence.
 
-\begin{defn}
+\begin{defn}[in/external hom]
   In these cases, it's useful to distinguish between the \emph{external} homs, the set of functions, and the \emph{internal} homs, the object in the category. Denote the \emph{internal} hom as
   \[
     \bracket{X,Y} \in\obj(\cat) \quad\text{where } X,Y\in \obj(\cat)
   \]
+
+  A category with internal homs is called \emph{closed}.
 \end{defn}
+
+With internal homs, we can now have arrows into hom-sets. Consider \(\veccat\).
+\[
+  \begin{tikzcd}
+    A \rar{f}& \bracket{B,C}
+  \end{tikzcd}
+\]
+Choosing an \(a\in A\) gives
+\[
+  \begin{tikzcd}
+    B \rar{f(a)} & C
+  \end{tikzcd}
+\]
+Sometimes I draw this like
+\[
+  \begin{tikzcd}
+    A \rar{f} & \Big\lbrack B
+    \rar[shift left=8pt]
+    \rar[shift left=4pt]
+    \rar
+    \rar[shift left=-8pt]
+    \rar[shift left=-4pt]
+    & C \Big\rbrack
+  \end{tikzcd}
+\]
+but I've never seen that anywhere else.
+
+The map
+\[
+  (a,b) \mapsto f(a)(b)
+\]
+is bilinear:
+\[
+  \paren{f(a+t\alpha)}b =  \paren{f(a) + t f(\alpha)}b = f(a)(b) + t f(\alpha)(b)
+\]
+and
+\[
+  f(a)(b+t\beta) = f(a)(b)+tf(a)(\beta)
+\]
+
+Internal homs give us one way to define multilinear maps from linear maps. The other way is with the tensor product. A bilinear map can be written
+\[
+  f : A \otimes B \to C
+\]
+or
+\[
+  f: A \to \bracket{B,C}.
+\]
+In other words, there's a natural equivalence
+\[
+  \bracket{A\otimes B, C} \cong \bracket{A, \bracket{B,C}}
+\]
+\ie, they're adjoints:
+\begin{theorem}[Tensor-hom adjunction]
+  \[
+    \blank \otimes  B\dashv \bracket{B,\blank}
+  \]
+\end{theorem}
 \printbibliography
 \end{document}
