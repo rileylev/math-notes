@@ -575,8 +575,8 @@ Pushouts are important for calculating fundamental groupoids. If you can express
   Taking \(I\) and gluing \(0\) and \(1\) gives a groupoid that looks like a circle:
   \[
     \begin{tikzcd}
-      0  \ar[swap,loop,"\eta", in=145,out=35, looseness=22]{}
-       \ar[<- ,gray,swap,loop,looseness=14]{}
+      0  \ar[<-,swap,loop,"\eta", in=145,out=35, looseness=22]{}
+       \ar[gray,swap,loop,looseness=14]{}
     \end{tikzcd}
   \]
   But now \(\eta\) loops back on itself. The pushout is a group! Since the pushout must be universal, the group is free, has no relations. Each \(\eta^k\) for \(k\in\Z\) is distinct.
@@ -958,9 +958,9 @@ The hom functors are important in category theory. Every category has them!
   \[
     \begin{tikzcd}
       A
-      \ar[-,lightgray!36, shift left= 6pt]{dr}
-      \ar[-,lightgray!36, shift left= 3pt]{dr}
-      \ar[-,lightgray!36, shift left=-3pt]{dr}
+      \ar[-,lightgray!50, shift left= 6pt]{dr}
+      \ar[-,lightgray!50, shift left= 3pt]{dr}
+      \ar[-,lightgray!50, shift left=-3pt]{dr}
       \ar[dashed]{dr}
       %
       \rar[-,lightgray,shift left=-3pt]{}
@@ -991,9 +991,9 @@ The hom functors are important in category theory. Every category has them!
   \[
     \begin{tikzcd}
       B
-      \ar[-,lightgray!36,shift left= 6pt]{rd}
-      \ar[-,lightgray!36,shift left= 3pt]{rd}
-      \ar[-,lightgray!36,shift left=-3pt]{rd}
+      \ar[-,lightgray!50,shift left= 6pt]{rd}
+      \ar[-,lightgray!50,shift left= 3pt]{rd}
+      \ar[-,lightgray!50,shift left=-3pt]{rd}
       \ar[dashed]{rd}
       \dar[swap]{f}
       \\
@@ -1707,7 +1707,7 @@ Every maximal ideal is also prime:
   \[
     P \ni ab \implies P\ni a \text{ or } P \ni b
   \]
-  in analogy with the fact\marginnote{(the \(\divides\) means divides)}
+  in analogy with the fact\marginnote{\(\divides\) means divides}
   \[
     p \divides ab \implies p\divides a \text{ or } p \divides b
   \]
@@ -1767,7 +1767,7 @@ Geometrically, this means the subset of \(\complex^n\) associated to \(I\) conta
 
   \item Dummit \& Foote \cite{dummit+foote} covers a ton of undergrad algebra, but no category theory.
 
-  \item Vakil's \book{Rising Sea} is an introduction to the machinery of modern algebraic geometry. From what I've read so far, it's clear writing and stresses intuition.
+  \item Vakil's \book{Rising Sea} is an introduction to the machinery of modern algebraic geometry. From what I've read so far, its  writing's clear and stresses intuition.
 \end{itemize}
 \printbibliography
 \end{document}
