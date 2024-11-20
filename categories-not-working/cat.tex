@@ -65,6 +65,10 @@
 \title{\normalfont \color{darkgray}Categories for a few specific working physicists}
 \author{Riley Levy}
 
+
+\let\oldimplies\implies
+\def\implies{\color{gray}\oldimplies\color{black}}
+
 \begin{document}
 \maketitle
 \section{Intro \& motivation}
@@ -1092,7 +1096,7 @@ In summary,
   must commute,
   but this is impossible unless \(f\) is injective, for every \(f\).
 \end{proof}
-This gives another perspective on \emph{why} orthogonal matrices are invertible. In the category of finite-dimensional \emph{inner} product spaces, whose arrows are orthogonal matrices, there really \emph{is} a natural equivalence \(X\cong X^*\) given by
+This gives another perspective on \emph{why} orthogonal matrices are invertable. In the category of finite-dimensional \emph{inner} product spaces, whose arrows are orthogonal matrices, there really \emph{is} a natural equivalence \(X\cong X^*\) given by
 \[
   x\mapsto \inner{x}{\blank},
 \]
@@ -1150,7 +1154,7 @@ Natural transformations resemble homotopies between paths. If you think of \(Ff\
   The requirement the square commutes says you can actually fill in the square. At this level of abstraction, this commutavity is the \emph{only} difference between an honest-to-god homotopy and any four arrows that connect four dots.
   \cite[228]{groupoid}
 \end{defn}
-In categories that aren't groupoids, natural transformations need not be invertible. In that sense, a natural transformation is a homotopy with an associated direction.
+In categories that aren't groupoids, natural transformations need not be invertable. In that sense, a natural transformation is a homotopy with an associated direction.
 
 \begin{theorem}
   There is a natural isomorphism between a vector space\eit/ \(V\) and the tangent space\eit/ \(T_a V\) \cite[59]{lee-smooth}. Consider\eit/ \(\veccat_*\), the category of pointed vector spaces. Let\eit/ \(F: \veccat_* \to \veccat\) be the functor that forgets the distinguished point. Let\eit/ \(T_\blank : \veccat_* \to \veccat\) be the tangent space functor. Then the isomorphism
@@ -1237,7 +1241,7 @@ A free functor from \(\cat \to \dee\) sends an object \(X\in \cat\) to the large
   \[
     \Hom_\cat\paren[\Big]{\grayunderbrace{\free_\veccat \set{x_i}}{?}, Y} \cong \Hom_\setcat\paren[\Big]{\set{x_i}, \forget_\veccat Y}
   \]
-  The left-hand side is the set of \emph{linear} functions from the (unknown) \(\free_\veccat \set{x_i}\). The right-hand side is the set of \emph{all} functions between \(\set{x_i}\to Y\). Using the indexing, an arbitrary function \(f:\set{x_i} \to Y\) is of the form  \(x_i\mapsto f(x_i)= y_i\).
+  The left-hand side is the set of \emph{linear} functions from the (unknown) \(\free \set{x_i}\). The right-hand side is the set of \emph{all} functions between \(\set{x_i}\to Y\). Using the indexing, an arbitrary function \(f:\set{x_i} \to Y\) is of the form  \(x_i\mapsto f(x_i)= y_i\).
 
   We want to extend \(\set{x_i}\) to a vector space while extending \(f\) to a linear map \(\overline f: \free X \to Y\). Use \(Y\) as a point of contact between \(f\) and \(\overline f\): identity \(x_i\) with the vector \(\overline{x_i}\) defined by \(\overline f (\overline {x}_i) = y_i\). Therefore, I'll drop the overline on \(\overline{x_i}\). Extend \(\overline f\) by stipulating linearity:
   \begin{equation}
@@ -1366,6 +1370,20 @@ In other words, there's a natural equivalence
 \end{defn}
 In categories with both a tensor product and internal homs, \namecref{tensor-hom-adj} is usually satisfied. In categories with internal homs only, it suggests an approach to define a tensor product.
 
+In \(\setcat\), the tensor product (in this sense) is just the cartesian product. In \(\setcat\),
+\[
+  [Y,Z] = Z^Y.
+\]
+Then
+\[
+  [X,[Y,Z]] = \paren{Z^Y}^X \cong \paren{Z^{X\times Y}} = [X\times Y, Z].
+\]
+The \setcat-isomorphism (bijection) is natural and given by Currying, \ie, send \(f\in [X,[Y,Z]]\)
+\[
+  (x,y) \mapsto f(x)(y)
+\]
+
+
 \section{Sheaves}
 \marginnote{This doesn't really belong here, but it's here anyway.}
 Before defining sheaves, I'll explain why geometers working in \(\smooth\) don't need them. In \(\smooth\), we have smooth bump functions, smooth cutoff functions, and smooth partitions of unity. Therefore, we can extend local constructions globally.
@@ -1404,17 +1422,17 @@ and the especially frustrating
   ``Any holomorphic function on a compact Riemann surface is necessarily constant'' \cite{wiki-liouville}.
 \end{cor}
 
-The situation is even worse when we look at polynomials and rational functions. A polynomial can't have more zeroes than its degree, so any polynomial that's zero infinitely often is zero constantly. Additionally, rational functions are interesting, but they have poles ({\footnotesize\texttt{s/rational/meromorphic}}). Sometimes the poles are the interesting part. If we want study rational functions as \emph{functions} instead of formal symbolic expressions, we are forced to be cautious with their domains.
+The situation is even worse when we look at polynomials and rational functions. A polynomial can't have more zeroes than its degree, so any polynomial that's zero infinitely often is zero constantly. Additionally, rational functions are interesting, but they have poles ({\footnotesize\texttt{s/rational/meromorphic}}). Sometimes the poles are the interesting part. If we want to study rational functions as \emph{functions} instead of formal symbolic expressions, we are forced to be cautious with their domains.
 
 For example, the only rational functions defined on all of \(\complex\) are plain-old polynomials ({\footnotesize \texttt{s/rational/meromorphic,} \texttt{s/polynomial/holomorphic}}). The only rational functions defined on \(\complex-\set{0}\) are
 \[
-  \set{\frac{p(x)}{x^n} : n \in \N, p \text{is a polynomial}}.
+  \set{\frac{p(x)}{x^n} : n \in \N, p \text{ is a polynomial}}.
 \]
 On \(\complex-\set{a,b}\), the only rational functions are
 \[
-  \set{\frac{p(x)}{(x-a)^m} + \frac{q(x)}{(x-b)^n}}
+  \set{\frac{p(x)}{(x-a)^m(x-b)^n}}
 \]
-Shrinking the domain grows the set of functions, which is backwards from \(\setcat\), \(\topcat\), \(\smooth\).
+Shrinking the domain grows the set of functions, which is backwards from \(\setcat\).
 
 To organize the situation, organize the relationships between the functions defined on various open sets. Additionally, we want to ensure the copy of \(f(x)\) defined on the set \(U\) and the copy defined on \(V\) really are the same thing. Enter sheaves.
 
@@ -1428,7 +1446,7 @@ Well, first, presheaves
 The arrows in \(\tau^\op\) are reverse-inclusions, also called \emph{restrictions}. When you restrict from a bigger set to a smaller one, the presheaf follows suit.
 \begin{itemize}
   \item The identity functor is a presheaf, trivially.
-  \item \(C^\infty:\tau^\op \to \setcat\) is a presheaf on a smooth manifold. Each open set \(U\) gets its set of functions \(c^\infty(U)\). Restrictions are the usual restrictions of a function's domain.
+  \item \(C^\infty:\tau^\op \to \setcat\) is a presheaf on a smooth manifold. Each open set \(U\) gets its set of functions \(C^\infty(U)\). Restrictions are the usual restrictions of a function's domain.
 
   \item \(\rat: \tau^\op \to \setcat\) is a presheaf on \(\complex\). Each open set gets its set of rational functions. Restrictions are still usual restriction of domain, but something interesting happens: restrictions \emph{are not} surjective. \(\rat(\complex)\) are just polynomials, but \(\rat(\complex - \Z)\) are every rational function with singularites on \(\Z\). Additionally, because polynomials, hence rational functions, are fully determined by their values on finitely many points, restrictions \emph{are} injective.
 \end{itemize}
@@ -1457,6 +1475,247 @@ We're not quite there, though. We want to make sure, in some sense, functions ar
   \end{itemize}
   \cite{wiki-sheaf}
 \end{defn}
-Most things on manifolds are sheaves. \(C^\infty\) is a sheaf, but so are vector fields, tensor fields, and differential forms. You can restrict them, they're fully defined by their local behavior, and you can glue them when they agree. In \(\smooth\), this machinery can be overkill, but when you lose partitions of unity, it's crucial.
+Most things on manifolds are sheaves. \(C^\infty\) is a sheaf, but so are the space of vector fields, tensor fields, and differential forms. You can restrict them, they're fully defined by their local behavior, and you can glue them when they agree. In \(\smooth\), this machinery can be overkill, but when you lose partitions of unity, it's crucial.
+
+\section{Algebra}
+The most important kinds of algebraic spaces roughly mirror the way we teach kids numbers, which makes a good mnemonic
+\begin{itemize}
+  \item monoids \(\sim (\N,+)\) \marginnote{You don't see monoids in abstract algebra 1, but they're all over category theory}\\
+        There's a binary operation (\(+\)) and an identity element (\(0\))
+  \item groups \(\sim (\Z,+)\) integers \\
+        Now inverses (negatives)
+  \item rings \(\sim (\Z,+,\times)\) \\
+        Now there's multiplication. It distributes over addition
+  \item fields \(\sim (\Q,+,\times)\)\marginnote{in fields, multiplication \emph{does} need to commute} \\
+        And fractions!
+\end{itemize}
+Addition in rings is commutative. Some authors require multiplication in rings be commutative, but some do not because then \(n\times n\) matrices are a ring. Either way, this is a good example to keep in mind, because square matrices show you lots of ways multiplication can fail to be invertable.
+
+\begin{defn}[ring]
+  A ring \((R,+,\cdot,0,1)\) is
+  \begin{itemize}
+    \item An abelian group under \((+,0)\) \marginnote{using group and monoid in the definition lets us omit writing all the associativity laws.}
+    \item A monoid under \((\cdot,1)\)
+    \item And distributive:
+          \begin{align*}
+            a(b+c) &= ab + ac. \\
+            (a+b)c &= ac + bc
+          \end{align*}
+  \end{itemize}
+\end{defn}
+Sometimes people drop the requirement that \(1\), a multiplicative identity exists. Sometimes this is called a rng, a ring without \emph{i}dentity. Similarly, sometimes people drop the requirement additive inverses exist and call it a rig, a ring without \emph{n}egatives. I propose we also use \emph{rin}, a ring without \emph{g}ommutativity. In other words, I'm assuming rings commute.
+
+\begin{defn}[Polynomial ring]
+  Given a ring \(R\), the polynomials with coefficients in \(\R\) and formal variable \(x\), written
+  \[
+    R[x],
+  \]
+  is a ring.
+
+  Similarly, \(R[x,y,z]\) is the ring of polynomials in all three variables.
+\end{defn}
+
+\begin{defn}
+  The tensor algebra \(V^\otimes\) of a vector space \(V\) is a ring.
+\end{defn}
+
+You can't quotient by any old group, only \emph{normal} subgroups. Analogously, you can't quotient by any subrng, only \emph{ideals}.
+Recall
+\[
+  0 + 0 = 0
+\]
+so \(0\) is closed under addition,
+and
+\[
+  0x = 0,
+\]
+\(0\) is absorbative under multiplication. Any set that can be collapsed to zero must have these properties as well
+
+\begin{defn}[Ideal]
+  A subset \(I\subseteq R\) is an ideal iff \marginnote{In a rin, you have to distinguish left-ideals and right-ideals}
+  \begin{itemize}
+    \item \(I\) is closed under addition, \ie
+          \[
+          \forall x,y\in I\quad x+y \in I
+          \]
+          or, more concisely, \(I+I=I\).
+    \item \(I\) is absorbative under multiplication, \ie
+          \[
+          \color{darkgray}
+          \forall r\in \black R\  \forall x \in I\quad  rx \in I
+          \]
+          or, more concisely, \(RI=I\).
+  \end{itemize}
+
+  The ideal generated by \(x\) is written \(\paren x\).
+\end{defn}
+
+This is already enough to do something interesting:
+\begin{defn}[Dual numbers]
+  The dual numbers are
+  \[
+    \R[x]/\paren{x^2}
+  \]
+\end{defn}
+Dual numbers contain nilpotent elements. After taking quotients, \(x^2=0\). As a consequence, \(x\) is non-invertable.
+
+\begin{defn}[Complex numbers]
+  \[
+    \complex = \R[x]/\paren{x^2+1}
+  \]
+\end{defn}
+Interestingly, \(\complex\) is a field: every nonzero complex number is invertable, even though the definition looks almost the same as dual numbers.  The reason for this is \(x^2+1\) is an \emph{irreducible} polynomial over \(\R\). We see the same thing happen in \(\Z/\paren 4\) vs \(\Z/\paren{5}\).  In \(\Z/\paren 4\), \(2^2=4\equiv 0 \pmod 4\), but every nonzero element is invertable in \(\Z/\paren 5\) because \(5\) is prime.
+
+\begin{defn}[Hyperbolic numbers]
+  \[
+    \R[x]/\paren{x^2-1}
+  \]
+\end{defn}
+Because \(x^2-1= (x+1)(x-1)\), this isn't a field. In fact, after taking mods, we get
+\[
+  (x+1)(x-1) = 0.
+\]
+
+\begin{defn}
+  \[
+    \Q[\sqrt 2] = \Q[x]/\paren{x^2-2}
+  \]
+\end{defn}
+Because \(x^2-2\) is irreducible over \(\Q\), we get a field again.
+
+\begin{theorem}
+  In \(\Q\), every ideal trivial---either\eit/ \(\set{0}\) or\eit/ \(\{\Q\}\).
+\end{theorem}
+\begin{proof}
+  Suppose \(I\) is an ideal. If \(I=\set 0\), we're done. Otherwise, there is some \(x\in I\) such that \(x\neq 0\). But then \(x^{-1}\in \Q\) exists. By hypothesis \(I\) is absorbative, so
+  \[
+    Ix^{-1} =I
+  \]
+  But then \(xx^{-1}=1\in I\). Applying absorbativity again, \(y=y1 \in yI = I\) for any \(y\in \Q\). Hence \(I=\Q\).
+\end{proof}
+Actually, this proof works for any field:
+\begin{cor}
+  The only ideals of a field are\eit/ \(\set 0\) and the whole field.
+\end{cor}
+Ideals measure the failure of a ring to be a field.
+
+Ideals also generalize the idea of multiples of a number:
+\begin{theorem}\marginnote{ideals like \(\paren{a}\) are called \emph{principal}}
+  Every ideal in \(\Z\) is of the form \(\paren{a}\), the set of multiples of \(a\).
+\end{theorem}
+\begin{proof}
+  Suppose \(I\) is an ideal in \(\Z\). If \(I=\set 0\), then \(I=\paren{0}\), so we're done.
+
+  Suppose \(I\neq 0\). Let \(a\) be the smallest positive element of \(I\). Let \(b>a\) be an element of \(I\). By repeated subtraction (Euclid's algorithm), find \(\texttt{gcd}\paren{a,b}\). Because \(I\) is closed under subtraction, \(\texttt{gcd}\paren{a,b}\in I\). By construction,
+  \[
+    \texttt{gcd}\paren{a,b} \leq a
+  \]
+  But by assumption \(a\) is minimal,
+  \[
+    a\leq\texttt{gcd}(a,b)
+  \]
+  so \(a=\texttt{gcd}(a,b)\). Then \(b\) is a multiple of \(a\).
+
+  By negating everything, the same argument applies to the negative side of \(I\). Conclude
+  \[
+    I = \paren{a},
+  \]
+  the ideal generated by \(a\).
+\end{proof}
+In ``easy'' rings, ideals are just multiples. Unfortunately, life is not so simple.
+
+\begin{theorem}
+  \(\Q[x,y]\) has an ideal that's not simply a set of all multiples. It's given by
+  \[
+    \paren{x,y}
+  \]
+\end{theorem}
+\begin{proof}
+  Consider
+  \[
+    \paren{x,y} = \set[\big]{\text{polynomials with \(0\) constant term}}.
+  \]
+  Certainly, we can quotient by \(\paren{x,y}\), in effect, setting \(x=y=0\).
+
+  However, there is no \(\texttt{gcd}(x,y)\) because \(x\) and \(y\) are indefinite variables. The only divisors of \(x\) are \(1\) and \(tx\) where \(t\in\Q\), \(t\neq 0\).
+\end{proof}
+\begin{theorem}[Unique factorization fails]
+  Unique factorization fails in \[\Z\bracket{\sqrt{-5}}.\] There are two distinct ``prime''\marginnote{irreducible \(\neq\) prime, but never mind. They're the same in \(\Z\), but not everywhere.} factorizations of \(6\),
+  \[
+     \gparen{1 + \sqrt{-5}}\gparen{1-\sqrt{-5}} =6= \gparen 2\gparen 3.
+  \]
+\end{theorem}
+\begin{proof}
+  The trick is to use the norm
+  \[
+    N\gparen{a+b\sqrt{-5}} \define \gparen{a+b\sqrt{-5}}\gparen{a-b\sqrt{-5}} = a^2 + 5 b^2.
+  \]
+  It's multiplicative,
+  \[
+    N(xy) = N(x)N(y),
+  \]
+  so necessary condition for \(x\) divides \(z\) is \(N(x)\) divides \(N(z)\). This screens out possible factors, so we can check irreducibility.
+  \begin{itemize}
+    \item \(2\) is irreducible.\\ Suppose \(xy=2\). Then
+          \[
+          N(x)N(y) = N(2)= 4 = 1\cdot 4 = 2\cdot 2.
+          \]
+          Without loss of generality, either \(N(x)=1\) or \(N(x)=2\). Write \(x = a + b\sqrt{-5}\). Suppose
+          \begin{equation}
+            \label{unique-factor-fail-n=1}
+            N(x)= a^2+ 5b^2 = 1 \implies a = \pm 1, b=0.
+          \end{equation}
+          so \(x=\pm 1\). Alternately, suppose
+          \[
+          N(x)=a^2+5b^2=2 \implies a^2= 2\implies \text{no solution over \(\Z\)}
+          \]
+    \item  \(3\) is irreducible.\\ By the same argument,
+          \[
+          N(3) = 9 = 1 \cdot 9 = 3 \cdot 3
+          \]
+          so either \(N(x)=1\) or \(N(x)=3\). From \cref{unique-factor-fail-n=1}, we know the only solution for \(N(x)=1\) is \(x=1\). So consider \(N(x)=3\):
+          \[
+          N(x)=a^2+5b^2 = 3 \implies{a^2=3} \implies \text{no solution over \(\Z\)}
+          \]
+    \item \(1+\sqrt{-5}\) is irreducible.
+          \[
+          N\gparen{1+\sqrt{-5}} = 1+5 = 6= 1\cdot 6 = 2\cdot 3
+          \]
+          So if \(xy=6\), then either \(N(x)=1\) or \(N(x)=2\). But we already checked the only solution is \(x=\pm 1\).
+    \item \(1-\sqrt{-5}\) is irreducible.
+          \[
+          N\gparen{1-\sqrt{-5}} = 1 + 5  = 6 = 1\cdot 6 =2 \cdot 3,
+          \]
+          so the same argument works.
+  \end{itemize}
+\end{proof}
+Algebraists were not ready to give up unique factorization. So they defined maximal and prime ideals.
+\begin{defn}[Maximal ideal]
+  An ideal \(I\) over ring \(R\) is maximal if the only bigger ideal is all of \(R\).
+\end{defn}
+Every maximal ideal is also prime:
+\begin{defn}[Prime ideal]
+  \marginnote{For a prime number,\\\,\\ \(p\divides ab\) \(\implies\)\\ \(p\divides a\) or \(p\divides b\)\\\,\\ (the \(\divides\) means divides)}
+  An ideal \(I\) is prime iff
+  \[
+    I \ni ab \implies I\ni a \text{ or } I \ni b
+  \]
+\end{defn}
+But prime ideals need not be maximal.
+In fact, the minimal (zero) ideal is often prime
+\begin{lemma}
+  In a ring with no zero divisors, \(\paren 0\) is prime.
+\end{lemma}
+\begin{proof}
+  If \(R\) has no zero divisors, then \(0=ab\) only if \(a=0\) or \(b=0\). Suppose
+  \[
+    \paren 0 \ni ab.
+  \]
+  Because \(\paren 0 = \set{0}\), conclude \(0=ab\). By hypothesis, either \(a=0\) or \(b=0\). Suppose \(a=0\). Then
+  \[
+    \paren{0}\ni a.
+  \]
+  By the same argument, if \(b=0\) then \(\paren 0 \ni b\).
+\end{proof}
 \printbibliography
 \end{document}
