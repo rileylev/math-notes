@@ -1776,11 +1776,11 @@ so that, too, is in the ideal. Continuing down that road will reveal
   9x - y^2 \in \paren{x-z^2, y-3z}
 \]
 
-In particular, you can encode points in the base space as systems of equations, hence ideals. The point \((a,b,c)\) becomes \(x=a,y=b,z=c\) becomes
+You can encode points in the base space as systems of equations, hence ideals. The point \((a,b,c)\) becomes \(x=a,y=b,z=c\) becomes
 \[
   \paren{x-a,y-b,z-c}.
 \]
-In particular, maximal ideals recover points from the space of functions, at least if the field is complete. But, first, a warmup.
+Taking maximal ideals recover points from the space of functions, at least if the field is complete. But, first, a warmup.
 \begin{theorem}[Remainder-root theorem]
   Suppose \(p(x)\) is a polynomial. Then
   \[
@@ -1804,7 +1804,7 @@ If we think of polynomials as functions over the space \(\complex^n\), taking ma
 
 This hints at a \emph{geometric} interpretation of ideals. Suppose \(I\) is an ideal, not maximal, over \(\complex[x_1\dots x_n]\). Then \(I\) can be refined to some maximal ideal:
 \[
-  I\subseteq (x_1-a,\dots x_n-a_n).
+  I\subseteq (x_1-a_1,\dots x_n-a_n).
 \]
 Geometrically, this means the subset of \(\complex^n\) associated to \(I\) contains the point \((a_1,\dots a_n)\).
 
@@ -1822,23 +1822,28 @@ What are the maximal ideals containing \(\paren[]{y-x^2}\)? The points on the pa
 \[
   \paren{x-a,y-a^2} \supseteq \paren{y-x^2}
 \]
-Here's the details. To be in the ideal, \(y-x^2\)   must be a linear combination of \(x-a\) and \(y-a^2\). You can start squaring and solving, but ordinary polynomial division with remainder does the trick. \marginnote{Because the division algorithm only works for one variable at a time, treat \(y\) as a constant.}
-%or monovariate polynomials?
-\[
-  \begin{matrix}
-    \color{darkgray}
-         &    & x  & -a    \\
-    \hline\rule{0pt}{\normalbaselineskip}
-    x-a\Big) & \black{-y} & +x^2      \\
-         &    &x^2  &- ax \\
-         &    &     &- ax & + \black{a^2}
-  \end{matrix}
-\]
-so the remainder is \(-y+a^2\) and, all together,
-\[
--y+x^2 = \paren{x-a}\paren{x-a} - (y-a^2)
-\]
-
+\begin{proof}
+  Here's the details. To be in the ideal, \(y-x^2\)   must be a linear combination of \(x-a\) and \(y-a^2\). You can start squaring and solving, but ordinary polynomial division with remainder does the trick. \marginnote{Because the division algorithm only works for one variable at a time, treat \(y\) as a constant.}
+  % or monovariate polynomials?
+  \[
+    \begin{matrix}
+      \color{darkgray}
+      &    & x  & +a    \\
+      \hline\rule{0pt}{\normalbaselineskip}
+      x-a\Big) & \black{-y} & +x^2      \\
+      &    &x^2  &- ax \\
+      \hline
+      &    &     & ax & \\
+      &    &     & ax & - {a^2} \\
+      \hline
+      &    &     &    & \black{a^2}\rule{0pt}{\normalbaselineskip}
+    \end{matrix}
+  \]
+  so the remainder is \(-y+a^2\) and, all together,
+  \[
+    -y+x^2 = \paren{x-a}\paren{x+a} - (y-a^2) \in \paren{y-a,x-a^2}
+  \]
+\end{proof}
 \section{Reading list}
 \begin{itemize}
   \item Eilenberg \& Mac Lane \book{Categories for the working mathematician} \cite{working} is the canonical reference for category theory. They are founders. But the book is hard.
@@ -1853,7 +1858,7 @@ so the remainder is \(-y+a^2\) and, all together,
 
   \item Vakil's \book{Rising Sea} is an introduction to the machinery of modern algebraic geometry. From what I've read so far, its  writing's clear and stresses intuition.
 
-  \item Lang's \book{Algebra}. I brought up a Lang book to a professor once, who called Lang a ``fallen Bourbaki-ist''. Not a good first algebra book, but it has a lot of info, generality, and a sense of taste, if not too Bourbaki.
+  \item Lang's \book{Algebra}. I brought up a Lang book to a professor once, who said  ``he's' a fallen Bourbaki-ist''. Not a good first algebra book, but it has a lot of info, generality, and a sense of taste, if not too Bourbaki.
 
 \end{itemize}
 \printbibliography
