@@ -1758,6 +1758,21 @@ This hints at a \emph{geometric} interpretation of ideals. Suppose \(I\) is an i
   I\subseteq (x_1-a_,\dots x_n-a_n).
 \]
 Geometrically, this means the subset of \(\complex^n\) associated to \(I\) contains the point \((a_1,\dots a_n)\).
+
+What about solution sets of systems of equations? Consider the solution set of \(y=x^2\) over \(\complex^2\). But instead of carving the solution out of the complex plane, use ideals in \(\complex[x,y]\):
+\[
+  \complex[x,y]/\paren{y-x^2}
+\]
+What does this quotient look like? It just sets \(y=x^2\)
+\[
+  p(x,y) \mapsto p(x,x^2) : \complex[x,y] \to \complex[x]
+\]
+We've restricted the functions in \(\complex[x,y]\) to \(y=x^2\) by taking this quotient.
+
+What are the maximal ideals containing \(\paren[]{y-x^2}\)? The points on the parabola! For example, if \(a\in\complex\), the point \((a,a^2)\) lies on the parabola, and the ideal
+\[
+  \paren{x-a,y-a^2} \supseteq \paren{y-x^2}
+\]
 \section{Reading list}
 \begin{itemize}
   \item Eilenberg \& Mac Lane \book{Categories for the working mathematician} \cite{working} is the canonical reference for category theory. They are founders. But the book is hard.
