@@ -721,6 +721,7 @@ Finally, we need the other kind of product of arrows.
   \[
     (f_1\circ \pi_1) \PI (f_2\circ \pi_2)
   \]
+  with diagram
   \[
     \begin{tikzcd}
       & X_1 \PI X_2 \ar[swap,"\pi_1"]{dl}\ar["\pi_2"]{dr}\ar[dashed,"f_1\times f_2"]{dd} \\
@@ -730,7 +731,7 @@ Finally, we need the other kind of product of arrows.
     \end{tikzcd}
   \]
 \end{defn}
-
+Now, the definition at the heart of this section:
 \begin{defn}[Group object]
   Suppose \(G\in\cat\) and \(\cat\) has all finite products (including a final object, \(F\), the \(0\)-ary product). Suppose there's a multiplication
   \[
@@ -1880,6 +1881,13 @@ What are the maximal ideals containing \(\paren[]{y-x^2}\)? The points on the pa
   \item The Catsters have a series of short youtube lectures on category theory. That's where I learned universal properties \url{https://www.youtube.com/user/TheCatsters/}.
   \item Baez \& Stay ``Physics, topology, logic and computation: a Rosetta stone'' \cite{rosetta} looks at correspondences in categories, particularly monoidal categories and braidings, of interest in all these subjects.
 
+  \item Riehl's \book{Category theory in context} \cite{cat-context}. I found this from a thread on stack-exchange:
+        \url{https://math.stackexchange.com/questions/370/good-books-and-lecture-notes-about-category-theory}. So far I've only used it to find some examples, but it seems solid! Here's some good quotes from the preface:
+        \begin{itemize}
+          \item ``Practicioners often assert that the hard part of category theory is to state the correct definitions. Once these are established and the categorical style of argument is sufficiently internalized, proving the theorems tends to be relatively easy'' \cite[x]{cat-context}.
+
+          \item ``Groups, modules,\dots form categories, but these classifications are not the main point. Rather, the action of packaging each variety of objects into a category shifts one's perspective from the particularities of each mathematical sub-discipline to the potential commonalities between them'' \cite[xi]{cat-context}.
+        \end{itemize}
   \item Brown's \book{Topology and Groupoids} \cite{groupoid}. If you want to learn category theory through the fundamental groupoid, read chapter 6.
 
   \item Aluffi's \book{Algebra Chapter 0} is an introduction to algebra with category theory (category theory is traditionally a grad-school topic).
