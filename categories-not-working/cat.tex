@@ -1537,20 +1537,35 @@ Sometimes people drop the requirement that \(1\), a multiplicative identity, exi
 \end{defn}
 
 \begin{defn}
-  The tensor algebra \(V^\otimes\) of a vector space \(V\) is a ring.
+  The \emph{symmetric} tensor algebra \(V^\odot\) of a vector space \(V\) is a ring.
 \end{defn}
+These are actually the same.
+\begin{theorem}
+  \[
+    R\bracket{X_1,\dots X_n} \cong \gparen{\Span_{\R} \set{X_1\dots X_n}}^\odot
+  \]
+\end{theorem}
+\begin{proof}
+  The idea is, in the polynomial ring, we're taking \emph{formal} products of the \(X_i\). We impose no restrictions on \(X_iX_j\) besides associativity, commutativity (the ring laws). There's no further simplification beyond \(X_iX_j\).
+
+  The isomorphism is given by erasing the \(\odot\) symbol:
+  \[
+    \color{darkgray}
+    X_{i_1}\color{black}\odot\color{darkgray} \dots X_{i_k} \mapsto X_{i_1} \dots X_{i_k}
+  \]
+\end{proof}
 
 You can't quotient by any old group, only \emph{normal} subgroups. Analogously, you can't quotient by any subrng, only \emph{ideals}.
 Recall
 \[
   0 + 0 = 0
 \]
-so \(0\) is closed under addition,
+so \(0\) is \emph{closed} under addition,
 and
 \[
   0x = 0,
 \]
-\(0\) is absorbative under multiplication. Any set that can be collapsed to zero must have these properties as well
+\(0\) is \emph{absorbative} under multiplication. Any set that can be collapsed to zero must have these properties as well. It turns out they are sufficient.
 
 \begin{defn}[Ideal]
   A subset \(I\subseteq R\) is an ideal iff \marginnote{In a \emph{rin}, you have to distinguish left-ideals from right-ideals, so I'm skipping them (I'm committed to the bit).}
@@ -1619,15 +1634,15 @@ Ideals measure the failure of a ring to be a field.
 \begin{theorem}
   A ring \(R\) is a field iff its only ideals are \(R\) and \(0\).
 \end{theorem}
-\begin{proof}
+\begin{proof}\phantom{M}
   \begin{itemize}
-    \item If ring, the only ideals are \(0\) and \(R\).\\
+    \item If field, the only ideals are \(0\) and \(R\).\\
           Take an ideal \(I\neq 0\). Pick a nonzero \(x\in I\). If \(x\) has an inverse, then by absorbativity
           \[
           xx^{-1} = 1 \in I.
           \]
           But then, by absorbativity, \(I=R\).
-    \item If the only ideals are \(R\) and \(0\), it's a ring.  \\
+    \item If the only ideals are \(R\) and \(0\), it's a field.  \\
           Pick a nonzero \(x\in R\). Then \(\paren{x}\), the set of multiples of \(x\), is an ideal. By hypothesis, it contains \(1\). Therefore, there is some \(y\) such that
           \[
           xy =1.
